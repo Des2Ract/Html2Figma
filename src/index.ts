@@ -1,19 +1,30 @@
-import { crawlWebPage } from "./crawler";
-import { parseHTMLToFigmaNode } from "./html_parser";
+import { crawlWebPage } from "./crawler.js";
+import { parseHTMLToFigmaNode } from "./html_parser.js";
 import { JSDOM } from "jsdom";
+const { window } = new JSDOM("<!doctype html><html><body></body></html>");
+const { document } = window;
 
 async function main() {
-  const url = "https://google.com"; // Replace with your target URL
+  const url = "https://motherfuckingwebsite.com/";
   const result = await crawlWebPage(url);
 
   if (result) {
-    const dom = new JSDOM(result.html);
-    const document = dom.window.document;
-    const rootElement = document.body;
+    try {
+      // Initialize JSDOM with the fetched HTML
+      const dom = new JSDOM(result.html, {
+        pretendToBeVisual: true, // Makes jsdom behave more like a browser (can help with some rendering issues)
+      });
+      const document = dom.window.document;
+      const rootElement = document.body;
 
-    const figmaTree = parseHTMLToFigmaNode(rootElement);
-    console.log("Generated Figma-like JSON:");
-    console.log(JSON.stringify(figmaTree, null, 2));
+      const figmaTree = parseHTMLToFigmaNode(rootElement);
+      console.log("Generated Figma-like JSON:");
+      console.log(JSON.stringify(figmaTree, null, 2));
+    } catch (error) {
+      console.error("Error parsing HTML with JSDOM:", error);
+    }
+  } else {
+    console.error("Failed to fetch the webpage content.");
   }
 }
 

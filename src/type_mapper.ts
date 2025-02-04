@@ -1,5 +1,5 @@
-import { FigmaNode } from "./figma_node";
-import { formatStyles } from "./utils";
+import { FigmaNode } from "./figma_node.js";
+import { formatStyles } from "./utils.js";
 
 // Helper function for basic tag-to-Figma type mapping
 export function mapTagToNodeType(tag: string): string {

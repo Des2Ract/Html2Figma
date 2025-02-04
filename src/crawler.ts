@@ -17,7 +17,7 @@ export async function crawlWebPage(url: string) {
     const cssLinks = Array.from(
       document.querySelectorAll('link[rel="stylesheet"]')
     )
-      .map((link) => link.href)
+      .map((link) => (link as HTMLAnchorElement).href)
       .filter((href) => href.startsWith("http") || href.startsWith("//"));
 
     // Fetch and store CSS content

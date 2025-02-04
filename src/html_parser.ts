@@ -1,9 +1,10 @@
-import { FigmaNode, createFigmaNode } from "./figma_node";
-import { extractStyles } from "./style_extractor";
-import { applyFigmaType } from "./type_mapper";
+import { createFigmaNode } from "./figma_node.js";
+import { extractStyles } from "./style_extractor.js";
+import { applyFigmaType } from "./type_mapper.js";
+import { JSDOM } from "jsdom";
 
 // Parse HTML to Figma-like nodes
-export function parseHTMLToFigmaNode(element: HTMLElement): FigmaNode {
+export function parseHTMLToFigmaNode(element: HTMLElement) {
   const styles = extractStyles(element);
   const node = createFigmaNode(element.tagName.toLowerCase(), styles);
 
