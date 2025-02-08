@@ -1,18 +1,14 @@
-export interface FigmaNode {
-  type: string;
-  tagName: string;
-  styles: Record<string, string>;
-  children: FigmaNode[];
+export interface SvgNode extends DefaultShapeMixin, ConstraintMixin {
+  type: "SVG";
+  svg: string;
 }
 
-export function createFigmaNode(
-  tagName: string,
-  styles: Record<string, string>
-): FigmaNode {
-  return {
-    type: "node",
-    tagName,
-    styles,
-    children: [],
-  };
+export type LayerNode = Partial<
+  RectangleNode | TextNode | FrameNode | SvgNode | GroupNode | ComponentNode
+>;
+
+export interface FigmaNode {
+  tag: string;
+  node: LayerNode;
+  children: FigmaNode[];
 }
