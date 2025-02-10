@@ -1,5 +1,4 @@
 import { FigmaNode } from "./figma_node.js";
-import { formatStyles } from "./utils.js";
 
 // Helper function for basic tag-to-Figma type mapping
 export function mapTagToNodeType(tag: string): string {
@@ -48,6 +47,6 @@ export function mapToFigmaType(
 
 // Apply Figma type to a node based on its tag and styles
 export function applyFigmaType(node: FigmaNode): void {
-  const figmaType = mapToFigmaType(node.tagName, node.styles);
-  node.type = figmaType;
+  // const figmaType = mapToFigmaType(node.tagName, node.styles);
+  // node.type = figmaType;
 }

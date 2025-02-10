@@ -1,32 +1,15 @@
 import { crawlWebPage } from "./crawler.js";
-import { parseHTMLToFigmaNode } from "./html_parser.js";
-import { JSDOM } from "jsdom";
-const { window } = new JSDOM("<!doctype html><html><body></body></html>");
-const { document } = window;
+import { parse } from "./parser.js";
 
 async function main() {
-  const url = "https://www.berkshirehathaway.com/";
-  const result = await crawlWebPage(url);
+  const urls = await crawlWebPage(10);
 
-  if (result) {
-    try {
-      // Initialize JSDOM with the fetched HTML
-      const dom = new JSDOM(result.html, {
-        pretendToBeVisual: true, // Makes jsdom behave more like a browser (can help with some rendering issues)
-      });
-      const document = dom.window.document;
-      const rootElement = document.body;
+  const link = "http://127.0.0.1:5500/index.html";
 
-      const figmaTree = parseHTMLToFigmaNode(rootElement);
-      // TODO: use result.cssContents
-      console.log("Generated Figma-like JSON:");
-      console.log(JSON.stringify(figmaTree, null, 2));
-    } catch (error) {
-      console.error("Error parsing HTML with JSDOM:", error);
-    }
-  } else {
-    console.error("Failed to fetch the webpage content.");
-  }
+  const figmaTree = await parse(link);
+
+  console.log("Generated Figma-like JSON:");
+  console.log(JSON.stringify(figmaTree, null, 2));
 }
 
 main();

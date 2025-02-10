@@ -4,11 +4,24 @@ export interface SvgNode extends DefaultShapeMixin, ConstraintMixin {
 }
 
 export type LayerNode = Partial<
-  RectangleNode | TextNode | FrameNode | SvgNode | GroupNode | ComponentNode
+  | Partial<RectangleNode>
+  | Partial<TextNode>
+  | Partial<FrameNode>
+  | Partial<SvgNode>
+  | Partial<GroupNode>
+  | Partial<ComponentNode>
 >;
 
 export interface FigmaNode {
   tag: string;
   node: LayerNode;
   children: FigmaNode[];
+}
+
+export function createFigmaNode(tag: string, node: LayerNode): FigmaNode {
+  return {
+    tag,
+    node,
+    children: [],
+  };
 }

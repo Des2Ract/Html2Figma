@@ -1,44 +1,74 @@
-import fetch from "node-fetch";
-import { JSDOM } from "jsdom";
+import puppeteer from "puppeteer";
+import fs from "fs/promises";
+import path from "path";
 
-export async function crawlWebPage(url: string) {
+const CACHE_FILE = path.resolve("./", "crawledUrls.json");
+
+// Helper to read cache file if available
+async function loadCache(): Promise<string[] | null> {
   try {
-    console.log(`Crawling: ${url}`);
-
-    // Fetch the HTML
-    const response = await fetch(url);
-    const html = await response.text();
-
-    // Parse HTML with JSDOM
-    const dom = new JSDOM(html);
-    const document = dom.window.document;
-
-    // Extract all external CSS links
-    const cssLinks = Array.from(
-      document.querySelectorAll('link[rel="stylesheet"]')
-    )
-      .map((link) => (link as HTMLAnchorElement).href)
-      .filter((href) => href.startsWith("http") || href.startsWith("//"));
-
-    // Fetch and store CSS content
-    const cssContents = await Promise.all(
-      cssLinks.map(async (cssUrl) => {
-        try {
-          const cssResponse = await fetch(cssUrl);
-          return await cssResponse.text();
-        } catch {
-          console.warn(`Failed to fetch CSS: ${cssUrl}`);
-          return "";
-        }
-      })
-    );
-
-    return {
-      html,
-      cssContents,
-    };
-  } catch (error) {
-    console.error(`Error crawling webpage: ${error}`);
-    return null;
+    const data = await fs.readFile(CACHE_FILE, "utf8");
+    return JSON.parse(data);
+  } catch (err) {
+    return null; // Cache does not exist
   }
+}
+
+// Helper to save crawled URLs to cache
+async function saveCache(urls: string[]): Promise<void> {
+  await fs.writeFile(CACHE_FILE, JSON.stringify(urls, null, 2));
+}
+
+// Main crawl function
+export async function crawlWebPage(crawlSize: number): Promise<string[]> {
+  // Check if cache exists
+  const cachedUrls = await loadCache();
+  if (cachedUrls) {
+    console.log("Loaded URLs from cache.");
+    return cachedUrls;
+  }
+
+  console.log("No cache found. Starting crawl...");
+
+  const startUrl = "https://www.berkshirehathaway.com/"; // Replace with the target start URL
+  const browser = await puppeteer.launch({ headless: true });
+  const page = await browser.newPage();
+  await page.goto(startUrl);
+
+  const crawledUrls: Set<string> = new Set();
+  crawledUrls.add(startUrl);
+
+  let pagesToCrawl: string[] = [startUrl];
+
+  while (pagesToCrawl.length > 0 && crawledUrls.size < crawlSize) {
+    const currentUrl = pagesToCrawl.shift()!;
+    try {
+      await page.goto(currentUrl, { waitUntil: "domcontentloaded" });
+
+      const links = await page.$$eval("a", (anchorElements) =>
+        anchorElements
+          .map((a) => a.href)
+          .filter((href) => href.startsWith("http"))
+      );
+
+      links.forEach((link) => {
+        if (!crawledUrls.has(link) && crawledUrls.size < crawlSize) {
+          crawledUrls.add(link);
+          pagesToCrawl.push(link);
+        }
+      });
+    } catch (err) {
+      console.warn(`Failed to crawl ${currentUrl}:`, err);
+    }
+  }
+
+  await browser.close();
+
+  const resultUrls = Array.from(crawledUrls);
+
+  // Save results to cache
+  await saveCache(resultUrls);
+  console.log("Crawl complete. URLs cached.");
+
+  return resultUrls;
 }

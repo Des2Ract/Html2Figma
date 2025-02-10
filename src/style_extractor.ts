@@ -17,14 +17,14 @@ export function extractStyles(element: Element): Record<string, string> {
   return styleObj; // Return the collected styles
 }
 
-export function applyStylesToFigmaNode(element: Element): FigmaNode {
-  const tagName = element.tagName.toLowerCase();
-  const styles = extractStyles(element);
+// export function applyStylesToFigmaNode(element: Element): FigmaNode {
+//   const tagName = element.tagName.toLowerCase();
+//   const styles = extractStyles(element);
 
-  return {
-    type: "node",
-    tagName,
-    styles,
-    children: [],
-  };
-}
+//   return {
+//     // type: "node",
+//     tagName,
+//     styles,
+//     children: [],
+//   };
+// }

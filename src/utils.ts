@@ -1,28 +1,27 @@
-// Utility function to handle deep cloning of an object
-export function deepClone<T>(obj: T): T {
-  return JSON.parse(JSON.stringify(obj));
+interface FigmaColor {
+  r: number;
+  g: number;
+  b: number;
+  a: number;
 }
 
-// Utility to handle merging styles
-export function mergeStyles(
-  styles1: Record<string, string>,
-  styles2: Record<string, string>
-): Record<string, string> {
-  return { ...styles1, ...styles2 };
-}
+export function getFigmaRGB(colorString?: string | null): FigmaColor | null {
+  if (!colorString) return null;
 
-// Utility function to format styles (for example, convert to camelCase)
-export function formatStyles(
-  styles: Record<string, string>
-): Record<string, string> {
-  const formattedStyles: Record<string, string> = {};
-  for (const key in styles) {
-    if (styles.hasOwnProperty(key)) {
-      const formattedKey = key.replace(/-([a-z])/g, (match) =>
-        match[1].toUpperCase()
-      ); // Convert to camelCase
-      formattedStyles[formattedKey] = styles[key];
-    }
-  }
-  return formattedStyles;
+  const match = colorString.match(
+    /rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)/
+  );
+  if (!match) return null;
+
+  const [, r, g, b, a] = match;
+  const alpha = a ? parseFloat(a) : 1;
+
+  if (parseFloat(a || "1") === 0) return null;
+
+  return {
+    r: parseInt(r, 10) / 255,
+    g: parseInt(g, 10) / 255,
+    b: parseInt(b, 10) / 255,
+    a: alpha,
+  };
 }

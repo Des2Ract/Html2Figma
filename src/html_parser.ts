@@ -1,21 +1,16 @@
-import { createFigmaNode } from "./figma_node.js";
-import { extractStyles } from "./style_extractor.js";
-import { applyFigmaType } from "./type_mapper.js";
-import { JSDOM } from "jsdom";
+import { FigmaNode } from "./figma_node.js";
+import { extractFigmaNode } from "./FigmaNodeExtractor.js";
 
-// Parse HTML to Figma-like nodes
-export function parseHTMLToFigmaNode(element: HTMLElement) {
-  const styles = extractStyles(element);
-  const node = createFigmaNode(element.tagName.toLowerCase(), styles);
+export function parseHTMLToFigmaNode(element: Element): FigmaNode | null {
+  // Create the root Figma node
+  const rootNode: FigmaNode | null = extractFigmaNode(element);
+  if (rootNode == null) return null;
+  // Recursively process valid child nodes
+  if (rootNode.node.type === "TEXT") return rootNode;
+  element.childNodes.forEach((child) => {
+    const childFigmaNode = parseHTMLToFigmaNode(child as Element);
+    if (childFigmaNode != null) rootNode.children.push(childFigmaNode);
+  });
 
-  // Apply Figma type mapping based on both tag and styles
-  applyFigmaType(node);
-
-  // Recursively parse child elements
-  for (const child of Array.from(element.children)) {
-    const childNode = parseHTMLToFigmaNode(child as HTMLElement);
-    node.children.push(childNode);
-  }
-
-  return node;
+  return rootNode;
 }
