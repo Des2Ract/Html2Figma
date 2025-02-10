@@ -6,7 +6,8 @@ export function parseHTMLToFigmaNode(element: Element): FigmaNode | null {
   const rootNode: FigmaNode | null = extractFigmaNode(element);
   if (rootNode == null) return null;
   // Recursively process valid child nodes
-  if (rootNode.node.type === "TEXT") return rootNode;
+  if (rootNode.node.type === "TEXT" || rootNode.node.type === "SVG")
+    return rootNode;
   element.childNodes.forEach((child) => {
     const childFigmaNode = parseHTMLToFigmaNode(child as Element);
     if (childFigmaNode != null) rootNode.children.push(childFigmaNode);

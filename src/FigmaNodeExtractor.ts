@@ -1,10 +1,9 @@
+import { FigmaNode, createFigmaNode } from "./figma_node.js";
 import {
-  FigmaNode,
-  createFigmaNode,
-  SvgNode,
-  LayerNode,
-} from "./figma_node.js";
-import { getFigmaRGB } from "./utils.js";
+  handleImageNode,
+  handleSvgNode,
+  handleTextNode,
+} from "./FigmaComponentHandlers.js";
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
   //   return extractFigmaNode2(element);
@@ -65,89 +64,23 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
       handleTextNode(element)
     );
 
-  // TODO: Hidden NODE
-
-  // TODO: PICTURE NODE
-
   // TODO: IMAGE NODE
+  if (element instanceof HTMLImageElement)
+    return createFigmaNode(
+      element.tagName ? element.tagName : "txt",
+      handleImageNode(element)
+    );
 
   // TODO: PICTURE NODE
 
   // TODO: VIDEO NODE
 
+  // TODO: Hidden NODE
+
   // TODO: SVG NODE
-  if (element instanceof SVGSVGElement) {
+  if (element instanceof SVGSVGElement)
     return createFigmaNode(element.tagName, handleSvgNode(element));
-  }
 
   // Create and return a general Figma node
   return createFigmaNode(element.tagName ? element.tagName : "txt", {} as any);
-}
-
-export function handleTextNode(element: Element): Partial<TextNode> {
-  const parent = element.parentElement as Element;
-
-  const computedStyles = getComputedStyle(
-    element instanceof Element ? element : parent
-  );
-
-  const range = document.createRange();
-  range.selectNode(element);
-  const fastClone = (data: any) =>
-    typeof data === "symbol" ? null : JSON.parse(JSON.stringify(data));
-  const rect = fastClone(range.getBoundingClientRect());
-  let x = Math.round(rect.left);
-  let y = Math.round(rect.top);
-  let width = Math.round(rect.width);
-  let height = Math.round(rect.height);
-
-  const fills: SolidPaint[] = [];
-  let rgb = getFigmaRGB(computedStyles.color);
-
-  if (rgb) {
-    fills.push({
-      type: "SOLID",
-      color: {
-        r: rgb.r,
-        g: rgb.g,
-        b: rgb.b,
-      },
-      blendMode: "NORMAL",
-      visible: true,
-      opacity: rgb.a || 1,
-    } as SolidPaint);
-  }
-
-  const textnode: Partial<TextNode> = {
-    type: "TEXT",
-    characters: (element.textContent as string).trim(),
-    x: x,
-    y: y,
-    width: width,
-    height: height,
-    textAlignHorizontal: "LEFT",
-    textAlignVertical: "CENTER",
-    fontSize: parseFloat(computedStyles.fontSize),
-    fontName: {
-      family: computedStyles.fontFamily,
-      style: computedStyles.fontStyle,
-    },
-    fills: fills,
-  };
-  return textnode;
-}
-
-export function handleSvgNode(element: Element) {
-  const rect = element.getBoundingClientRect();
-
-  const svgNode: Partial<LayerNode> = {
-    type: "SVG",
-    svg: element.outerHTML,
-    x: Math.round(rect.left),
-    y: Math.round(rect.top),
-    width: Math.round(rect.width),
-    height: Math.round(rect.height),
-  };
-
-  return svgNode;
 }

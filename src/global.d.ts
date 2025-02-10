@@ -5,7 +5,8 @@ declare global {
     createFigmaNode: typeof import("./figma_node").createFigmaNode;
     extractFigmaNode: typeof import("./FigmaNodeExtractor").extractFigmaNode;
     getFigmaRGB: typeof import("./utils").getFigmaRGB;
-    handleTextNode: typeof import("./FigmaNodeExtractor").handleTextNode;
-    handleSvgNode: typeof import("./FigmaNodeExtractor").handleSvgNode;
+    handleTextNode: typeof import("./FigmaComponentHandlers").handleTextNode;
+    handleSvgNode: typeof import("./FigmaComponentHandlers").handleSvgNode;
+    handleImageNode: typeof import("./FigmaComponentHandlers").handleImageNode;
   }
 }

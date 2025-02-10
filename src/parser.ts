@@ -2,8 +2,13 @@ import puppeteer from "puppeteer";
 import { FigmaNode } from "./figma_node.js";
 import { parseHTMLToFigmaNode } from "./html_parser.js";
 import { createFigmaNode } from "./figma_node.js";
-import { extractFigmaNode, handleTextNode, handleSvgNode } from "./FigmaNodeExtractor.js";
+import { extractFigmaNode } from "./FigmaNodeExtractor.js";
 import { getFigmaRGB } from "./utils.js";
+import {
+  handleImageNode,
+  handleSvgNode,
+  handleTextNode,
+} from "./FigmaComponentHandlers.js";
 
 export async function parse(url: string): Promise<FigmaNode> {
   const browser = await puppeteer.launch({ headless: true });
@@ -18,7 +23,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     getFigmaRGB: getFigmaRGB.toString(),
     handleTextNode: handleTextNode.toString(),
     handleSvgNode: handleSvgNode.toString(),
-
+    handleImageNode: handleImageNode.toString(),
   };
 
   const result = await page.evaluate((logic) => {
@@ -31,7 +36,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     const getFigmaRGB = new Function(`return ${logic.getFigmaRGB}`)();
     const handleTextNode = new Function(`return ${logic.handleTextNode}`)();
     const handleSvgNode = new Function(`return ${logic.handleSvgNode}`)();
-
+    const handleImageNode = new Function(`return ${logic.handleImageNode}`)();
 
     // Use functions to process the document
     window.createFigmaNode = createFigmaNode;
@@ -39,6 +44,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     window.getFigmaRGB = getFigmaRGB;
     window.handleTextNode = handleTextNode;
     window.handleSvgNode = handleSvgNode;
+    window.handleImageNode = handleImageNode;
 
     return parseHTMLToFigmaNode(document.body);
   }, logicBundle);
