@@ -1,4 +1,9 @@
-import { FigmaNode, createFigmaNode } from "./figma_node.js";
+import {
+  FigmaNode,
+  createFigmaNode,
+  SvgNode,
+  LayerNode,
+} from "./figma_node.js";
 import { getFigmaRGB } from "./utils.js";
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
@@ -48,8 +53,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
     // Check children for a single, non-empty text node
     const nonEmptyTextChildren = Array.from(element.childNodes).filter(
       (node) =>
-        (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== "") ||
-        node.nodeType !== Node.TEXT_NODE
+        node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ""
     );
 
     return nonEmptyTextChildren.length === 1;
@@ -72,21 +76,9 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: VIDEO NODE
 
   // TODO: SVG NODE
-  //   if (isElemType(el, ElemTypes.SVG)) {
-  //     const rect = el.getBoundingClientRect();
-  //     const fill = computedStyle.fill;
-
-  //     return {
-  //       type: "SVG",
-  //       ref: el,
-  //       // add FILL to SVG to get right color in figma
-  //       svg: replaceSvgFill(el.outerHTML, fill),
-  //       x: Math.round(rect.left),
-  //       y: Math.round(rect.top),
-  //       width: Math.round(rect.width),
-  //       height: Math.round(rect.height),
-  //     } as WithMeta<SvgNode>;
-  //   }
+  if (element instanceof SVGSVGElement) {
+    return createFigmaNode(element.tagName, handleSvgNode(element));
+  }
 
   // Create and return a general Figma node
   return createFigmaNode(element.tagName ? element.tagName : "txt", {} as any);
@@ -143,4 +135,19 @@ export function handleTextNode(element: Element): Partial<TextNode> {
     fills: fills,
   };
   return textnode;
+}
+
+export function handleSvgNode(element: Element) {
+  const rect = element.getBoundingClientRect();
+
+  const svgNode: Partial<LayerNode> = {
+    type: "SVG",
+    svg: element.outerHTML,
+    x: Math.round(rect.left),
+    y: Math.round(rect.top),
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+  };
+
+  return svgNode;
 }

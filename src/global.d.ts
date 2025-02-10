@@ -6,5 +6,6 @@ declare global {
     extractFigmaNode: typeof import("./FigmaNodeExtractor").extractFigmaNode;
     getFigmaRGB: typeof import("./utils").getFigmaRGB;
     handleTextNode: typeof import("./FigmaNodeExtractor").handleTextNode;
+    handleSvgNode: typeof import("./FigmaNodeExtractor").handleSvgNode;
   }
 }

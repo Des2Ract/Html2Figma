@@ -4,7 +4,7 @@ import { parse } from "./parser.js";
 async function main() {
   const urls = await crawlWebPage(10);
 
-  const link = "http://127.0.0.1:5500/index.html";
+  const link = "http://127.0.0.1:5500/test/index.html";
 
   const figmaTree = await parse(link);
 
