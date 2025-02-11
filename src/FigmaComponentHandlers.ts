@@ -347,7 +347,7 @@ export function handleInputNode(element: Element): FigmaNode {
     return inputFigmaNode;
   }
 
-  if (inputType == 'email' || inputType == 'text' || inputType == 'search' || inputType == 'list') {
+  if (inputType == 'email' || inputType == 'text' || inputType == 'search' || inputType == 'list' || inputType == 'number') {
     let x = Math.round(rect.left);
     let y = Math.round(rect.top);
     let width = Math.round(rect.width);
