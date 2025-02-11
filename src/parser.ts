@@ -5,6 +5,7 @@ import { createFigmaNode } from './figma_node.js';
 import { extractFigmaNode } from './FigmaNodeExtractor.js';
 import { getFigmaRGB } from './utils.js';
 import {
+  handleButtonNode,
   handleImageNode,
   handleLineNode,
   handlePictureNode,
@@ -30,6 +31,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     handlePictureNode: handlePictureNode.toString(),
     handleVideoNode: handleVideoNode.toString(),
     handleLineNode: handleLineNode.toString(),
+    handleButtonNode: handleButtonNode.toString(),
   };
 
   const result = await page.evaluate((logic) => {
@@ -44,6 +46,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     const handlePictureNode = new Function(`return ${logic.handlePictureNode}`)();
     const handleVideoNode = new Function(`return ${logic.handleVideoNode}`)();
     const handleLineNode = new Function(`return ${logic.handleLineNode}`)();
+    const handleButtonNode = new Function(`return ${logic.handleButtonNode}`)();
 
     // Use functions to process the document
     window.createFigmaNode = createFigmaNode;
@@ -55,6 +58,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     window.handlePictureNode = handlePictureNode;
     window.handleVideoNode = handleVideoNode;
     window.handleLineNode = handleLineNode;
+    window.handleButtonNode = handleButtonNode;
 
     return parseHTMLToFigmaNode(document.body);
   }, logicBundle);

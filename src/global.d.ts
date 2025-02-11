@@ -11,5 +11,6 @@ declare global {
     handlePictureNode: typeof import('./FigmaComponentHandlers').handlePictureNode;
     handleVideoNode: typeof import('./FigmaComponentHandlers').handleVideoNode;
     handleLineNode: typeof import('./FigmaComponentHandlers').handleLineNode;
+    handleButtonNode: typeof import('./FigmaComponentHandlers').handleButtonNode;
   }
 }

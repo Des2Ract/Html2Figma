@@ -1,5 +1,6 @@
 import { FigmaNode, createFigmaNode } from './figma_node.js';
 import {
+  handleButtonNode,
   handleImageNode,
   handleLineNode,
   handlePictureNode,
@@ -9,6 +10,7 @@ import {
 } from './FigmaComponentHandlers.js';
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
+  const TXTNODETAG = 'TXT';
   // Skip empty or whitespace text nodes
   if (element.nodeType === Node.TEXT_NODE && (!element.nodeValue || element.nodeValue.trim() === '')) {
     return null;
@@ -60,7 +62,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   }
 
   if (isTextOnlyNode(element))
-    return createFigmaNode(element.tagName ? element.tagName : 'txt', handleTextNode(element));
+    return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleTextNode(element));
 
   // TODO: Hidden NODE
   const isHiddenNode = (element: HTMLElement): boolean =>
@@ -72,14 +74,14 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
 
   // TODO: IMAGE NODE
   if (element instanceof HTMLImageElement)
-    return createFigmaNode(element.tagName ? element.tagName : 'txt', handleImageNode(element));
+    return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleImageNode(element));
 
   // TODO: PICTURE NODE
   if (element instanceof HTMLPictureElement)
-    return createFigmaNode(element.tagName ? element.tagName : 'txt', handlePictureNode(element));
+    return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handlePictureNode(element));
   // TODO: VIDEO NODE
   if (element instanceof HTMLVideoElement)
-    return createFigmaNode(element.tagName ? element.tagName : 'txt', handleVideoNode(element));
+    return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleVideoNode(element));
 
   // TODO: SVG NODE
   if (element instanceof SVGSVGElement) return createFigmaNode(element.tagName, handleSvgNode(element));
@@ -87,9 +89,10 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: HR element
   if (element instanceof HTMLHRElement) return createFigmaNode(element.tagName, handleLineNode(element));
 
-  // TODO: DIV/SPAN NODE
-
   // TODO: BUTTON NODE
+  if (element instanceof HTMLButtonElement) return createFigmaNode(element.tagName, handleButtonNode(element));
+
+  // TODO: DIV/SPAN NODE
 
   // TODO: A/LINK NODE
 
@@ -100,5 +103,5 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: INPUT NODE
 
   // Create and return a general Figma node
-  return createFigmaNode(element.tagName ? element.tagName : 'txt', {} as any);
+  return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, {} as any);
 }

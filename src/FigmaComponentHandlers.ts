@@ -223,3 +223,46 @@ export function handleLineNode(element: Element): Partial<LineNode> {
 
   return lineNode;
 }
+
+export function handleButtonNode(element: Element): Partial<RectangleNode> {
+  const el = element as HTMLButtonElement;
+  const rect = element.getBoundingClientRect();
+  const computedStyles = getComputedStyle(el);
+
+  const fills: SolidPaint[] = [];
+  let rgb = getFigmaRGB(computedStyles.backgroundColor);
+
+  if (rgb) {
+    fills.push({
+      type: 'SOLID',
+      color: {
+        r: rgb.r,
+        g: rgb.g,
+        b: rgb.b,
+      },
+      blendMode: 'NORMAL',
+      visible: true,
+      opacity: rgb.a || 1,
+    } as SolidPaint);
+  }
+
+  const handlePX = (v: string): number => (/px$/.test(v) || v === '0' ? parseFloat(v) : 0);
+  const handlePercent = (v: string): number => (/^(\d+)%$/.test(v) ? parseInt(v) / 100 : 0);
+  const parse = (borderRadius: string, height: number): number =>
+    handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
+
+  const ButtonNode: Partial<RectangleNode> = {
+    type: 'RECTANGLE',
+    x: Math.round(rect.left),
+    y: Math.round(rect.top),
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+    fills: fills,
+    topLeftRadius: parse(computedStyles.borderTopLeftRadius, rect.height),
+    topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
+    bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
+    bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+  };
+
+  return ButtonNode;
+}
