@@ -27,9 +27,10 @@ export function getFigmaRGB(colorString?: string | null): FigmaColor | null {
 export function getBorder(computedStyle: CSSStyleDeclaration) {
   const borderRegex = /^([\d\.]+)px\s*(\w+)\s*(.*)$/;
   const directions = ['Top', 'Left', 'Right', 'Bottom'];
-  const strokes: Paint[] = [];
+  const borderStyles = new Set<string>();
   let strokeWeight = 0;
   let dashPattern: number[] = [];
+  let strokePaint: Paint | null = null;
 
   for (const dir of directions) {
     const border = computedStyle.getPropertyValue(`border-${dir.toLowerCase()}`);
@@ -44,22 +45,30 @@ export function getBorder(computedStyle: CSSStyleDeclaration) {
     const rgb = getFigmaRGB(color);
     if (!rgb) continue;
 
-    const strokePaint: Paint = {
-      type: 'SOLID',
-      color: { r: rgb.r, g: rgb.g, b: rgb.b },
-      opacity: rgb.a || 1,
-    };
-
+    borderStyles.add(`${width} ${type} ${color}`);
     strokeWeight = Math.max(strokeWeight, parseFloat(width));
+
+    if (!strokePaint) {
+      strokePaint = {
+        type: 'SOLID',
+        color: { r: rgb.r, g: rgb.g, b: rgb.b },
+        opacity: rgb.a || 1,
+      };
+    }
 
     if (type === 'dashed') {
       dashPattern = [6, 4];
     } else if (type === 'dotted') {
       dashPattern = [2, 2];
     }
-
-    strokes.push(strokePaint);
   }
 
-  return strokes.length ? { strokes, strokeWeight, dashPattern } : null;
+  if (borderStyles.size === 1 && strokePaint) {
+    return { strokes: [strokePaint], strokeWeight, dashPattern };
+  } else if (borderStyles.size > 1) {
+    // Different borders on different sides (e.g., mixed styles) -> Keep them separate
+    return { strokes: [strokePaint], strokeWeight, dashPattern, individualSides: true };
+  }
+
+  return null;
 }

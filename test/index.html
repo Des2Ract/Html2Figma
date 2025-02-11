@@ -3,39 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Figma Node Extraction Test</title>
+    <title>Feature Extraction Test</title>
     <style>
-        .rectangle {
-            width: 200px;
-            height: 100px;
-            background-color: #3498db;
-            border: 4px solid #e74c3c;
-            border-radius: 10px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin: 50px;
         }
-
-        .dashed-border {
-            width: 150px;
-            height: 75px;
-            background-color: #2ecc71;
-            border: 3px dashed #f39c12;
+        .container {
+            width: 80%;
+            border: 2px solid black;
+            padding: 10px;
         }
-
-        .dotted-border {
-            width: 100px;
-            height: 50px;
-            background-color: #9b59b6;
-            border: 2px dotted #fff;
+        .header {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 3px solid gray;
+            padding-bottom: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: 2px solid darkblue;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .input-field {
+            width: 60%;
+            padding: 8px;
+            border: 1px solid gray;
+            outline: 2px solid lightblue;
+        }
+        .card {
+            width: 50%;
+            padding: 15px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .list-item {
+            padding: 5px;
+            border-bottom: 1px dashed gray;
         }
     </style>
 </head>
 <body>
-    <h2>Figma Node Extraction Test</h2>
-    
-    <div class="rectangle"></div>
-    <br>
-    <div class="dashed-border"></div>
-    <br>
-    <div class="dotted-border"></div>
+
+    <div class="container">
+        <div class="header">Feature Extraction Test</div>
+        
+        <button class="button">Click Me</button>
+        
+        <input type="text" class="input-field" placeholder="Enter text here">
+        
+        <div class="card">
+            This is a card element with a shadow.
+        </div>
+
+        <div class="list">
+            <div class="list-item">Item 1</div>
+            <div class="list-item">Item 2</div>
+            <div class="list-item">Item 3</div>
+        </div>
+
+    </div>
+
 </body>
 </html>
