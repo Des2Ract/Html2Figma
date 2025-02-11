@@ -9,5 +9,6 @@ declare global {
     handleSvgNode: typeof import('./FigmaComponentHandlers').handleSvgNode;
     handleImageNode: typeof import('./FigmaComponentHandlers').handleImageNode;
     handlePictureNode: typeof import('./FigmaComponentHandlers').handlePictureNode;
+    handleVideoNode: typeof import('./FigmaComponentHandlers').handleVideoNode;
   }
 }

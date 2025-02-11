@@ -9,7 +9,8 @@ export function parseHTMLToFigmaNode(element: Element): FigmaNode | null {
   if (
     rootNode.node.type === 'TEXT' ||
     rootNode.node.type === 'SVG' ||
-    rootNode.tag === 'PICTURE'
+    rootNode.tag === 'PICTURE' ||
+    rootNode.tag === 'VIDEO'
   )
     return rootNode;
   element.childNodes.forEach((child) => {
