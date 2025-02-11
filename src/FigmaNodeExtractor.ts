@@ -1,6 +1,7 @@
 import { FigmaNode, createFigmaNode } from './figma_node.js';
 import {
-  handleButtonNode,
+  handleButtonFormNode,
+  handleDivSpanNode,
   handleImageNode,
   handleLineNode,
   handlePictureNode,
@@ -89,16 +90,16 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: HR element
   if (element instanceof HTMLHRElement) return createFigmaNode(element.tagName, handleLineNode(element));
 
-  // TODO: BUTTON NODE
-  if (element instanceof HTMLButtonElement) return createFigmaNode(element.tagName, handleButtonNode(element));
+  // TODO: BUTTON/FORM NODE
+  if (element instanceof HTMLButtonElement || element instanceof HTMLFormElement)
+    return createFigmaNode(element.tagName, handleButtonFormNode(element));
 
   // TODO: DIV/SPAN NODE
-
+  if (element instanceof HTMLDivElement || element instanceof HTMLSpanElement)
+    return createFigmaNode(element.tagName, handleDivSpanNode(element));
   // TODO: A/LINK NODE
 
   // TODO: TABLE NODE
-
-  // TODO: FORM NODE
 
   // TODO: INPUT NODE
 

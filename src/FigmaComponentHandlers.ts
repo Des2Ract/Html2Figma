@@ -224,8 +224,8 @@ export function handleLineNode(element: Element): Partial<LineNode> {
   return lineNode;
 }
 
-export function handleButtonNode(element: Element): Partial<RectangleNode> {
-  const el = element as HTMLButtonElement;
+export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
+  const el = element as HTMLButtonElement | HTMLFormElement;
   const rect = element.getBoundingClientRect();
   const computedStyles = getComputedStyle(el);
 
@@ -251,7 +251,7 @@ export function handleButtonNode(element: Element): Partial<RectangleNode> {
   const parse = (borderRadius: string, height: number): number =>
     handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
 
-  const ButtonNode: Partial<RectangleNode> = {
+  const ButtonFormNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
     x: Math.round(rect.left),
     y: Math.round(rect.top),
@@ -264,5 +264,62 @@ export function handleButtonNode(element: Element): Partial<RectangleNode> {
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
   };
 
-  return ButtonNode;
+  return ButtonFormNode;
+}
+
+export function handleDivSpanNode(element: Element): Partial<GroupNode> | Partial<RectangleNode> {
+  const el = element as HTMLDivElement | HTMLSpanElement;
+  const rect = element.getBoundingClientRect();
+  const computedStyles = getComputedStyle(el);
+
+  const fills: SolidPaint[] = [];
+  const rgb = getFigmaRGB(computedStyles.backgroundColor);
+
+  if (rgb) {
+    fills.push({
+      type: 'SOLID',
+      color: {
+        r: rgb.r,
+        g: rgb.g,
+        b: rgb.b,
+      },
+      blendMode: 'NORMAL',
+      visible: true,
+      opacity: rgb.a || 1,
+    });
+  }
+
+  // Detect border radius or shadow
+  const hasBorderRadius =
+    parseFloat(computedStyles.borderTopLeftRadius) > 0 ||
+    parseFloat(computedStyles.borderTopRightRadius) > 0 ||
+    parseFloat(computedStyles.borderBottomLeftRadius) > 0 ||
+    parseFloat(computedStyles.borderBottomRightRadius) > 0;
+
+  const hasBoxShadow = computedStyles.boxShadow !== 'none';
+
+  if (hasBorderRadius || hasBoxShadow) {
+    return {
+      type: 'RECTANGLE',
+      x: Math.round(rect.left),
+      y: Math.round(rect.top),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+      fills: fills,
+      topLeftRadius: parseFloat(computedStyles.borderTopLeftRadius) || 0,
+      topRightRadius: parseFloat(computedStyles.borderTopRightRadius) || 0,
+      bottomLeftRadius: parseFloat(computedStyles.borderBottomLeftRadius) || 0,
+      bottomRightRadius: parseFloat(computedStyles.borderBottomRightRadius) || 0,
+    };
+  }
+
+  // Default is GroupNode
+  return {
+    type: 'GROUP',
+    x: Math.round(rect.left),
+    y: Math.round(rect.top),
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+    backgrounds: fills,
+  };
 }
