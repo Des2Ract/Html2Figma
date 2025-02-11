@@ -390,3 +390,35 @@ export function handleBodyNode(element: Element): Partial<FrameNode> {
 
   return BodyNode;
 }
+
+export function handleGroupNode(element: Element): Partial<GroupNode> {
+  const el = element as HTMLDivElement | HTMLSpanElement;
+  const rect = element.getBoundingClientRect();
+  const computedStyles = getComputedStyle(el);
+
+  const fills: SolidPaint[] = [];
+  const rgb = getFigmaRGB(computedStyles.backgroundColor);
+
+  if (rgb) {
+    fills.push({
+      type: 'SOLID',
+      color: {
+        r: rgb.r,
+        g: rgb.g,
+        b: rgb.b,
+      },
+      blendMode: 'NORMAL',
+      visible: true,
+      opacity: rgb.a || 1,
+    });
+  }
+
+  return {
+    type: 'GROUP',
+    x: Math.round(rect.left),
+    y: Math.round(rect.top),
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+    backgrounds: fills,
+  };
+}

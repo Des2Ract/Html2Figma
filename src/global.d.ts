@@ -15,5 +15,6 @@ declare global {
     handleDivSpanNode: typeof import('./FigmaComponentHandlers').handleDivSpanNode;
     handleLinkNode: typeof import('./FigmaComponentHandlers').handleLinkNode;
     handleBodyNode: typeof import('./FigmaComponentHandlers').handleBodyNode;
+    handleGroupNode: typeof import('./FigmaComponentHandlers').handleGroupNode;
   }
 }
