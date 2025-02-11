@@ -1,17 +1,14 @@
-import { LayerNode } from "./figma_node.js";
-import { getFigmaRGB } from "./utils.js";
+import { LayerNode } from './figma_node.js';
+import { getFigmaRGB } from './utils.js';
 
 export function handleTextNode(element: Element): Partial<TextNode> {
   const parent = element.parentElement as Element;
 
-  const computedStyles = getComputedStyle(
-    element instanceof Element ? element : parent
-  );
+  const computedStyles = getComputedStyle(element instanceof Element ? element : parent);
 
   const range = document.createRange();
   range.selectNode(element);
-  const fastClone = (data: any) =>
-    typeof data === "symbol" ? null : JSON.parse(JSON.stringify(data));
+  const fastClone = (data: any) => (typeof data === 'symbol' ? null : JSON.parse(JSON.stringify(data)));
   const rect = fastClone(range.getBoundingClientRect());
   let x = Math.round(rect.left);
   let y = Math.round(rect.top);
@@ -23,27 +20,27 @@ export function handleTextNode(element: Element): Partial<TextNode> {
 
   if (rgb) {
     fills.push({
-      type: "SOLID",
+      type: 'SOLID',
       color: {
         r: rgb.r,
         g: rgb.g,
         b: rgb.b,
       },
-      blendMode: "NORMAL",
+      blendMode: 'NORMAL',
       visible: true,
       opacity: rgb.a || 1,
     } as SolidPaint);
   }
 
   const textnode: Partial<TextNode> = {
-    type: "TEXT",
+    type: 'TEXT',
     characters: (element.textContent as string).trim(),
     x: x,
     y: y,
     width: width,
     height: height,
-    textAlignHorizontal: "LEFT",
-    textAlignVertical: "CENTER",
+    textAlignHorizontal: 'LEFT',
+    textAlignVertical: 'CENTER',
     fontSize: parseFloat(computedStyles.fontSize),
     fontName: {
       family: computedStyles.fontFamily,
@@ -58,7 +55,7 @@ export function handleSvgNode(element: Element): Partial<LayerNode> {
   const rect = element.getBoundingClientRect();
 
   const svgNode: Partial<LayerNode> = {
-    type: "SVG",
+    type: 'SVG',
     svg: element.outerHTML,
     x: Math.round(rect.left),
     y: Math.round(rect.top),
@@ -77,23 +74,19 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
   const fills = [
     {
       url: url as string,
-      type: "IMAGE",
-      scaleMode: computedStyles.objectFit === "contain" ? "FIT" : "FILL",
+      type: 'IMAGE',
+      scaleMode: computedStyles.objectFit === 'contain' ? 'FIT' : 'FILL',
       imageHash: null,
     } as ImagePaint,
   ] as ImagePaint[];
 
-  const handlePX = (v: string): number =>
-    /px$/.test(v) || v === "0" ? parseFloat(v) : 0;
-  const handlePercent = (v: string): number =>
-    /^(\d+)%$/.test(v) ? parseInt(v) / 100 : 0;
+  const handlePX = (v: string): number => (/px$/.test(v) || v === '0' ? parseFloat(v) : 0);
+  const handlePercent = (v: string): number => (/^(\d+)%$/.test(v) ? parseInt(v) / 100 : 0);
   const parse = (borderRadius: string, height: number): number =>
-    handlePX(borderRadius)
-      ? handlePX(borderRadius)
-      : handlePercent(borderRadius) * height;
+    handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
 
   const imageNode: Partial<RectangleNode> = {
-    type: "RECTANGLE",
+    type: 'RECTANGLE',
     x: Math.round(rect.left),
     y: Math.round(rect.top),
     width: Math.round(rect.width),
@@ -102,11 +95,47 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
     topLeftRadius: parse(computedStyles.borderTopLeftRadius, rect.height),
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
-    bottomRightRadius: parse(
-      computedStyles.borderBottomRightRadius,
-      rect.height
-    ),
+    bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
   };
 
   return imageNode;
+}
+
+export function handlePictureNode(element: Element): Partial<RectangleNode> {
+  const source = element.querySelector('source')?.srcset.split(/[,\s]+/g)[0];
+  const formatUrl = (url: string) =>
+    url?.trim()?.replace(/^\/\//, 'https://')?.replace(/^\//, `https://${location.host}/`) || '';
+
+  const rect = element.getBoundingClientRect();
+  const computedStyles = getComputedStyle(element);
+  const url = (element as HTMLImageElement).src as string;
+
+  const fills = [
+    {
+      url: source ? (formatUrl(source) ? formatUrl(source) : null) : null,
+      type: 'IMAGE',
+      scaleMode: computedStyles.objectFit === 'contain' ? 'FIT' : 'FILL',
+      imageHash: null,
+    } as ImagePaint,
+  ] as ImagePaint[];
+
+  const handlePX = (v: string): number => (/px$/.test(v) || v === '0' ? parseFloat(v) : 0);
+  const handlePercent = (v: string): number => (/^(\d+)%$/.test(v) ? parseInt(v) / 100 : 0);
+  const parse = (borderRadius: string, height: number): number =>
+    handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
+
+  const pictureNode: Partial<RectangleNode> = {
+    type: 'RECTANGLE',
+    x: Math.round(rect.left),
+    y: Math.round(rect.top),
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+    fills: fills,
+    topLeftRadius: parse(computedStyles.borderTopLeftRadius, rect.height),
+    topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
+    bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
+    bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+  };
+
+  return pictureNode;
 }

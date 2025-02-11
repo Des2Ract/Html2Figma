@@ -1,18 +1,11 @@
-import { FigmaNode, createFigmaNode } from "./figma_node.js";
-import {
-  handleImageNode,
-  handleSvgNode,
-  handleTextNode,
-} from "./FigmaComponentHandlers.js";
+import { FigmaNode, createFigmaNode } from './figma_node.js';
+import { handleImageNode, handlePictureNode, handleSvgNode, handleTextNode } from './FigmaComponentHandlers.js';
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
   //   return extractFigmaNode2(element);
 
   // Skip empty or whitespace text nodes
-  if (
-    element.nodeType === Node.TEXT_NODE &&
-    (!element.nodeValue || element.nodeValue.trim() === "")
-  ) {
+  if (element.nodeType === Node.TEXT_NODE && (!element.nodeValue || element.nodeValue.trim() === '')) {
     return null;
   }
 
@@ -25,62 +18,73 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   if (
     element.nodeType === Node.TEXT_NODE &&
     element.nodeValue &&
-    (element.nodeValue.includes("function") ||
-      element.nodeValue.includes("var ") ||
-      element.nodeValue.includes("if (") ||
-      element.nodeValue.includes("else {"))
+    (element.nodeValue.includes('function') ||
+      element.nodeValue.includes('var ') ||
+      element.nodeValue.includes('if (') ||
+      element.nodeValue.includes('else {'))
   ) {
     return null;
   }
 
   // Skip nodes with specific tag names or attributes
-  if (
-    element.tagName === "SCRIPT" ||
-    element.tagName === "STYLE" ||
-    element.tagName === "NOSCRIPT"
-  ) {
+  if (element.tagName === 'SCRIPT' || element.tagName === 'STYLE' || element.tagName === 'NOSCRIPT') {
     return null;
   }
 
   // TODO: TEXT NODE
-  function isTextOnlyNode(element: Element) {
+  function isTextOnlyNode(element: Element): boolean {
     // Direct text node
     if (element.nodeType === Node.TEXT_NODE) {
       return true;
     }
 
-    // Check children for a single, non-empty text node
-    const nonEmptyTextChildren = Array.from(element.childNodes).filter(
-      (node) =>
-        node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ""
-    );
+    // Tags allowed to encapsulate simple text
+    // prettier-ignore
+    const allowedTextTags = new Set(['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'B', 'U', 'I', 'STRONG', 'EM', 'MARK', 'SMALL', 'SUB', 'SUP', 'INS', 'DEL', 'CITE', 'Q', 'BLOCKQUOTE', 'CODE', 'VAR', 'PRE', 'SAMP', 'KBD', 'DFN', 'ABBR', 'SPAN']);
 
-    return nonEmptyTextChildren.length === 1;
+    // Check if it's a non-grouping tag from allowedTextTags
+    if (allowedTextTags.has(element.tagName)) {
+      const nonEmptyTextChildren = Array.from(element.childNodes).filter(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== '',
+      );
+      return nonEmptyTextChildren.length === 1;
+    }
+
+    // Grouping tags are never simple text nodes
+    return false;
   }
 
   if (isTextOnlyNode(element))
-    return createFigmaNode(
-      element.tagName ? element.tagName : "txt",
-      handleTextNode(element)
-    );
+    return createFigmaNode(element.tagName ? element.tagName : 'txt', handleTextNode(element));
 
   // TODO: IMAGE NODE
   if (element instanceof HTMLImageElement)
-    return createFigmaNode(
-      element.tagName ? element.tagName : "txt",
-      handleImageNode(element)
-    );
+    return createFigmaNode(element.tagName ? element.tagName : 'txt', handleImageNode(element));
 
   // TODO: PICTURE NODE
-
+  if (element instanceof HTMLPictureElement)
+    return createFigmaNode(element.tagName ? element.tagName : 'txt', handlePictureNode(element));
   // TODO: VIDEO NODE
 
   // TODO: Hidden NODE
 
   // TODO: SVG NODE
-  if (element instanceof SVGSVGElement)
-    return createFigmaNode(element.tagName, handleSvgNode(element));
+  if (element instanceof SVGSVGElement) return createFigmaNode(element.tagName, handleSvgNode(element));
+
+  // TODO: DIV/SPAN NODE
+
+  // TODO: A/LINK NODE
+
+  // TODO: TABLE NODE
+
+  // TODO: FORM NODE
+
+  // TODO: INPUT NODE
+
+  // TODO: BUTTON NODE
+
+  // TODO: hr element (consider it as a rectangle)
 
   // Create and return a general Figma node
-  return createFigmaNode(element.tagName ? element.tagName : "txt", {} as any);
+  return createFigmaNode(element.tagName ? element.tagName : 'txt', {} as any);
 }
