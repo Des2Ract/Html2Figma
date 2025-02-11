@@ -52,7 +52,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
 
     // Tags allowed to encapsulate simple text
     // prettier-ignore
-    const allowedTextTags = new Set(['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'B', 'U', 'I', 'STRONG', 'EM', 'MARK', 'SMALL', 'SUB', 'SUP', 'INS', 'DEL', 'CITE', 'Q', 'BLOCKQUOTE', 'CODE', 'VAR', 'PRE', 'SAMP', 'KBD', 'DFN', 'ABBR', 'SPAN', 'LABEL']);
+    const allowedTextTags = new Set(['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'B', 'U', 'I', 'STRONG', 'EM', 'MARK', 'SMALL', 'SUB', 'SUP', 'INS', 'DEL', 'CITE', 'Q', 'BLOCKQUOTE', 'CODE', 'VAR', 'PRE', 'SAMP', 'KBD', 'DFN', 'ABBR', 'SPAN', 'LABEL', 'LI']);
 
     // Check if it's a non-grouping tag from allowedTextTags
     if (allowedTextTags.has(element.tagName)) {
@@ -105,12 +105,11 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   if (element instanceof HTMLAnchorElement) return createFigmaNode(element.tagName, handleLinkNode(element));
   // TODO: Handle BODY
   if (element instanceof HTMLBodyElement) return createFigmaNode(element.tagName, handleBodyNode(element));
-  // TODO: TABLE NODE
 
   // TODO: INPUT NODE
   if (element instanceof HTMLInputElement) return handleInputNode(element);
 
-  // TODO: LIST NODE
+  // TODO: TABLE NODE
 
   // Default: return a Group Figma Node
   return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleGroupNode(element));

@@ -233,7 +233,7 @@ export function handleLineNode(element: Element): Partial<LineNode> {
   return lineNode;
 }
 
-export function handleInputNode(element: Element): FigmaNode  {
+export function handleInputNode(element: Element): FigmaNode {
   const inputEl = element as HTMLInputElement;
   const inputType = inputEl.type.toLowerCase();
 
@@ -242,19 +242,14 @@ export function handleInputNode(element: Element): FigmaNode  {
   const parse = (borderRadius: string, height: number): number =>
     handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
 
-
   const rect = element.getBoundingClientRect();
   const computedStyles = getComputedStyle(element);
 
-  const textValue = (
-    (element as HTMLInputElement).value ||
-    (element as HTMLInputElement).placeholder
-)?.trim();
+  const textValue = ((element as HTMLInputElement).value || (element as HTMLInputElement).placeholder)?.trim();
 
   const fills: SolidPaint[] = [];
-  
 
-  if(inputType == "checkbox"){
+  if (inputType == 'checkbox') {
     const checkboxNode: Partial<RectangleNode> = {
       type: 'RECTANGLE',
       x: Math.round(rect.left),
@@ -263,10 +258,10 @@ export function handleInputNode(element: Element): FigmaNode  {
       height: Math.round(rect.height),
       fills: fills,
     };
-    return createFigmaNode('INPUT',checkboxNode);
+    return createFigmaNode('INPUT', checkboxNode);
   }
 
-  if(inputType == "radio"){
+  if (inputType == 'radio') {
     const radioNode: Partial<EllipseNode> = {
       type: 'ELLIPSE',
       x: Math.round(rect.left),
@@ -275,96 +270,18 @@ export function handleInputNode(element: Element): FigmaNode  {
       height: Math.round(rect.height),
       fills: fills,
     };
-    return createFigmaNode('INPUT',radioNode);
+    return createFigmaNode('INPUT', radioNode);
   }
 
-  if(inputType == "button" || inputType == "submit" || inputType == "reset"){
-
-  let x = Math.round(rect.left);
-  let y = Math.round(rect.top);
-  let width = Math.round(rect.width);
-  let height = Math.round(rect.height);
-
-  const fills: SolidPaint[] = [];
-  let rgb = getFigmaRGB(computedStyles.color);
-
-  if (rgb) {
-    fills.push({
-      type: 'SOLID',
-      color: {
-        r: rgb.r,
-        g: rgb.g,
-        b: rgb.b,
-      },
-      blendMode: 'NORMAL',
-      visible: true,
-      opacity: rgb.a || 1,
-    } as SolidPaint);
-  }
-
-  const mapTextAlignHorizontal = (
-    cssAlign: string | undefined,
-  ): 'LEFT' | 'RIGHT' | 'CENTER' | 'JUSTIFIED' | undefined =>
-    (
-      ({
-        left: 'LEFT',
-        right: 'RIGHT',
-        center: 'CENTER',
-        justify: 'JUSTIFIED',
-      }) as const
-    )[cssAlign as 'left' | 'right' | 'center' | 'justify'];
-
-  const mapTextAlignVertical = (cssAlign: string | undefined): 'TOP' | 'CENTER' | 'BOTTOM' | undefined =>
-    (({ top: 'TOP', middle: 'CENTER', bottom: 'BOTTOM' }) as const)[cssAlign as 'top' | 'middle' | 'bottom'];
-
-  const textNode: Partial<TextNode> = {
-    type: 'TEXT',
-    characters: ((element as HTMLInputElement).value )?.trim(),
-    x: x,
-    y: y,
-    width: width,
-    height: height,
-    textAlignHorizontal: mapTextAlignHorizontal(computedStyles.textAlign),
-    textAlignVertical: mapTextAlignVertical(computedStyles.verticalAlign),
-    fontSize: parseFloat(computedStyles.fontSize),
-    fontName: {
-      family: computedStyles.fontFamily.replace(/['"]/g, ''),
-      style: computedStyles.fontStyle,
-    },
-    fills: fills,
-  };
-
-    const buttonNode: Partial<RectangleNode> = {
-      type: 'RECTANGLE',
-      x: Math.round(rect.left),
-      y: Math.round(rect.top),
-      width: Math.round(rect.width),
-      height: Math.round(rect.height),
-      fills: fills,
-      topLeftRadius: parse(computedStyles.borderTopLeftRadius, rect.height),
-      topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
-      bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
-      bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
-    };
-    const inputFigmaNode = createFigmaNode('INPUT',buttonNode);
-    const textFigmaNode = createFigmaNode('txt',textNode);
-    inputFigmaNode.children.push(textFigmaNode)
-
-    return inputFigmaNode;
-  }
-
-  if(inputType == "email" || inputType == "text" || inputType == "search" || inputType == 'list'){
-
+  if (inputType == 'button' || inputType == 'submit' || inputType == 'reset') {
     let x = Math.round(rect.left);
     let y = Math.round(rect.top);
     let width = Math.round(rect.width);
     let height = Math.round(rect.height);
-  
- 
 
     const fills: SolidPaint[] = [];
     let rgb = getFigmaRGB(computedStyles.color);
-  
+
     if (rgb) {
       fills.push({
         type: 'SOLID',
@@ -378,13 +295,87 @@ export function handleInputNode(element: Element): FigmaNode  {
         opacity: rgb.a || 1,
       } as SolidPaint);
     }
-  
+
+    const mapTextAlignHorizontal = (
+      cssAlign: string | undefined,
+    ): 'LEFT' | 'RIGHT' | 'CENTER' | 'JUSTIFIED' | undefined =>
+      (
+        ({
+          left: 'LEFT',
+          right: 'RIGHT',
+          center: 'CENTER',
+          justify: 'JUSTIFIED',
+        }) as const
+      )[cssAlign as 'left' | 'right' | 'center' | 'justify'];
+
+    const mapTextAlignVertical = (cssAlign: string | undefined): 'TOP' | 'CENTER' | 'BOTTOM' | undefined =>
+      (({ top: 'TOP', middle: 'CENTER', bottom: 'BOTTOM' }) as const)[cssAlign as 'top' | 'middle' | 'bottom'];
+
+    const textNode: Partial<TextNode> = {
+      type: 'TEXT',
+      characters: (element as HTMLInputElement).value?.trim(),
+      x: x,
+      y: y,
+      width: width,
+      height: height,
+      textAlignHorizontal: mapTextAlignHorizontal(computedStyles.textAlign),
+      textAlignVertical: mapTextAlignVertical(computedStyles.verticalAlign),
+      fontSize: parseFloat(computedStyles.fontSize),
+      fontName: {
+        family: computedStyles.fontFamily.replace(/['"]/g, ''),
+        style: computedStyles.fontStyle,
+      },
+      fills: fills,
+    };
+
+    const buttonNode: Partial<RectangleNode> = {
+      type: 'RECTANGLE',
+      x: Math.round(rect.left),
+      y: Math.round(rect.top),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+      fills: fills,
+      topLeftRadius: parse(computedStyles.borderTopLeftRadius, rect.height),
+      topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
+      bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
+      bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+    };
+    const inputFigmaNode = createFigmaNode('INPUT', buttonNode);
+    const textFigmaNode = createFigmaNode('txt', textNode);
+    inputFigmaNode.children.push(textFigmaNode);
+
+    return inputFigmaNode;
+  }
+
+  if (inputType == 'email' || inputType == 'text' || inputType == 'search' || inputType == 'list') {
+    let x = Math.round(rect.left);
+    let y = Math.round(rect.top);
+    let width = Math.round(rect.width);
+    let height = Math.round(rect.height);
+
+    const fills: SolidPaint[] = [];
+    let rgb = getFigmaRGB(computedStyles.color);
+
+    if (rgb) {
+      fills.push({
+        type: 'SOLID',
+        color: {
+          r: rgb.r,
+          g: rgb.g,
+          b: rgb.b,
+        },
+        blendMode: 'NORMAL',
+        visible: true,
+        opacity: rgb.a || 1,
+      } as SolidPaint);
+    }
+
     const fillsText: SolidPaint[] = [];
 
     const defaultPlaceholderColor = getFigmaRGB('rgba(178, 178, 178, 1)');
 
     let rgbText = defaultPlaceholderColor;
-  
+
     if (rgbText) {
       fillsText.push({
         type: 'SOLID',
@@ -398,7 +389,7 @@ export function handleInputNode(element: Element): FigmaNode  {
         opacity: rgbText.a || 1,
       } as SolidPaint);
     }
-  
+
     const mapTextAlignHorizontal = (
       cssAlign: string | undefined,
     ): 'LEFT' | 'RIGHT' | 'CENTER' | 'JUSTIFIED' | undefined =>
@@ -410,30 +401,28 @@ export function handleInputNode(element: Element): FigmaNode  {
           justify: 'JUSTIFIED',
         }) as const
       )[cssAlign as 'left' | 'right' | 'center' | 'justify'];
-  
+
     const mapTextAlignVertical = (cssAlign: string | undefined): 'TOP' | 'CENTER' | 'BOTTOM' | undefined =>
       (({ top: 'TOP', middle: 'CENTER', bottom: 'BOTTOM' }) as const)[cssAlign as 'top' | 'middle' | 'bottom'];
-  
-    
-  
-      const textFieldNode: Partial<RectangleNode> = {
-        type: 'RECTANGLE',
-        x: Math.round(rect.left),
-        y: Math.round(rect.top),
-        width: Math.round(rect.width),
-        height: Math.round(rect.height),
-        fills: fills,
-        topLeftRadius: parse(computedStyles.borderTopLeftRadius, rect.height),
-        topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
-        bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
-        bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
-      };
-      const inputFigmaNode = createFigmaNode('INPUT',textFieldNode);
 
-      if((element as HTMLInputElement).placeholder?.trim()){
+    const textFieldNode: Partial<RectangleNode> = {
+      type: 'RECTANGLE',
+      x: Math.round(rect.left),
+      y: Math.round(rect.top),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+      fills: fills,
+      topLeftRadius: parse(computedStyles.borderTopLeftRadius, rect.height),
+      topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
+      bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
+      bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+    };
+    const inputFigmaNode = createFigmaNode('INPUT', textFieldNode);
+
+    if ((element as HTMLInputElement).placeholder?.trim()) {
       const textNode: Partial<TextNode> = {
         type: 'TEXT',
-        characters: ((element as HTMLInputElement).placeholder )?.trim(),
+        characters: (element as HTMLInputElement).placeholder?.trim(),
         x: x,
         y: y,
         width: width,
@@ -447,11 +436,11 @@ export function handleInputNode(element: Element): FigmaNode  {
         },
         fills: fillsText,
       };
-      const textFigmaNode = createFigmaNode('txt',textNode);
-      inputFigmaNode.children.push(textFigmaNode)
+      const textFigmaNode = createFigmaNode('txt', textNode);
+      inputFigmaNode.children.push(textFigmaNode);
     }
-  
-      return inputFigmaNode;
+
+    return inputFigmaNode;
   }
 
   const inputNode: Partial<RectangleNode> = {
@@ -467,9 +456,8 @@ export function handleInputNode(element: Element): FigmaNode  {
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
   };
 
-  return createFigmaNode('INPUT',inputNode)
+  return createFigmaNode('INPUT', inputNode);
 }
-
 
 export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
   const el = element as HTMLButtonElement | HTMLFormElement;
