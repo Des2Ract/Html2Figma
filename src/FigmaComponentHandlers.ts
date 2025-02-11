@@ -77,6 +77,9 @@ export function handleTextNode(element: Element): Partial<TextNode> {
 
 export function handleSvgNode(element: Element): Partial<LayerNode> {
   const rect = element.getBoundingClientRect();
+  const computedStyles = getComputedStyle(element);
+  // Extract strokes (borders)
+  const borderData = getBorder(computedStyles);
 
   const svgNode: Partial<LayerNode> = {
     type: 'SVG',
@@ -85,6 +88,9 @@ export function handleSvgNode(element: Element): Partial<LayerNode> {
     y: Math.round(rect.top),
     width: Math.round(rect.width),
     height: Math.round(rect.height),
+    strokes: borderData?.strokes || [],
+    strokeWeight: borderData?.strokeWeight || 0,
+    dashPattern: borderData?.dashPattern || [],
   };
 
   return svgNode;
@@ -109,6 +115,9 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
   const parse = (borderRadius: string, height: number): number =>
     handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
 
+  // Extract strokes (borders)
+  const borderData = getBorder(computedStyles);
+
   const imageNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
     x: Math.round(rect.left),
@@ -120,6 +129,9 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+    strokes: borderData?.strokes || [],
+    strokeWeight: borderData?.strokeWeight || 0,
+    dashPattern: borderData?.dashPattern || [],
   };
 
   return imageNode;
@@ -148,6 +160,9 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
   const parse = (borderRadius: string, height: number): number =>
     handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
 
+  // Extract strokes (borders)
+  const borderData = getBorder(computedStyles);
+
   const pictureNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
     x: Math.round(rect.left),
@@ -159,6 +174,9 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+    strokes: borderData?.strokes || [],
+    strokeWeight: borderData?.strokeWeight || 0,
+    dashPattern: borderData?.dashPattern || [],
   };
 
   return pictureNode;
@@ -183,6 +201,9 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
   const parse = (borderRadius: string, height: number): number =>
     handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
 
+  // Extract strokes (borders)
+  const borderData = getBorder(computedStyles);
+
   const videoNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
     x: Math.round(rect.left),
@@ -194,6 +215,9 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+    strokes: borderData?.strokes || [],
+    strokeWeight: borderData?.strokeWeight || 0,
+    dashPattern: borderData?.dashPattern || [],
   };
 
   return videoNode;
@@ -492,6 +516,9 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
   const parse = (borderRadius: string, height: number): number =>
     handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
 
+  // Extract strokes (borders)
+  const borderData = getBorder(computedStyles);
+
   const ButtonFormNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
     x: Math.round(rect.left),
@@ -503,6 +530,9 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+    strokes: borderData?.strokes || [],
+    strokeWeight: borderData?.strokeWeight || 0,
+    dashPattern: borderData?.dashPattern || [],
   };
 
   return ButtonFormNode;

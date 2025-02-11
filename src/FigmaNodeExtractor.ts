@@ -79,24 +79,24 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
 
   if (isHiddenNode(element as HTMLElement)) return null;
 
-  // TODO: IMAGE NODE / Handle Strokes
+  // TODO: IMAGE NODE
   if (element instanceof HTMLImageElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleImageNode(element));
 
-  // TODO: PICTURE NODE / Handle Strokes
+  // TODO: PICTURE NODE
   if (element instanceof HTMLPictureElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handlePictureNode(element));
-  // TODO: VIDEO NODE / Handle Strokes
+  // TODO: VIDEO NODE
   if (element instanceof HTMLVideoElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleVideoNode(element));
 
-  // TODO: SVG NODE / Handle Strokes
+  // TODO: SVG NODE
   if (element instanceof SVGSVGElement) return createFigmaNode(element.tagName, handleSvgNode(element));
 
   // TODO: HR element
   if (element instanceof HTMLHRElement) return createFigmaNode(element.tagName, handleLineNode(element));
 
-  // TODO: BUTTON/FORM NODE / Handle Strokes
+  // TODO: BUTTON/FORM NODE
   if (element instanceof HTMLButtonElement || element instanceof HTMLFormElement)
     return createFigmaNode(element.tagName, handleButtonFormNode(element));
 
@@ -108,6 +108,6 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: INPUT NODE
   if (element instanceof HTMLInputElement) return handleInputNode(element);
 
-  // Default: return a Group Figma Node / Handle Strokes
+  // Default: return a Group Figma Node
   return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleDefaultNode(element));
 }
