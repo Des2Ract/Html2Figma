@@ -6,7 +6,7 @@ import { extractFigmaNode } from './FigmaNodeExtractor.js';
 import { getFigmaRGB } from './utils.js';
 import {
   handleButtonFormNode,
-  handleDivSpanNode,
+  handleDefaultNode,
   handleImageNode,
   handleLineNode,
   handleLinkNode,
@@ -16,7 +16,6 @@ import {
   handleVideoNode,
   handleBodyNode,
   handleInputNode,
-  handleGroupNode,
 } from './FigmaComponentHandlers.js';
 
 export async function parse(url: string): Promise<FigmaNode> {
@@ -37,11 +36,10 @@ export async function parse(url: string): Promise<FigmaNode> {
     handleVideoNode: handleVideoNode.toString(),
     handleLineNode: handleLineNode.toString(),
     handleButtonFormNode: handleButtonFormNode.toString(),
-    handleDivSpanNode: handleDivSpanNode.toString(),
+    handleDefaultNode: handleDefaultNode.toString(),
     handleLinkNode: handleLinkNode.toString(),
     handleBodyNode: handleBodyNode.toString(),
     handleInputNode: handleInputNode.toString(),
-    handleGroupNode: handleGroupNode.toString(),
   };
 
   const result = await page.evaluate((logic) => {
@@ -57,11 +55,10 @@ export async function parse(url: string): Promise<FigmaNode> {
     const handleVideoNode = new Function(`return ${logic.handleVideoNode}`)();
     const handleLineNode = new Function(`return ${logic.handleLineNode}`)();
     const handleButtonFormNode = new Function(`return ${logic.handleButtonFormNode}`)();
-    const handleDivSpanNode = new Function(`return ${logic.handleDivSpanNode}`)();
+    const handleDefaultNode = new Function(`return ${logic.handleDefaultNode}`)();
     const handleLinkNode = new Function(`return ${logic.handleLinkNode}`)();
     const handleBodyNode = new Function(`return ${logic.handleBodyNode}`)();
     const handleInputNode = new Function(`return ${logic.handleInputNode}`)();
-    const handleGroupNode = new Function(`return ${logic.handleGroupNode}`)();
 
     // Use functions to process the document
     window.createFigmaNode = createFigmaNode;
@@ -74,11 +71,10 @@ export async function parse(url: string): Promise<FigmaNode> {
     window.handleVideoNode = handleVideoNode;
     window.handleLineNode = handleLineNode;
     window.handleButtonFormNode = handleButtonFormNode;
-    window.handleDivSpanNode = handleDivSpanNode;
+    window.handleDefaultNode = handleDefaultNode;
     window.handleLinkNode = handleLinkNode;
     window.handleBodyNode = handleBodyNode;
     window.handleInputNode = handleInputNode;
-    window.handleGroupNode = handleGroupNode;
 
     return parseHTMLToFigmaNode(document.body);
   }, logicBundle);

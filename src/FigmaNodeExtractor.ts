@@ -1,7 +1,7 @@
 import { FigmaNode, createFigmaNode } from './figma_node.js';
 import {
   handleButtonFormNode,
-  handleDivSpanNode,
+  handleDefaultNode,
   handleImageNode,
   handleLineNode,
   handleLinkNode,
@@ -11,7 +11,6 @@ import {
   handleVideoNode,
   handleBodyNode,
   handleInputNode,
-  handleGroupNode,
 } from './FigmaComponentHandlers.js';
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
@@ -98,9 +97,6 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   if (element instanceof HTMLButtonElement || element instanceof HTMLFormElement)
     return createFigmaNode(element.tagName, handleButtonFormNode(element));
 
-  // TODO: DIV/SPAN NODE / Handle Strokes
-  if (element instanceof HTMLDivElement || element instanceof HTMLSpanElement)
-    return createFigmaNode(element.tagName, handleDivSpanNode(element));
   // TODO: A/LINK NODE
   if (element instanceof HTMLAnchorElement) return createFigmaNode(element.tagName, handleLinkNode(element));
   // TODO: Handle BODY
@@ -109,8 +105,6 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: INPUT NODE
   if (element instanceof HTMLInputElement) return handleInputNode(element);
 
-  // TODO: TABLE NODE
-
-  // Default: return a Group Figma Node
-  return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleGroupNode(element));
+  // Default: return a Group Figma Node / Handle Strokes
+  return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleDefaultNode(element));
 }

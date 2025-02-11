@@ -12,10 +12,9 @@ declare global {
     handleVideoNode: typeof import('./FigmaComponentHandlers').handleVideoNode;
     handleLineNode: typeof import('./FigmaComponentHandlers').handleLineNode;
     handleButtonFormNode: typeof import('./FigmaComponentHandlers').handleButtonFormNode;
-    handleDivSpanNode: typeof import('./FigmaComponentHandlers').handleDivSpanNode;
+    handleDefaultNode: typeof import('./FigmaComponentHandlers').handleDefaultNode;
     handleLinkNode: typeof import('./FigmaComponentHandlers').handleLinkNode;
     handleBodyNode: typeof import('./FigmaComponentHandlers').handleBodyNode;
     handleInputNode: typeof import('./FigmaComponentHandlers').handleInputNode;
-    handleGroupNode: typeof import('./FigmaComponentHandlers').handleGroupNode;
   }
 }

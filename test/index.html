@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hidden Node Test</title>
-        <style>
-          .hidden-display {
-            display: none;
-          }
-      
-          .hidden-visibility {
-            visibility: hidden;
-          }
-      
-          .hidden-opacity {
-            opacity: 0;
-          }
-      
-          .visible {
-            display: block;
-            color: blue;
-          }
-          .styled-button {
-            background-color: #4CAF50; /* Green background */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 12px; /* Rounded corners */
-            cursor: pointer;
-          }
-          .test-form {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Example</title>
+    <style>
+        table {
+            width: 60%;
+            border-collapse: collapse;
             background-color: #f2f2f2;
-            padding: 20px;
-            border-radius: 16px;
-            width: 300px;
-            margin-top: 20px;
-          }
-          body{
-            background-color:purple;
-            border-radius: 5%;
-          }
-        </style>
-      </head>
-  <body>
-    <ul>
-      <li>ahmed</li>
-      <li>zahran</li>
-    </ul>
-  </body>
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            background-color: aqua;
+        }
+        th {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Country</th>
+        </tr>
+        <tr>
+            <td>Ahmed</td>
+            <td>25</td>
+            <td>Egypt</td>
+        </tr>
+        <tr>
+            <td>Sarah</td>
+            <td>30</td>
+            <td>USA</td>
+        </tr>
+    </table>
+</body>
 </html>
