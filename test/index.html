@@ -1,45 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table Example</title>
-    <style>
-        table {
-            width: 60%;
-            border-collapse: collapse;
-            background-color: #f2f2f2;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-            background-color: aqua;
-        }
-        th {
-            background-color: #ddd;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hidden Node Test</title>
+  <style>
+    .hidden-display {
+      display: none;
+    }
+
+    .hidden-visibility {
+      visibility: hidden;
+    }
+
+    .hidden-opacity {
+      opacity: 0;
+    }
+
+    .visible {
+      display: block;
+      color: blue;
+    }
+
+    .styled-button {
+      background-color: #4caf50;
+      /* Green background */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 12px;
+      /* Rounded corners */
+      cursor: pointer;
+    }
+
+    .test-form {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 16px;
+      width: 300px;
+      margin-top: 20px;
+    }
+
+    body {
+      background-color: purple;
+      border-radius: 5%;
+    }
+
+    .styled-input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .styled-input:focus {
+      border-color: #4caf50;
+      outline: none;
+    }
+  </style>
 </head>
+
 <body>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Country</th>
-        </tr>
-        <tr>
-            <td>Ahmed</td>
-            <td>25</td>
-            <td>Egypt</td>
-        </tr>
-        <tr>
-            <td>Sarah</td>
-            <td>30</td>
-            <td>USA</td>
-        </tr>
-    </table>
+  <ul>
+    <li>ahmed</li>
+    <li>zahran</li>
+  </ul>
+
+  <form class="test-form">
+    <label for="name">Name:</label>
+    <input type="text" id="name" class="styled-input" placeholder="Enter your name" />
+    <br />
+    <label for="email">Email:</label>
+    <input type="email" id="email" class="styled-input" placeholder="Enter your email" />
+    <br />
+    <label for="age">Age:</label>
+    <input type="number" id="age" class="styled-input" placeholder="Enter your age" />
+    <br />
+    <input type="submit" class="styled-button" value="Submit" />
+  </form>
 </body>
+
 </html>
