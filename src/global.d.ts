@@ -13,5 +13,7 @@ declare global {
     handleLineNode: typeof import('./FigmaComponentHandlers').handleLineNode;
     handleButtonFormNode: typeof import('./FigmaComponentHandlers').handleButtonFormNode;
     handleDivSpanNode: typeof import('./FigmaComponentHandlers').handleDivSpanNode;
+    handleLinkNode: typeof import('./FigmaComponentHandlers').handleLinkNode;
+    handleBodyNode: typeof import('./FigmaComponentHandlers').handleBodyNode;
   }
 }

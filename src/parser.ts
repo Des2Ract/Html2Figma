@@ -9,10 +9,12 @@ import {
   handleDivSpanNode,
   handleImageNode,
   handleLineNode,
+  handleLinkNode,
   handlePictureNode,
   handleSvgNode,
   handleTextNode,
   handleVideoNode,
+  handleBodyNode,
 } from './FigmaComponentHandlers.js';
 
 export async function parse(url: string): Promise<FigmaNode> {
@@ -34,6 +36,8 @@ export async function parse(url: string): Promise<FigmaNode> {
     handleLineNode: handleLineNode.toString(),
     handleButtonFormNode: handleButtonFormNode.toString(),
     handleDivSpanNode: handleDivSpanNode.toString(),
+    handleLinkNode: handleLinkNode.toString(),
+    handleBodyNode: handleBodyNode.toString(),
   };
 
   const result = await page.evaluate((logic) => {
@@ -50,6 +54,8 @@ export async function parse(url: string): Promise<FigmaNode> {
     const handleLineNode = new Function(`return ${logic.handleLineNode}`)();
     const handleButtonFormNode = new Function(`return ${logic.handleButtonFormNode}`)();
     const handleDivSpanNode = new Function(`return ${logic.handleDivSpanNode}`)();
+    const handleLinkNode = new Function(`return ${logic.handleLinkNode}`)();
+    const handleBodyNode = new Function(`return ${logic.handleBodyNode}`)();
 
     // Use functions to process the document
     window.createFigmaNode = createFigmaNode;
@@ -63,6 +69,8 @@ export async function parse(url: string): Promise<FigmaNode> {
     window.handleLineNode = handleLineNode;
     window.handleButtonFormNode = handleButtonFormNode;
     window.handleDivSpanNode = handleDivSpanNode;
+    window.handleLinkNode = handleLinkNode;
+    window.handleBodyNode = handleBodyNode;
 
     return parseHTMLToFigmaNode(document.body);
   }, logicBundle);

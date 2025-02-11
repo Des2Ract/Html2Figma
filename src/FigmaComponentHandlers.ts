@@ -47,6 +47,13 @@ export function handleTextNode(element: Element): Partial<TextNode> {
   const mapTextAlignVertical = (cssAlign: string | undefined): 'TOP' | 'CENTER' | 'BOTTOM' | undefined =>
     (({ top: 'TOP', middle: 'CENTER', bottom: 'BOTTOM' }) as const)[cssAlign as 'top' | 'middle' | 'bottom'];
 
+  const mapTextDecoration = (textDecoration: string): TextDecoration =>
+    textDecoration.includes('underline')
+      ? ('UNDERLINE' as TextDecoration)
+      : textDecoration.includes('line-through')
+        ? ('LINE_THROUGH' as TextDecoration)
+        : ('NONE' as TextDecoration);
+
   const textnode: Partial<TextNode> = {
     type: 'TEXT',
     characters: (element.textContent as string).trim(),
@@ -62,6 +69,7 @@ export function handleTextNode(element: Element): Partial<TextNode> {
       style: computedStyles.fontStyle,
     },
     fills: fills,
+    textDecoration: mapTextDecoration(computedStyles.textDecoration),
   };
   return textnode;
 }
@@ -322,4 +330,63 @@ export function handleDivSpanNode(element: Element): Partial<GroupNode> | Partia
     height: Math.round(rect.height),
     backgrounds: fills,
   };
+}
+
+export function handleLinkNode(element: Element): Partial<LinkUnfurlNode> {
+  const el = element as HTMLAnchorElement;
+  const rect = el.getBoundingClientRect();
+
+  const linkNode: Partial<LinkUnfurlNode> = {
+    type: 'LINK_UNFURL',
+    x: Math.round(rect.left),
+    y: Math.round(rect.top),
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+    linkUnfurlData: { url: element.getAttribute('href') as string, title: null, description: null, provider: null },
+  };
+
+  return linkNode;
+}
+
+export function handleBodyNode(element: Element): Partial<FrameNode> {
+  const el = element as HTMLBodyElement;
+  const rect = element.getBoundingClientRect();
+  const computedStyles = getComputedStyle(el);
+
+  const fills: SolidPaint[] = [];
+  let rgb = getFigmaRGB(computedStyles.backgroundColor);
+
+  if (rgb) {
+    fills.push({
+      type: 'SOLID',
+      color: {
+        r: rgb.r,
+        g: rgb.g,
+        b: rgb.b,
+      },
+      blendMode: 'NORMAL',
+      visible: true,
+      opacity: rgb.a || 1,
+    } as SolidPaint);
+  }
+
+  const handlePX = (v: string): number => (/px$/.test(v) || v === '0' ? parseFloat(v) : 0);
+  const handlePercent = (v: string): number => (/^(\d+)%$/.test(v) ? parseInt(v) / 100 : 0);
+  const parse = (borderRadius: string, height: number): number =>
+    handlePX(borderRadius) ? handlePX(borderRadius) : handlePercent(borderRadius) * height;
+
+  const BodyNode: Partial<FrameNode> = {
+    type: 'FRAME',
+    x: Math.round(rect.left),
+    y: Math.round(rect.top),
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+    fills: fills,
+    topLeftRadius: parse(computedStyles.borderTopLeftRadius, rect.height),
+    topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
+    bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
+    bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+  };
+
+  return BodyNode;
 }

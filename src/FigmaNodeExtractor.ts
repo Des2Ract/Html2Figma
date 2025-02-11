@@ -4,10 +4,12 @@ import {
   handleDivSpanNode,
   handleImageNode,
   handleLineNode,
+  handleLinkNode,
   handlePictureNode,
   handleSvgNode,
   handleTextNode,
   handleVideoNode,
+  handleBodyNode,
 } from './FigmaComponentHandlers.js';
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
@@ -73,32 +75,34 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
 
   if (isHiddenNode(element as HTMLElement)) return null;
 
-  // TODO: IMAGE NODE
+  // TODO: IMAGE NODE / Handle Strokes
   if (element instanceof HTMLImageElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleImageNode(element));
 
-  // TODO: PICTURE NODE
+  // TODO: PICTURE NODE / Handle Strokes
   if (element instanceof HTMLPictureElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handlePictureNode(element));
-  // TODO: VIDEO NODE
+  // TODO: VIDEO NODE / Handle Strokes
   if (element instanceof HTMLVideoElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleVideoNode(element));
 
-  // TODO: SVG NODE
+  // TODO: SVG NODE / Handle Strokes
   if (element instanceof SVGSVGElement) return createFigmaNode(element.tagName, handleSvgNode(element));
 
   // TODO: HR element
   if (element instanceof HTMLHRElement) return createFigmaNode(element.tagName, handleLineNode(element));
 
-  // TODO: BUTTON/FORM NODE
+  // TODO: BUTTON/FORM NODE / Handle Strokes
   if (element instanceof HTMLButtonElement || element instanceof HTMLFormElement)
     return createFigmaNode(element.tagName, handleButtonFormNode(element));
 
-  // TODO: DIV/SPAN NODE
+  // TODO: DIV/SPAN NODE / Handle Strokes
   if (element instanceof HTMLDivElement || element instanceof HTMLSpanElement)
     return createFigmaNode(element.tagName, handleDivSpanNode(element));
   // TODO: A/LINK NODE
-
+  if (element instanceof HTMLAnchorElement) return createFigmaNode(element.tagName, handleLinkNode(element));
+  // TODO: Handle BODY
+  if (element instanceof HTMLBodyElement) return createFigmaNode(element.tagName, handleBodyNode(element));
   // TODO: TABLE NODE
 
   // TODO: INPUT NODE
