@@ -1,6 +1,7 @@
 import { FigmaNode, createFigmaNode } from './figma_node.js';
 import {
   handleImageNode,
+  handleLineNode,
   handlePictureNode,
   handleSvgNode,
   handleTextNode,
@@ -44,7 +45,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
 
     // Tags allowed to encapsulate simple text
     // prettier-ignore
-    const allowedTextTags = new Set(['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'B', 'U', 'I', 'STRONG', 'EM', 'MARK', 'SMALL', 'SUB', 'SUP', 'INS', 'DEL', 'CITE', 'Q', 'BLOCKQUOTE', 'CODE', 'VAR', 'PRE', 'SAMP', 'KBD', 'DFN', 'ABBR', 'SPAN']);
+    const allowedTextTags = new Set(['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'B', 'U', 'I', 'STRONG', 'EM', 'MARK', 'SMALL', 'SUB', 'SUP', 'INS', 'DEL', 'CITE', 'Q', 'BLOCKQUOTE', 'CODE', 'VAR', 'PRE', 'SAMP', 'KBD', 'DFN', 'ABBR', 'SPAN', 'LABEL']);
 
     // Check if it's a non-grouping tag from allowedTextTags
     if (allowedTextTags.has(element.tagName)) {
@@ -83,7 +84,12 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: SVG NODE
   if (element instanceof SVGSVGElement) return createFigmaNode(element.tagName, handleSvgNode(element));
 
+  // TODO: HR element
+  if (element instanceof HTMLHRElement) return createFigmaNode(element.tagName, handleLineNode(element));
+
   // TODO: DIV/SPAN NODE
+
+  // TODO: BUTTON NODE
 
   // TODO: A/LINK NODE
 
@@ -92,10 +98,6 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: FORM NODE
 
   // TODO: INPUT NODE
-
-  // TODO: BUTTON NODE
-
-  // TODO: hr element (consider it as a rectangle)
 
   // Create and return a general Figma node
   return createFigmaNode(element.tagName ? element.tagName : 'txt', {} as any);

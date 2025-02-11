@@ -6,6 +6,7 @@ import { extractFigmaNode } from './FigmaNodeExtractor.js';
 import { getFigmaRGB } from './utils.js';
 import {
   handleImageNode,
+  handleLineNode,
   handlePictureNode,
   handleSvgNode,
   handleTextNode,
@@ -28,23 +29,21 @@ export async function parse(url: string): Promise<FigmaNode> {
     handleImageNode: handleImageNode.toString(),
     handlePictureNode: handlePictureNode.toString(),
     handleVideoNode: handleVideoNode.toString(),
+    handleLineNode: handleLineNode.toString(),
   };
 
   const result = await page.evaluate((logic) => {
     // Reconstruct functions in the browser
-    const parseHTMLToFigmaNode = new Function(
-      `return ${logic.parseHTMLToFigmaNode}`,
-    )();
+    const parseHTMLToFigmaNode = new Function(`return ${logic.parseHTMLToFigmaNode}`)();
     const createFigmaNode = new Function(`return ${logic.createFigmaNode}`)();
     const extractFigmaNode = new Function(`return ${logic.extractFigmaNode}`)();
     const getFigmaRGB = new Function(`return ${logic.getFigmaRGB}`)();
     const handleTextNode = new Function(`return ${logic.handleTextNode}`)();
     const handleSvgNode = new Function(`return ${logic.handleSvgNode}`)();
     const handleImageNode = new Function(`return ${logic.handleImageNode}`)();
-    const handlePictureNode = new Function(
-      `return ${logic.handlePictureNode}`,
-    )();
+    const handlePictureNode = new Function(`return ${logic.handlePictureNode}`)();
     const handleVideoNode = new Function(`return ${logic.handleVideoNode}`)();
+    const handleLineNode = new Function(`return ${logic.handleLineNode}`)();
 
     // Use functions to process the document
     window.createFigmaNode = createFigmaNode;
@@ -55,6 +54,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     window.handleImageNode = handleImageNode;
     window.handlePictureNode = handlePictureNode;
     window.handleVideoNode = handleVideoNode;
+    window.handleLineNode = handleLineNode;
 
     return parseHTMLToFigmaNode(document.body);
   }, logicBundle);

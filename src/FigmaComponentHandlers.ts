@@ -189,3 +189,37 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
 
   return videoNode;
 }
+
+export function handleLineNode(element: Element): Partial<LineNode> {
+  const el = element as HTMLHRElement;
+  const rect = element.getBoundingClientRect();
+  const computedStyles = getComputedStyle(el);
+
+  const fills: SolidPaint[] = [];
+  let rgb = getFigmaRGB(computedStyles.backgroundColor);
+
+  if (rgb) {
+    fills.push({
+      type: 'SOLID',
+      color: {
+        r: rgb.r,
+        g: rgb.g,
+        b: rgb.b,
+      },
+      blendMode: 'NORMAL',
+      visible: true,
+      opacity: rgb.a || 1,
+    } as SolidPaint);
+  }
+
+  const lineNode: Partial<LineNode> = {
+    type: 'LINE',
+    x: el.offsetLeft,
+    y: el.offsetTop,
+    width: parseFloat(computedStyles.width),
+    height: parseFloat(computedStyles.height),
+    fills: fills,
+  };
+
+  return lineNode;
+}

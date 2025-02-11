@@ -1,5 +1,5 @@
 export interface SvgNode extends DefaultShapeMixin, ConstraintMixin {
-  type: "SVG";
+  type: 'SVG';
   svg: string;
 }
 
@@ -10,6 +10,7 @@ export type LayerNode = Partial<
   | Partial<SvgNode>
   | Partial<GroupNode>
   | Partial<ComponentNode>
+  | Partial<LineNode>
 >;
 
 export interface FigmaNode {
