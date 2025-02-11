@@ -8,13 +8,8 @@ import {
 } from './FigmaComponentHandlers.js';
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
-  //   return extractFigmaNode2(element);
-
   // Skip empty or whitespace text nodes
-  if (
-    element.nodeType === Node.TEXT_NODE &&
-    (!element.nodeValue || element.nodeValue.trim() === '')
-  ) {
+  if (element.nodeType === Node.TEXT_NODE && (!element.nodeValue || element.nodeValue.trim() === '')) {
     return null;
   }
 
@@ -36,11 +31,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   }
 
   // Skip nodes with specific tag names or attributes
-  if (
-    element.tagName === 'SCRIPT' ||
-    element.tagName === 'STYLE' ||
-    element.tagName === 'NOSCRIPT'
-  ) {
+  if (element.tagName === 'SCRIPT' || element.tagName === 'STYLE' || element.tagName === 'NOSCRIPT') {
     return null;
   }
 
@@ -58,8 +49,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
     // Check if it's a non-grouping tag from allowedTextTags
     if (allowedTextTags.has(element.tagName)) {
       const nonEmptyTextChildren = Array.from(element.childNodes).filter(
-        (node) =>
-          node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== '',
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== '',
       );
       return nonEmptyTextChildren.length === 1;
     }
@@ -69,35 +59,29 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   }
 
   if (isTextOnlyNode(element))
-    return createFigmaNode(
-      element.tagName ? element.tagName : 'txt',
-      handleTextNode(element),
-    );
+    return createFigmaNode(element.tagName ? element.tagName : 'txt', handleTextNode(element));
+
+  // TODO: Hidden NODE
+  const isHiddenNode = (element: HTMLElement): boolean =>
+    getComputedStyle(element).display === 'none' ||
+    getComputedStyle(element).visibility === 'hidden' ||
+    parseFloat(getComputedStyle(element).opacity) === 0;
+
+  if (isHiddenNode(element as HTMLElement)) return null;
 
   // TODO: IMAGE NODE
   if (element instanceof HTMLImageElement)
-    return createFigmaNode(
-      element.tagName ? element.tagName : 'txt',
-      handleImageNode(element),
-    );
+    return createFigmaNode(element.tagName ? element.tagName : 'txt', handleImageNode(element));
 
   // TODO: PICTURE NODE
   if (element instanceof HTMLPictureElement)
-    return createFigmaNode(
-      element.tagName ? element.tagName : 'txt',
-      handlePictureNode(element),
-    );
+    return createFigmaNode(element.tagName ? element.tagName : 'txt', handlePictureNode(element));
   // TODO: VIDEO NODE
   if (element instanceof HTMLVideoElement)
-    return createFigmaNode(
-      element.tagName ? element.tagName : 'txt',
-      handleVideoNode(element),
-    );
-  // TODO: Hidden NODE
+    return createFigmaNode(element.tagName ? element.tagName : 'txt', handleVideoNode(element));
 
   // TODO: SVG NODE
-  if (element instanceof SVGSVGElement)
-    return createFigmaNode(element.tagName, handleSvgNode(element));
+  if (element instanceof SVGSVGElement) return createFigmaNode(element.tagName, handleSvgNode(element));
 
   // TODO: DIV/SPAN NODE
 

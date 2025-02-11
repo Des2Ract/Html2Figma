@@ -1,13 +1,34 @@
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hidden Node Test</title>
+        <style>
+          .hidden-display {
+            display: none;
+          }
+      
+          .hidden-visibility {
+            visibility: hidden;
+          }
+      
+          .hidden-opacity {
+            opacity: 0;
+          }
+      
+          .visible {
+            display: block;
+            color: blue;
+          }
+        </style>
+      </head>
   <body>
-    <h1>Video Element Test</h1>
+    <h1>Hidden Node Test</h1>
 
-    <!-- Simple Video Element -->
-    <video width="320" height="240" controls poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBoPUzq_mhJLnhw2E74H9dEOUzjPt8v8iqkg&s">
-      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <div class="hidden-display">I am hidden by display: none</div>
+    <div class="hidden-visibility">I am hidden by visibility: hidden</div>
+    <div class="hidden-opacity">I am hidden by opacity: 0</div>
+    <div class="visible">I am visible</div>
 
-    <p style="text-align: right;">This is a paragraph after the video element for additional content.</p>
   </body>
 </html>
