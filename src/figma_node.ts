@@ -12,6 +12,7 @@ export type LayerNode = Partial<
   | Partial<ComponentNode>
   | Partial<LineNode>
   | Partial<LinkUnfurlNode>
+  | Partial<EllipseNode>
 >;
 
 export interface FigmaNode {

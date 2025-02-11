@@ -10,6 +10,7 @@ import {
   handleTextNode,
   handleVideoNode,
   handleBodyNode,
+  handleInputNode,
 } from './FigmaComponentHandlers.js';
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
@@ -106,7 +107,8 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   // TODO: TABLE NODE
 
   // TODO: INPUT NODE
-
+  if (element instanceof HTMLInputElement) return handleInputNode(element);
+    
   // Create and return a general Figma node
   return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, {} as any);
 }
