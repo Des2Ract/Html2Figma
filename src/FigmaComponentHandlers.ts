@@ -1,5 +1,5 @@
 import { LayerNode } from './figma_node.js';
-import { getFigmaRGB } from './utils.js';
+import { getBorder, getFigmaRGB } from './utils.js';
 import { FigmaNode, createFigmaNode } from './figma_node.js';
 
 export function handleTextNode(element: Element): Partial<TextNode> {
@@ -347,7 +347,13 @@ export function handleInputNode(element: Element): FigmaNode {
     return inputFigmaNode;
   }
 
-  if (inputType == 'email' || inputType == 'text' || inputType == 'search' || inputType == 'list' || inputType == 'number') {
+  if (
+    inputType == 'email' ||
+    inputType == 'text' ||
+    inputType == 'search' ||
+    inputType == 'list' ||
+    inputType == 'number'
+  ) {
     let x = Math.round(rect.left);
     let y = Math.round(rect.top);
     let width = Math.round(rect.width);
@@ -513,16 +519,15 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
   if (rgb) {
     fills.push({
       type: 'SOLID',
-      color: {
-        r: rgb.r,
-        g: rgb.g,
-        b: rgb.b,
-      },
+      color: { r: rgb.r, g: rgb.g, b: rgb.b },
       blendMode: 'NORMAL',
       visible: true,
       opacity: rgb.a || 1,
     });
   }
+
+  // Extract strokes (borders)
+  const borderData = getBorder(computedStyles);
 
   // Detect border radius or shadow
   const hasBorderRadius =
@@ -533,22 +538,24 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
 
   const hasBoxShadow = computedStyles.boxShadow !== 'none';
 
-  if (hasBorderRadius || hasBoxShadow) {
+  if (hasBorderRadius || hasBoxShadow || borderData) {
     return {
       type: 'RECTANGLE',
       x: Math.round(rect.left),
       y: Math.round(rect.top),
       width: Math.round(rect.width),
       height: Math.round(rect.height),
-      fills: fills,
+      fills,
       topLeftRadius: parseFloat(computedStyles.borderTopLeftRadius) || 0,
       topRightRadius: parseFloat(computedStyles.borderTopRightRadius) || 0,
       bottomLeftRadius: parseFloat(computedStyles.borderBottomLeftRadius) || 0,
       bottomRightRadius: parseFloat(computedStyles.borderBottomRightRadius) || 0,
+      strokes: borderData?.strokes || [],
+      strokeWeight: borderData?.strokeWeight || 0,
+      dashPattern: borderData?.dashPattern || [],
     };
   }
 
-  // Default is GroupNode
   return {
     type: 'GROUP',
     x: Math.round(rect.left),

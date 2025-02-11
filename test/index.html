@@ -1,87 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hidden Node Test</title>
-  <style>
-    .hidden-display {
-      display: none;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Node Extraction Test</title>
+    <style>
+        .rectangle {
+            width: 200px;
+            height: 100px;
+            background-color: #3498db;
+            border: 4px solid #e74c3c;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
 
-    .hidden-visibility {
-      visibility: hidden;
-    }
+        .dashed-border {
+            width: 150px;
+            height: 75px;
+            background-color: #2ecc71;
+            border: 3px dashed #f39c12;
+        }
 
-    .hidden-opacity {
-      opacity: 0;
-    }
-
-    .visible {
-      display: block;
-      color: blue;
-    }
-
-    .styled-button {
-      background-color: #4caf50;
-      /* Green background */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 16px;
-      border-radius: 12px;
-      /* Rounded corners */
-      cursor: pointer;
-    }
-
-    .test-form {
-      background-color: #f2f2f2;
-      padding: 20px;
-      border-radius: 16px;
-      width: 300px;
-      margin-top: 20px;
-    }
-
-    body {
-      background-color: purple;
-      border-radius: 5%;
-    }
-
-    .styled-input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    .styled-input:focus {
-      border-color: #4caf50;
-      outline: none;
-    }
-  </style>
+        .dotted-border {
+            width: 100px;
+            height: 50px;
+            background-color: #9b59b6;
+            border: 2px dotted #fff;
+        }
+    </style>
 </head>
-
 <body>
-  <ul>
-    <li>ahmed</li>
-    <li>zahran</li>
-  </ul>
-
-  <form class="test-form">
-    <label for="name">Name:</label>
-    <input type="text" id="name" class="styled-input" placeholder="Enter your name" />
-    <br />
-    <label for="email">Email:</label>
-    <input type="email" id="email" class="styled-input" placeholder="Enter your email" />
-    <br />
-    <label for="age">Age:</label>
-    <input type="number" id="age" class="styled-input" placeholder="Enter your age" />
-    <br />
-    <input type="submit" class="styled-button" value="Submit" />
-  </form>
+    <h2>Figma Node Extraction Test</h2>
+    
+    <div class="rectangle"></div>
+    <br>
+    <div class="dashed-border"></div>
+    <br>
+    <div class="dotted-border"></div>
 </body>
-
 </html>

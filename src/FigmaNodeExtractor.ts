@@ -20,6 +20,9 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
     return null;
   }
 
+  // skip break element
+  if (element instanceof HTMLBRElement) return null;
+
   // Skip comment nodes
   if (element.nodeType === Node.COMMENT_NODE) {
     return null;
