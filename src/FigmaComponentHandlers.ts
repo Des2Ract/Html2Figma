@@ -55,6 +55,8 @@ export function handleTextNode(element: Element): Partial<TextNode> {
         ? ('LINE_THROUGH' as TextDecoration)
         : ('NONE' as TextDecoration);
 
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
   const textnode: Partial<TextNode> = {
     type: 'TEXT',
     characters: (element.textContent as string).trim(),
@@ -71,6 +73,7 @@ export function handleTextNode(element: Element): Partial<TextNode> {
     },
     fills: fills,
     textDecoration: mapTextDecoration(computedStyles.textDecoration),
+    effects: shadow ? [shadow] : [],
   };
   return textnode;
 }
@@ -80,6 +83,8 @@ export function handleSvgNode(element: Element): Partial<LayerNode> {
   const computedStyles = getComputedStyle(element);
   // Extract strokes (borders)
   const borderData = getBorder(computedStyles);
+
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
 
   const svgNode: Partial<LayerNode> = {
     type: 'SVG',
@@ -93,6 +98,8 @@ export function handleSvgNode(element: Element): Partial<LayerNode> {
     ) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
+    effects: shadow ? [shadow] : [],
+
   };
 
   return svgNode;
@@ -102,6 +109,8 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
   const rect = element.getBoundingClientRect();
   const computedStyles = getComputedStyle(element);
   const url = (element as HTMLImageElement).src as string;
+
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
 
   const fills = [
     {
@@ -134,6 +143,8 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
     strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
+    effects: shadow ? [shadow] : [],
+
   };
 
   return imageNode;
@@ -165,6 +176,8 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
   // Extract strokes (borders)
   const borderData = getBorder(computedStyles);
 
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
   const pictureNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
     x: Math.round(rect.left),
@@ -179,6 +192,8 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
     strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
+    effects: shadow ? [shadow] : [],
+
   };
 
   return pictureNode;
@@ -206,6 +221,8 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
   // Extract strokes (borders)
   const borderData = getBorder(computedStyles);
 
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
   const videoNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
     x: Math.round(rect.left),
@@ -220,6 +237,8 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
     strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
+    effects: shadow ? [shadow] : [],
+
   };
 
   return videoNode;
@@ -247,6 +266,8 @@ export function handleLineNode(element: Element): Partial<LineNode> {
     } as SolidPaint);
   }
 
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
   const lineNode: Partial<LineNode> = {
     type: 'LINE',
     x: el.offsetLeft,
@@ -254,6 +275,8 @@ export function handleLineNode(element: Element): Partial<LineNode> {
     width: parseFloat(computedStyles.width),
     height: parseFloat(computedStyles.height),
     fills: fills,
+    effects: shadow ? [shadow] : [],
+
   };
 
   return lineNode;
@@ -275,6 +298,8 @@ export function handleInputNode(element: Element): FigmaNode {
 
   const fills: SolidPaint[] = [];
 
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
   if (inputType == 'checkbox') {
     const checkboxNode: Partial<RectangleNode> = {
       type: 'RECTANGLE',
@@ -283,6 +308,8 @@ export function handleInputNode(element: Element): FigmaNode {
       width: Math.round(rect.width),
       height: Math.round(rect.height),
       fills: fills,
+      effects: shadow ? [shadow] : [],
+
     };
     return createFigmaNode('INPUT', checkboxNode);
   }
@@ -295,6 +322,8 @@ export function handleInputNode(element: Element): FigmaNode {
       width: Math.round(rect.width),
       height: Math.round(rect.height),
       fills: fills,
+      effects: shadow ? [shadow] : [],
+
     };
     return createFigmaNode('INPUT', radioNode);
   }
@@ -365,6 +394,8 @@ export function handleInputNode(element: Element): FigmaNode {
       topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
       bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
       bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+      effects: shadow ? [shadow] : [],
+
     };
     const inputFigmaNode = createFigmaNode('INPUT', buttonNode);
     const textFigmaNode = createFigmaNode('TXT', textNode);
@@ -486,6 +517,8 @@ export function handleInputNode(element: Element): FigmaNode {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
+    effects: shadow ? [shadow] : [],
+
   };
 
   return createFigmaNode('INPUT', inputNode);
@@ -574,6 +607,8 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
 
   const hasBoxShadow = computedStyles.boxShadow !== 'none';
 
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
   if (hasBorderRadius || hasBoxShadow || borderData) {
     return {
       type: 'RECTANGLE',
@@ -589,6 +624,8 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
       strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
       strokeWeight: borderData?.strokeWeight || 0,
       dashPattern: borderData?.dashPattern || [],
+      effects: shadow ? [shadow] : [],
+
     };
   }
 
@@ -599,6 +636,8 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
     width: Math.round(rect.width),
     height: Math.round(rect.height),
     backgrounds: fills,
+    effects: shadow ? [shadow] : [],
+
   };
 }
 

@@ -11,13 +11,10 @@
       background-color: #ffffff;
       margin: 50px auto;
       border: 1px solid #ccc;
-      /* box-shadow: horizontal offset, vertical offset, blur radius, spread radius, color */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      /* Optional: Add a transition for smooth hover effect */
       transition: box-shadow 0.3s ease;
     }
 
-    /* Optional: Enhance the shadow on hover */
     .shadow-box:hover {
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
     }
@@ -28,13 +25,137 @@
       margin: 0;
       font-family: Arial, sans-serif;
     }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #fafafa;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .visible {
+      background-color: #e0e0e0;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .test-form {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      width: 300px;
+    }
+
+    .styled-input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .styled-button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .border-box {
+      width: 200px;
+      height: 100px;
+      margin: 20px auto;
+      text-align: center;
+      line-height: 100px;
+      font-family: Arial, sans-serif;
+    }
+
+    .solid-border {
+      border: 3px solid black;
+    }
+
+    .dashed-border {
+      border: 3px dashed red;
+    }
+
+    .dotted-border {
+      border: 3px dotted blue;
+    }
+
+    .double-border {
+      border: 5px double green;
+    }
+
+    .groove-border {
+      border: 5px groove purple;
+    }
   </style>
 </head>
 
 <body>
   <div class="shadow-box">
     <p>Box Shadow Example</p>
+    <h1>Figma Node Extractor Test</h1>
+
+    <p>This is a sample text node contained within a paragraph element.</p>
+
+    <div class="hidden">This content is hidden (display: none).</div>
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfdqQv-xmZGeLVPNNXhndGIutv3lnrIi5CQ&s"
+      alt="Placeholder Image" />
+
+    <picture>
+      <source srcset="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfdqQv-xmZGeLVPNNXhndGIutv3lnrIi5CQ&s"
+        type="image/webp" />
+      <img src="https://via.placeholder.com/150" alt="Picture Element Image" />
+    </picture>
+
+    <video width="320" height="240" controls>
+      <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+    </svg>
+
+    <hr />
+
+    <form class="test-form" action="#">
+      <label for="username">Username:</label>
+      <input type="text" id="username" class="styled-input" placeholder="Enter your username" />
+      <br />
+      <button type="submit" class="styled-button">Submit Form</button>
+    </form>
+
+    <a href="https://www.example.com">Visit Example.com</a>
+
+    <input type="text" class="styled-input" placeholder="Text Input" />
+    <div>
+      <input type="radio" id="radio1" name="sampleRadio" value="option1" />
+      <label for="radio1">Option 1</label>
+      <input type="radio" id="radio2" name="sampleRadio" value="option2" />
+      <label for="radio2">Option 2</label>
+    </div>
+    <div>
+      <input type="checkbox" id="checkbox1" name="sampleCheckbox" value="check1" />
+      <label for="checkbox1">Checkbox Option</label>
+    </div>
   </div>
+
+  <div class="border-box solid-border">Solid Border</div>
+  <div class="border-box dashed-border">Dashed Border</div>
+  <div class="border-box dotted-border">Dotted Border</div>
+  <div class="border-box double-border">Double Border</div>
+  <div class="border-box groove-border">Groove Border</div>
+
 </body>
 
 </html>
