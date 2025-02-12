@@ -1,5 +1,5 @@
 import { LayerNode } from './figma_node.js';
-import { getBorder, getFigmaRGB } from './utils.js';
+import { getBorder, getFigmaRGB, parseBoxShadow } from './utils.js';
 import { FigmaNode, createFigmaNode } from './figma_node.js';
 
 export function handleTextNode(element: Element): Partial<TextNode> {
@@ -521,8 +521,11 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
   // Extract strokes (borders)
   const borderData = getBorder(computedStyles);
 
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
   const ButtonFormNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
+    name: computedStyles.boxShadow,
     x: Math.round(rect.left),
     y: Math.round(rect.top),
     width: Math.round(rect.width),
@@ -535,6 +538,7 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
     strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
+    effects: shadow ? [shadow] : [],
   };
 
   return ButtonFormNode;

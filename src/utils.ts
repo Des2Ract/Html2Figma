@@ -72,3 +72,46 @@ export function getBorder(computedStyle: CSSStyleDeclaration) {
 
   return null;
 }
+
+export function parseBoxShadow(cssShadow: string | null): DropShadowEffect | null {
+  if (!cssShadow || cssShadow === 'none') return null;
+
+  // Updated regex to handle color appearing first OR last
+  const shadowRegex =
+    /(rgba?\([^)]+\)|#[0-9a-fA-F]+)?\s*(-?\d+\.?\d*)px\s*(-?\d+\.?\d*)px\s*(\d+\.?\d*)px\s*(\d+\.?\d*)?px?\s*(rgba?\([^)]+\)|#[0-9a-fA-F]+)?/;
+  const match = cssShadow.match(shadowRegex);
+
+  if (!match) return null;
+
+  // Identify where the color is
+  const colorString = match[1] || match[6]; // Color can be at the start or end
+
+  // Extract numerical values
+  const offsetX = parseFloat(match[2]);
+  const offsetY = parseFloat(match[3]);
+  const blurRadius = parseFloat(match[4]);
+  const spreadRadius = match[5] ? parseFloat(match[5]) : 0; // Default to 0 if not present
+
+  // Convert color to RGBA format
+  let parsedColor = { r: 0, g: 0, b: 0, a: 1 }; // Default black
+  if (colorString) {
+    const rgbaMatch = colorString.match(/rgba?\((\d+), (\d+), (\d+),? (\d?.?\d+)?\)/);
+    if (rgbaMatch) {
+      parsedColor = {
+        r: parseInt(rgbaMatch[1], 10) / 255,
+        g: parseInt(rgbaMatch[2], 10) / 255,
+        b: parseInt(rgbaMatch[3], 10) / 255,
+        a: rgbaMatch[4] ? parseFloat(rgbaMatch[4]) : 1,
+      };
+    }
+  }
+
+  return {
+    type: 'DROP_SHADOW',
+    color: parsedColor,
+    offset: { x: offsetX, y: offsetY },
+    radius: blurRadius,
+    visible: true,
+    blendMode: 'NORMAL',
+  };
+}
