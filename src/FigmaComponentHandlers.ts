@@ -1,5 +1,5 @@
 import { LayerNode } from './figma_node.js';
-import { getBorder, getFigmaRGB } from './utils.js';
+import { getBorder, getFigmaRGB, parseBoxShadow } from './utils.js';
 import { FigmaNode, createFigmaNode } from './figma_node.js';
 
 export function handleTextNode(element: Element): Partial<TextNode> {
@@ -88,7 +88,9 @@ export function handleSvgNode(element: Element): Partial<LayerNode> {
     y: Math.round(rect.top),
     width: Math.round(rect.width),
     height: Math.round(rect.height),
-    strokes: borderData?.strokes || [],
+    strokes: ((borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[]).filter(
+      (stroke) => stroke !== null,
+    ) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
   };
@@ -129,7 +131,7 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
-    strokes: borderData?.strokes || [],
+    strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
   };
@@ -174,7 +176,7 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
-    strokes: borderData?.strokes || [],
+    strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
   };
@@ -215,7 +217,7 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
-    strokes: borderData?.strokes || [],
+    strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
   };
@@ -365,7 +367,7 @@ export function handleInputNode(element: Element): FigmaNode {
       bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
     };
     const inputFigmaNode = createFigmaNode('INPUT', buttonNode);
-    const textFigmaNode = createFigmaNode('txt', textNode);
+    const textFigmaNode = createFigmaNode('TXT', textNode);
     inputFigmaNode.children.push(textFigmaNode);
 
     return inputFigmaNode;
@@ -466,7 +468,7 @@ export function handleInputNode(element: Element): FigmaNode {
         },
         fills: fillsText,
       };
-      const textFigmaNode = createFigmaNode('txt', textNode);
+      const textFigmaNode = createFigmaNode('TXT', textNode);
       inputFigmaNode.children.push(textFigmaNode);
     }
 
@@ -519,8 +521,11 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
   // Extract strokes (borders)
   const borderData = getBorder(computedStyles);
 
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
   const ButtonFormNode: Partial<RectangleNode> = {
     type: 'RECTANGLE',
+    name: computedStyles.boxShadow,
     x: Math.round(rect.left),
     y: Math.round(rect.top),
     width: Math.round(rect.width),
@@ -530,10 +535,10 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
     topRightRadius: parse(computedStyles.borderTopRightRadius, rect.height),
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
-    strokes: borderData?.strokes || [],
+    strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
-    effects: []
+    effects: shadow ? [shadow] : [],
   };
 
   return ButtonFormNode;
@@ -581,7 +586,7 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
       topRightRadius: parseFloat(computedStyles.borderTopRightRadius) || 0,
       bottomLeftRadius: parseFloat(computedStyles.borderBottomLeftRadius) || 0,
       bottomRightRadius: parseFloat(computedStyles.borderBottomRightRadius) || 0,
-      strokes: borderData?.strokes || [],
+      strokes: (borderData?.strokes || []).filter((stroke) => stroke !== null) as Paint[],
       strokeWeight: borderData?.strokeWeight || 0,
       dashPattern: borderData?.dashPattern || [],
     };

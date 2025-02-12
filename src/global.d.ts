@@ -17,5 +17,6 @@ declare global {
     handleBodyNode: typeof import('./FigmaComponentHandlers').handleBodyNode;
     handleInputNode: typeof import('./FigmaComponentHandlers').handleInputNode;
     getBorder: typeof import('./utils').getBorder;
+    parseBoxShadow: typeof import('./utils').parseBoxShadow;
   }
 }

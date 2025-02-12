@@ -3,7 +3,7 @@ import { FigmaNode } from './figma_node.js';
 import { parseHTMLToFigmaNode } from './html_parser.js';
 import { createFigmaNode } from './figma_node.js';
 import { extractFigmaNode } from './FigmaNodeExtractor.js';
-import { getBorder, getFigmaRGB } from './utils.js';
+import { getBorder, getFigmaRGB, parseBoxShadow } from './utils.js';
 import {
   handleButtonFormNode,
   handleDefaultNode,
@@ -41,6 +41,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     handleBodyNode: handleBodyNode.toString(),
     handleInputNode: handleInputNode.toString(),
     getBorder: getBorder.toString(),
+    parseBoxShadow: parseBoxShadow.toString(),
   };
 
   const result = await page.evaluate((logic) => {
@@ -61,6 +62,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     const handleBodyNode = new Function(`return ${logic.handleBodyNode}`)();
     const handleInputNode = new Function(`return ${logic.handleInputNode}`)();
     const getBorder = new Function(`return ${logic.getBorder}`)();
+    const parseBoxShadow = new Function(`return ${logic.parseBoxShadow}`)();
 
     // Use functions to process the document
     window.createFigmaNode = createFigmaNode;
@@ -78,6 +80,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     window.handleBodyNode = handleBodyNode;
     window.handleInputNode = handleInputNode;
     window.getBorder = getBorder;
+    window.parseBoxShadow = parseBoxShadow;
 
     return parseHTMLToFigmaNode(document.body);
   }, logicBundle);
