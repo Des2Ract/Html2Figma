@@ -1,0 +1,639 @@
+{
+  "tag": "BODY",
+  "node": {
+    "type": "FRAME",
+    "x": 20,
+    "y": 21,
+    "width": 760,
+    "height": 797,
+    "fills": [
+      {
+        "type": "SOLID",
+        "color": {
+          "r": 0.9803921568627451,
+          "g": 0.9803921568627451,
+          "b": 0.9803921568627451
+        },
+        "blendMode": "NORMAL",
+        "visible": true,
+        "opacity": 1
+      }
+    ],
+    "topLeftRadius": 0,
+    "topRightRadius": 0,
+    "bottomLeftRadius": 0,
+    "bottomRightRadius": 0
+  },
+  "children": [
+    {
+      "tag": "H1",
+      "node": {
+        "type": "TEXT",
+        "characters": "Figma Node Extractor Test",
+        "x": 20,
+        "y": 21,
+        "width": 760,
+        "height": 38,
+        "fontSize": 32,
+        "fontName": {
+          "family": "Arial, sans-serif",
+          "style": "normal"
+        },
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0,
+              "g": 0,
+              "b": 0
+            },
+            "blendMode": "NORMAL",
+            "visible": true,
+            "opacity": 1
+          }
+        ],
+        "textDecoration": "NONE"
+      },
+      "children": []
+    },
+    {
+      "tag": "P",
+      "node": {
+        "type": "TEXT",
+        "characters": "This is a sample text node contained within a paragraph element.",
+        "x": 20,
+        "y": 80,
+        "width": 760,
+        "height": 19,
+        "fontSize": 16,
+        "fontName": {
+          "family": "Arial, sans-serif",
+          "style": "normal"
+        },
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0,
+              "g": 0,
+              "b": 0
+            },
+            "blendMode": "NORMAL",
+            "visible": true,
+            "opacity": 1
+          }
+        ],
+        "textDecoration": "NONE"
+      },
+      "children": []
+    },
+    {
+      "tag": "IMG",
+      "node": {
+        "type": "RECTANGLE",
+        "x": 20,
+        "y": 116,
+        "width": 300,
+        "height": 168,
+        "fills": [
+          {
+            "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfdqQv-xmZGeLVPNNXhndGIutv3lnrIi5CQ&s",
+            "type": "IMAGE",
+            "scaleMode": "FILL",
+            "imageHash": null
+          }
+        ],
+        "topLeftRadius": 0,
+        "topRightRadius": 0,
+        "bottomLeftRadius": 0,
+        "bottomRightRadius": 0
+      },
+      "children": []
+    },
+    {
+      "tag": "PICTURE",
+      "node": {
+        "type": "RECTANGLE",
+        "x": 325,
+        "y": 268,
+        "width": 300,
+        "height": 18,
+        "fills": [
+          {
+            "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfdqQv-xmZGeLVPNNXhndGIutv3lnrIi5CQ&s",
+            "type": "IMAGE",
+            "scaleMode": "FILL",
+            "imageHash": null
+          }
+        ],
+        "topLeftRadius": 0,
+        "topRightRadius": 0,
+        "bottomLeftRadius": 0,
+        "bottomRightRadius": 0
+      },
+      "children": []
+    },
+    {
+      "tag": "VIDEO",
+      "node": {
+        "type": "RECTANGLE",
+        "x": 20,
+        "y": 288,
+        "width": 320,
+        "height": 240,
+        "fills": [
+          {
+            "url": "",
+            "type": "IMAGE",
+            "scaleMode": "FIT",
+            "imageHash": null
+          }
+        ],
+        "topLeftRadius": 0,
+        "topRightRadius": 0,
+        "bottomLeftRadius": 0,
+        "bottomRightRadius": 0
+      },
+      "children": []
+    },
+    {
+      "tag": "svg",
+      "node": {
+        "type": "SVG",
+        "svg": "<svg width=\"100\" height=\"100\" xmlns=\"http://www.w3.org/2000/svg\">\n    <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" stroke-width=\"3\" fill=\"red\"></circle>\n  </svg>",
+        "x": 345,
+        "y": 428,
+        "width": 100,
+        "height": 100
+      },
+      "children": []
+    },
+    {
+      "tag": "HR",
+      "node": {
+        "type": "LINE",
+        "x": 20,
+        "y": 540,
+        "width": 758.4,
+        "height": 0,
+        "fills": []
+      },
+      "children": []
+    },
+    {
+      "tag": "FORM",
+      "node": {
+        "type": "RECTANGLE",
+        "x": 20,
+        "y": 561,
+        "width": 340,
+        "height": 148,
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0.9490196078431372,
+              "g": 0.9490196078431372,
+              "b": 0.9490196078431372
+            },
+            "blendMode": "NORMAL",
+            "visible": true,
+            "opacity": 1
+          }
+        ],
+        "topLeftRadius": 8,
+        "topRightRadius": 8,
+        "bottomLeftRadius": 8,
+        "bottomRightRadius": 8
+      },
+      "children": [
+        {
+          "tag": "LABEL",
+          "node": {
+            "type": "TEXT",
+            "characters": "Username:",
+            "x": 40,
+            "y": 581,
+            "width": 76,
+            "height": 18,
+            "fontSize": 16,
+            "fontName": {
+              "family": "Arial, sans-serif",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "textDecoration": "NONE"
+          },
+          "children": []
+        },
+        {
+          "tag": "INPUT",
+          "node": {
+            "type": "RECTANGLE",
+            "x": 40,
+            "y": 608,
+            "width": 318,
+            "height": 34,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "topLeftRadius": 4,
+            "topRightRadius": 4,
+            "bottomLeftRadius": 4,
+            "bottomRightRadius": 4
+          },
+          "children": [
+            {
+              "tag": "txt",
+              "node": {
+                "type": "TEXT",
+                "characters": "Enter your username",
+                "x": 40,
+                "y": 608,
+                "width": 318,
+                "height": 34,
+                "fontSize": 13.3333,
+                "fontName": {
+                  "family": "Arial",
+                  "style": "normal"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.6980392156862745,
+                      "g": 0.6980392156862745,
+                      "b": 0.6980392156862745
+                    },
+                    "blendMode": "NORMAL",
+                    "visible": true,
+                    "opacity": 1
+                  }
+                ]
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "BR",
+          "node": {
+            "type": "GROUP",
+            "x": 358,
+            "y": 614,
+            "width": 0,
+            "height": 18,
+            "backgrounds": []
+          },
+          "children": []
+        },
+        {
+          "tag": "BUTTON",
+          "node": {
+            "type": "RECTANGLE",
+            "x": 40,
+            "y": 650,
+            "width": 130,
+            "height": 39,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0.2980392156862745,
+                  "g": 0.6862745098039216,
+                  "b": 0.3137254901960784
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "topLeftRadius": 4,
+            "topRightRadius": 4,
+            "bottomLeftRadius": 4,
+            "bottomRightRadius": 4
+          },
+          "children": [
+            {
+              "tag": "TXT",
+              "node": {
+                "type": "TEXT",
+                "characters": "Submit Form",
+                "x": 60,
+                "y": 660,
+                "width": 90,
+                "height": 18,
+                "textAlignHorizontal": "CENTER",
+                "fontSize": 16,
+                "fontName": {
+                  "family": "Arial",
+                  "style": "normal"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1
+                    },
+                    "blendMode": "NORMAL",
+                    "visible": true,
+                    "opacity": 1
+                  }
+                ],
+                "textDecoration": "NONE"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "A",
+      "node": {
+        "type": "LINK_UNFURL",
+        "x": 20,
+        "y": 709,
+        "width": 129,
+        "height": 18,
+        "linkUnfurlData": {
+          "url": "https://www.example.com",
+          "title": null,
+          "description": null,
+          "provider": null
+        }
+      },
+      "children": [
+        {
+          "tag": "TXT",
+          "node": {
+            "type": "TEXT",
+            "characters": "Visit Example.com",
+            "x": 20,
+            "y": 709,
+            "width": 129,
+            "height": 18,
+            "fontSize": 16,
+            "fontName": {
+              "family": "Arial, sans-serif",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0.9333333333333333
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "textDecoration": "UNDERLINE"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "INPUT",
+      "node": {
+        "type": "RECTANGLE",
+        "x": 20,
+        "y": 736,
+        "width": 778,
+        "height": 34,
+        "fills": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0,
+              "g": 0,
+              "b": 0
+            },
+            "blendMode": "NORMAL",
+            "visible": true,
+            "opacity": 1
+          }
+        ],
+        "topLeftRadius": 4,
+        "topRightRadius": 4,
+        "bottomLeftRadius": 4,
+        "bottomRightRadius": 4
+      },
+      "children": [
+        {
+          "tag": "txt",
+          "node": {
+            "type": "TEXT",
+            "characters": "Text Input",
+            "x": 20,
+            "y": 736,
+            "width": 778,
+            "height": 34,
+            "fontSize": 13.3333,
+            "fontName": {
+              "family": "Arial",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0.6980392156862745,
+                  "g": 0.6980392156862745,
+                  "b": 0.6980392156862745
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ]
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "DIV",
+      "node": {
+        "type": "GROUP",
+        "x": 20,
+        "y": 778,
+        "width": 760,
+        "height": 20,
+        "backgrounds": []
+      },
+      "children": [
+        {
+          "tag": "INPUT",
+          "node": {
+            "type": "ELLIPSE",
+            "x": 25,
+            "y": 781,
+            "width": 13,
+            "height": 13,
+            "fills": []
+          },
+          "children": []
+        },
+        {
+          "tag": "LABEL",
+          "node": {
+            "type": "TEXT",
+            "characters": "Option 1",
+            "x": 46,
+            "y": 779,
+            "width": 60,
+            "height": 18,
+            "fontSize": 16,
+            "fontName": {
+              "family": "Arial, sans-serif",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "textDecoration": "NONE"
+          },
+          "children": []
+        },
+        {
+          "tag": "INPUT",
+          "node": {
+            "type": "ELLIPSE",
+            "x": 116,
+            "y": 781,
+            "width": 13,
+            "height": 13,
+            "fills": []
+          },
+          "children": []
+        },
+        {
+          "tag": "LABEL",
+          "node": {
+            "type": "TEXT",
+            "characters": "Option 2",
+            "x": 136,
+            "y": 779,
+            "width": 60,
+            "height": 18,
+            "fontSize": 16,
+            "fontName": {
+              "family": "Arial, sans-serif",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "textDecoration": "NONE"
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "DIV",
+      "node": {
+        "type": "GROUP",
+        "x": 20,
+        "y": 798,
+        "width": 760,
+        "height": 20,
+        "backgrounds": []
+      },
+      "children": [
+        {
+          "tag": "INPUT",
+          "node": {
+            "type": "RECTANGLE",
+            "x": 24,
+            "y": 801,
+            "width": 13,
+            "height": 13,
+            "fills": []
+          },
+          "children": []
+        },
+        {
+          "tag": "LABEL",
+          "node": {
+            "type": "TEXT",
+            "characters": "Checkbox Option",
+            "x": 45,
+            "y": 799,
+            "width": 120,
+            "height": 18,
+            "fontSize": 16,
+            "fontName": {
+              "family": "Arial, sans-serif",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "textDecoration": "NONE"
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}

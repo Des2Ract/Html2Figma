@@ -533,6 +533,7 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
     strokes: borderData?.strokes || [],
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
+    effects: []
   };
 
   return ButtonFormNode;
