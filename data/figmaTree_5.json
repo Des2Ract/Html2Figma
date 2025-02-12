@@ -1,0 +1,30 @@
+{
+  "tag": "BODY",
+  "node": {
+    "type": "FRAME",
+    "x": 0,
+    "y": 0,
+    "width": 800,
+    "height": 600,
+    "fills": [],
+    "topLeftRadius": 0,
+    "topRightRadius": 0,
+    "bottomLeftRadius": 0,
+    "bottomRightRadius": 0
+  },
+  "children": [
+    {
+      "tag": "IFRAME",
+      "node": {
+        "type": "GROUP",
+        "x": 0,
+        "y": 0,
+        "width": 800,
+        "height": 600,
+        "backgrounds": [],
+        "effects": []
+      },
+      "children": []
+    }
+  ]
+}

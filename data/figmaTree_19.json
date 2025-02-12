@@ -1,0 +1,794 @@
+{
+  "tag": "BODY",
+  "node": {
+    "type": "FRAME",
+    "x": 0,
+    "y": 0,
+    "width": 800,
+    "height": 644,
+    "fills": [
+      {
+        "type": "SOLID",
+        "color": {
+          "r": 0.9490196078431372,
+          "g": 0.9490196078431372,
+          "b": 0.9490196078431372
+        },
+        "blendMode": "NORMAL",
+        "visible": true,
+        "opacity": 1
+      }
+    ],
+    "topLeftRadius": 0,
+    "topRightRadius": 0,
+    "bottomLeftRadius": 0,
+    "bottomRightRadius": 0
+  },
+  "children": [
+    {
+      "tag": "HEADER",
+      "node": {
+        "type": "GROUP",
+        "x": 0,
+        "y": 0,
+        "width": 800,
+        "height": 60,
+        "backgrounds": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 0,
+              "g": 0,
+              "b": 0
+            },
+            "blendMode": "NORMAL",
+            "visible": true,
+            "opacity": 1
+          }
+        ],
+        "effects": []
+      },
+      "children": [
+        {
+          "tag": "H1",
+          "node": {
+            "type": "TEXT",
+            "characters": "Bloomberg",
+            "x": 20,
+            "y": 0,
+            "width": 140,
+            "height": 60,
+            "fontSize": 0,
+            "fontName": {
+              "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 1,
+                  "g": 1,
+                  "b": 1
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "textDecoration": "NONE",
+            "effects": []
+          },
+          "children": []
+        },
+        {
+          "tag": "A",
+          "node": {
+            "type": "LINK_UNFURL",
+            "x": 628,
+            "y": 0,
+            "width": 152,
+            "height": 60,
+            "linkUnfurlData": {
+              "url": "/feedback",
+              "title": null,
+              "description": null,
+              "provider": null
+            }
+          },
+          "children": [
+            {
+              "tag": "TXT",
+              "node": {
+                "type": "TEXT",
+                "characters": "Need help? Contact us",
+                "x": 628,
+                "y": 22,
+                "width": 152,
+                "height": 16,
+                "fontSize": 14,
+                "fontName": {
+                  "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                  "style": "normal"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1,
+                      "g": 1,
+                      "b": 1
+                    },
+                    "blendMode": "NORMAL",
+                    "visible": true,
+                    "opacity": 1
+                  }
+                ],
+                "textDecoration": "UNDERLINE",
+                "effects": []
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "SECTION",
+      "node": {
+        "type": "GROUP",
+        "x": 60,
+        "y": 90,
+        "width": 680,
+        "height": 213,
+        "backgrounds": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "blendMode": "NORMAL",
+            "visible": true,
+            "opacity": 1
+          }
+        ],
+        "effects": []
+      },
+      "children": [
+        {
+          "tag": "H2",
+          "node": {
+            "type": "TEXT",
+            "characters": "We've detected unusual activity from your computer network",
+            "x": 90,
+            "y": 120,
+            "width": 620,
+            "height": 32,
+            "fontSize": 19,
+            "fontName": {
+              "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "textDecoration": "NONE",
+            "effects": []
+          },
+          "children": []
+        },
+        {
+          "tag": "P",
+          "node": {
+            "type": "TEXT",
+            "characters": "To continue, please click the box below to let us know you're not a robot.",
+            "x": 90,
+            "y": 152,
+            "width": 620,
+            "height": 22,
+            "fontSize": 18,
+            "fontName": {
+              "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+              "style": "normal"
+            },
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "textDecoration": "NONE",
+            "effects": []
+          },
+          "children": []
+        },
+        {
+          "tag": "DIV",
+          "node": {
+            "type": "GROUP",
+            "x": 240,
+            "y": 193,
+            "width": 320,
+            "height": 80,
+            "backgrounds": [],
+            "effects": []
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "SECTION",
+      "node": {
+        "type": "GROUP",
+        "x": 60,
+        "y": 333,
+        "width": 680,
+        "height": 310,
+        "backgrounds": [
+          {
+            "type": "SOLID",
+            "color": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "blendMode": "NORMAL",
+            "visible": true,
+            "opacity": 1
+          }
+        ],
+        "effects": []
+      },
+      "children": [
+        {
+          "tag": "SECTION",
+          "node": {
+            "type": "RECTANGLE",
+            "x": 90,
+            "y": 363,
+            "width": 620,
+            "height": 105,
+            "fills": [],
+            "topLeftRadius": 0,
+            "topRightRadius": 0,
+            "bottomLeftRadius": 0,
+            "bottomRightRadius": 0,
+            "strokes": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "opacity": 1
+              }
+            ],
+            "strokeWeight": 0.8,
+            "dashPattern": [
+              2,
+              2
+            ],
+            "effects": []
+          },
+          "children": [
+            {
+              "tag": "H3",
+              "node": {
+                "type": "TEXT",
+                "characters": "Why did this happen?",
+                "x": 90,
+                "y": 373,
+                "width": 620,
+                "height": 29,
+                "fontSize": 16,
+                "fontName": {
+                  "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                  "style": "normal"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0
+                    },
+                    "blendMode": "NORMAL",
+                    "visible": true,
+                    "opacity": 1
+                  }
+                ],
+                "textDecoration": "NONE",
+                "effects": []
+              },
+              "children": []
+            },
+            {
+              "tag": "P",
+              "node": {
+                "type": "GROUP",
+                "x": 90,
+                "y": 402,
+                "width": 620,
+                "height": 67,
+                "backgrounds": [],
+                "effects": []
+              },
+              "children": [
+                {
+                  "tag": "TXT",
+                  "node": {
+                    "type": "TEXT",
+                    "characters": "Please make sure your browser supports JavaScript and cookies and that you are not\n                    blocking them from loading.\n                    For more information you can review our",
+                    "x": 90,
+                    "y": 402,
+                    "width": 602,
+                    "height": 38,
+                    "fontSize": 16,
+                    "fontName": {
+                      "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                      "style": "normal"
+                    },
+                    "fills": [
+                      {
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "blendMode": "NORMAL",
+                        "visible": true,
+                        "opacity": 1
+                      }
+                    ],
+                    "textDecoration": "NONE",
+                    "effects": []
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "A",
+                  "node": {
+                    "type": "LINK_UNFURL",
+                    "x": 90,
+                    "y": 421,
+                    "width": 604,
+                    "height": 38,
+                    "linkUnfurlData": {
+                      "url": "/notices/tos",
+                      "title": null,
+                      "description": null,
+                      "provider": null
+                    }
+                  },
+                  "children": [
+                    {
+                      "tag": "TXT",
+                      "node": {
+                        "type": "TEXT",
+                        "characters": "Terms of Service",
+                        "x": 90,
+                        "y": 421,
+                        "width": 604,
+                        "height": 38,
+                        "fontSize": 16,
+                        "fontName": {
+                          "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                          "style": "normal"
+                        },
+                        "fills": [
+                          {
+                            "type": "SOLID",
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "blendMode": "NORMAL",
+                            "visible": true,
+                            "opacity": 1
+                          }
+                        ],
+                        "textDecoration": "UNDERLINE",
+                        "effects": []
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "TXT",
+                  "node": {
+                    "type": "TEXT",
+                    "characters": "and",
+                    "x": 146,
+                    "y": 441,
+                    "width": 35,
+                    "height": 19,
+                    "fontSize": 16,
+                    "fontName": {
+                      "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                      "style": "normal"
+                    },
+                    "fills": [
+                      {
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "blendMode": "NORMAL",
+                        "visible": true,
+                        "opacity": 1
+                      }
+                    ],
+                    "textDecoration": "NONE",
+                    "effects": []
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "A",
+                  "node": {
+                    "type": "LINK_UNFURL",
+                    "x": 181,
+                    "y": 441,
+                    "width": 100,
+                    "height": 19,
+                    "linkUnfurlData": {
+                      "url": "/notices/tos",
+                      "title": null,
+                      "description": null,
+                      "provider": null
+                    }
+                  },
+                  "children": [
+                    {
+                      "tag": "TXT",
+                      "node": {
+                        "type": "TEXT",
+                        "characters": "Cookie Policy",
+                        "x": 181,
+                        "y": 441,
+                        "width": 100,
+                        "height": 19,
+                        "fontSize": 16,
+                        "fontName": {
+                          "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                          "style": "normal"
+                        },
+                        "fills": [
+                          {
+                            "type": "SOLID",
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "blendMode": "NORMAL",
+                            "visible": true,
+                            "opacity": 1
+                          }
+                        ],
+                        "textDecoration": "UNDERLINE",
+                        "effects": []
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "TXT",
+                  "node": {
+                    "type": "TEXT",
+                    "characters": ".",
+                    "x": 281,
+                    "y": 441,
+                    "width": 3,
+                    "height": 19,
+                    "fontSize": 16,
+                    "fontName": {
+                      "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                      "style": "normal"
+                    },
+                    "fills": [
+                      {
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "blendMode": "NORMAL",
+                        "visible": true,
+                        "opacity": 1
+                      }
+                    ],
+                    "textDecoration": "NONE",
+                    "effects": []
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "SECTION",
+          "node": {
+            "type": "RECTANGLE",
+            "x": 90,
+            "y": 499,
+            "width": 620,
+            "height": 115,
+            "fills": [],
+            "topLeftRadius": 0,
+            "topRightRadius": 0,
+            "bottomLeftRadius": 0,
+            "bottomRightRadius": 0,
+            "strokes": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "opacity": 1
+              }
+            ],
+            "strokeWeight": 0.8,
+            "dashPattern": [
+              2,
+              2
+            ],
+            "effects": []
+          },
+          "children": [
+            {
+              "tag": "H3",
+              "node": {
+                "type": "TEXT",
+                "characters": "Need Help?",
+                "x": 90,
+                "y": 509,
+                "width": 620,
+                "height": 29,
+                "fontSize": 16,
+                "fontName": {
+                  "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                  "style": "normal"
+                },
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0,
+                      "g": 0,
+                      "b": 0
+                    },
+                    "blendMode": "NORMAL",
+                    "visible": true,
+                    "opacity": 1
+                  }
+                ],
+                "textDecoration": "NONE",
+                "effects": []
+              },
+              "children": []
+            },
+            {
+              "tag": "P",
+              "node": {
+                "type": "GROUP",
+                "x": 90,
+                "y": 538,
+                "width": 620,
+                "height": 47,
+                "backgrounds": [],
+                "effects": []
+              },
+              "children": [
+                {
+                  "tag": "TXT",
+                  "node": {
+                    "type": "TEXT",
+                    "characters": "For inquiries related to this message please",
+                    "x": 90,
+                    "y": 538,
+                    "width": 325,
+                    "height": 19,
+                    "fontSize": 16,
+                    "fontName": {
+                      "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                      "style": "normal"
+                    },
+                    "fills": [
+                      {
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "blendMode": "NORMAL",
+                        "visible": true,
+                        "opacity": 1
+                      }
+                    ],
+                    "textDecoration": "NONE",
+                    "effects": []
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "A",
+                  "node": {
+                    "type": "LINK_UNFURL",
+                    "x": 415,
+                    "y": 538,
+                    "width": 188,
+                    "height": 19,
+                    "linkUnfurlData": {
+                      "url": "/feedback",
+                      "title": null,
+                      "description": null,
+                      "provider": null
+                    }
+                  },
+                  "children": [
+                    {
+                      "tag": "TXT",
+                      "node": {
+                        "type": "TEXT",
+                        "characters": "contact\n                        our support team",
+                        "x": 415,
+                        "y": 538,
+                        "width": 188,
+                        "height": 19,
+                        "fontSize": 16,
+                        "fontName": {
+                          "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                          "style": "normal"
+                        },
+                        "fills": [
+                          {
+                            "type": "SOLID",
+                            "color": {
+                              "r": 0,
+                              "g": 0,
+                              "b": 0
+                            },
+                            "blendMode": "NORMAL",
+                            "visible": true,
+                            "opacity": 1
+                          }
+                        ],
+                        "textDecoration": "UNDERLINE",
+                        "effects": []
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "TXT",
+                  "node": {
+                    "type": "TEXT",
+                    "characters": "and provide the reference ID below.",
+                    "x": 90,
+                    "y": 538,
+                    "width": 604,
+                    "height": 38,
+                    "fontSize": 16,
+                    "fontName": {
+                      "family": "BWHaasGroteskWeb, Helvetica, Arial, sans-serif",
+                      "style": "normal"
+                    },
+                    "fills": [
+                      {
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "blendMode": "NORMAL",
+                        "visible": true,
+                        "opacity": 1
+                      }
+                    ],
+                    "textDecoration": "NONE",
+                    "effects": []
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "DIV",
+              "node": {
+                "type": "GROUP",
+                "x": 90,
+                "y": 585,
+                "width": 452,
+                "height": 29,
+                "backgrounds": [
+                  {
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.9490196078431372,
+                      "g": 0.9490196078431372,
+                      "b": 0.9490196078431372
+                    },
+                    "blendMode": "NORMAL",
+                    "visible": true,
+                    "opacity": 1
+                  }
+                ],
+                "effects": []
+              },
+              "children": [
+                {
+                  "tag": "TXT",
+                  "node": {
+                    "type": "TEXT",
+                    "characters": "Block reference ID:be842614-e8df-11ef-bcab-f86e8a4d2ea0",
+                    "x": 96,
+                    "y": 591,
+                    "width": 440,
+                    "height": 16,
+                    "fontSize": 14,
+                    "fontName": {
+                      "family": "monospace",
+                      "style": "normal"
+                    },
+                    "fills": [
+                      {
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0,
+                          "g": 0,
+                          "b": 0
+                        },
+                        "blendMode": "NORMAL",
+                        "visible": true,
+                        "opacity": 1
+                      }
+                    ],
+                    "textDecoration": "NONE",
+                    "effects": []
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2003 @@
+{
+  "tag": "BODY",
+  "node": {
+    "type": "FRAME",
+    "x": 0,
+    "y": 0,
+    "width": 800,
+    "height": 96,
+    "fills": [
+      {
+        "type": "SOLID",
+        "color": {
+          "r": 0.00784313725490196,
+          "g": 0.058823529411764705,
+          "b": 0.16470588235294117
+        },
+        "blendMode": "NORMAL",
+        "visible": true,
+        "opacity": 1
+      }
+    ],
+    "topLeftRadius": 0,
+    "topRightRadius": 0,
+    "bottomLeftRadius": 0,
+    "bottomRightRadius": 0
+  },
+  "children": [
+    {
+      "tag": "DIV",
+      "node": {
+        "type": "GROUP",
+        "x": 0,
+        "y": 0,
+        "width": 800,
+        "height": 96,
+        "backgrounds": [],
+        "effects": []
+      },
+      "children": [
+        {
+          "tag": "DIV",
+          "node": {
+            "type": "GROUP",
+            "x": 0,
+            "y": 0,
+            "width": 800,
+            "height": 96,
+            "backgrounds": [],
+            "effects": []
+          },
+          "children": [
+            {
+              "tag": "DIV",
+              "node": {
+                "type": "GROUP",
+                "x": 0,
+                "y": 0,
+                "width": 800,
+                "height": 96,
+                "backgrounds": [],
+                "effects": []
+              },
+              "children": [
+                {
+                  "tag": "DIV",
+                  "node": {
+                    "type": "GROUP",
+                    "x": 0,
+                    "y": 0,
+                    "width": 0,
+                    "height": 0,
+                    "backgrounds": [],
+                    "effects": []
+                  },
+                  "children": [
+                    {
+                      "tag": "HEADER",
+                      "node": {
+                        "type": "GROUP",
+                        "x": 0,
+                        "y": 0,
+                        "width": 800,
+                        "height": 96,
+                        "backgrounds": [
+                          {
+                            "type": "SOLID",
+                            "color": {
+                              "r": 0.01568627450980392,
+                              "g": 0.33725490196078434,
+                              "b": 0.5803921568627451
+                            },
+                            "blendMode": "NORMAL",
+                            "visible": true,
+                            "opacity": 1
+                          }
+                        ],
+                        "effects": []
+                      },
+                      "children": [
+                        {
+                          "tag": "DIV",
+                          "node": {
+                            "type": "GROUP",
+                            "x": 0,
+                            "y": 0,
+                            "width": 800,
+                            "height": 96,
+                            "backgrounds": [
+                              {
+                                "type": "SOLID",
+                                "color": {
+                                  "r": 0.01568627450980392,
+                                  "g": 0.33725490196078434,
+                                  "b": 0.5803921568627451
+                                },
+                                "blendMode": "NORMAL",
+                                "visible": true,
+                                "opacity": 1
+                              }
+                            ],
+                            "effects": []
+                          },
+                          "children": [
+                            {
+                              "tag": "NAV",
+                              "node": {
+                                "type": "RECTANGLE",
+                                "x": 0,
+                                "y": 0,
+                                "width": 800,
+                                "height": 32,
+                                "fills": [
+                                  {
+                                    "type": "SOLID",
+                                    "color": {
+                                      "r": 0.01568627450980392,
+                                      "g": 0.33725490196078434,
+                                      "b": 0.5803921568627451
+                                    },
+                                    "blendMode": "NORMAL",
+                                    "visible": true,
+                                    "opacity": 1
+                                  }
+                                ],
+                                "topLeftRadius": 0,
+                                "topRightRadius": 0,
+                                "bottomLeftRadius": 0,
+                                "bottomRightRadius": 0,
+                                "strokes": [
+                                  {
+                                    "type": "SOLID",
+                                    "color": {
+                                      "r": 0.40784313725490196,
+                                      "g": 0.6039215686274509,
+                                      "b": 0.7490196078431373
+                                    },
+                                    "opacity": 1
+                                  }
+                                ],
+                                "strokeWeight": 0.8,
+                                "dashPattern": [],
+                                "effects": []
+                              },
+                              "children": [
+                                {
+                                  "tag": "DIV",
+                                  "node": {
+                                    "type": "GROUP",
+                                    "x": 262,
+                                    "y": 0,
+                                    "width": 506,
+                                    "height": 32,
+                                    "backgrounds": [],
+                                    "effects": []
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 262,
+                                        "y": 0,
+                                        "width": 164,
+                                        "height": 32,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "A",
+                                          "node": {
+                                            "type": "LINK_UNFURL",
+                                            "x": 286,
+                                            "y": 8,
+                                            "width": 140,
+                                            "height": 15,
+                                            "linkUnfurlData": {
+                                              "url": "/en/tickets",
+                                              "title": null,
+                                              "description": null,
+                                              "provider": null
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "TXT",
+                                              "node": {
+                                                "type": "TEXT",
+                                                "characters": "TICKETS & HOSPITALITY",
+                                                "x": 286,
+                                                "y": 8,
+                                                "width": 140,
+                                                "height": 15,
+                                                "fontSize": 12,
+                                                "fontName": {
+                                                  "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                  "style": "normal"
+                                                },
+                                                "fills": [
+                                                  {
+                                                    "type": "SOLID",
+                                                    "color": {
+                                                      "r": 1,
+                                                      "g": 1,
+                                                      "b": 1
+                                                    },
+                                                    "blendMode": "NORMAL",
+                                                    "visible": true,
+                                                    "opacity": 1
+                                                  }
+                                                ],
+                                                "textDecoration": "NONE",
+                                                "effects": []
+                                              },
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 426,
+                                        "y": 0,
+                                        "width": 54,
+                                        "height": 32,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "A",
+                                          "node": {
+                                            "type": "LINK_UNFURL",
+                                            "x": 450,
+                                            "y": 8,
+                                            "width": 30,
+                                            "height": 15,
+                                            "linkUnfurlData": {
+                                              "url": "https://www.plus.fifa.com/?intcmp=%28p_fifacom%29_%28d_plusfifa%29_%28c_webuniversal-main%29_%28sc_home%29_%28ssc_%29_%28sssc_%29_%28l_en%29_%28da_27112023%29",
+                                              "title": null,
+                                              "description": null,
+                                              "provider": null
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "TXT",
+                                              "node": {
+                                                "type": "TEXT",
+                                                "characters": "FIFA+",
+                                                "x": 450,
+                                                "y": 8,
+                                                "width": 30,
+                                                "height": 15,
+                                                "fontSize": 12,
+                                                "fontName": {
+                                                  "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                  "style": "normal"
+                                                },
+                                                "fills": [
+                                                  {
+                                                    "type": "SOLID",
+                                                    "color": {
+                                                      "r": 1,
+                                                      "g": 1,
+                                                      "b": 1
+                                                    },
+                                                    "blendMode": "NORMAL",
+                                                    "visible": true,
+                                                    "opacity": 1
+                                                  }
+                                                ],
+                                                "textDecoration": "NONE",
+                                                "effects": []
+                                              },
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 481,
+                                        "y": 0,
+                                        "width": 90,
+                                        "height": 32,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "A",
+                                          "node": {
+                                            "type": "LINK_UNFURL",
+                                            "x": 505,
+                                            "y": 8,
+                                            "width": 66,
+                                            "height": 15,
+                                            "linkUnfurlData": {
+                                              "url": "https://store.fifa.com/?intcmp=%28p_fifacom%29_%28d_fifastore%29_%28c_webuniversal-main%29_%28sc_fifastore%29_%28ssc_%29_%28sssc_%29_%28l_en%29_%28da_27112023%29",
+                                              "title": null,
+                                              "description": null,
+                                              "provider": null
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "TXT",
+                                              "node": {
+                                                "type": "TEXT",
+                                                "characters": "FIFA STORE",
+                                                "x": 505,
+                                                "y": 8,
+                                                "width": 66,
+                                                "height": 15,
+                                                "fontSize": 12,
+                                                "fontName": {
+                                                  "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                  "style": "normal"
+                                                },
+                                                "fills": [
+                                                  {
+                                                    "type": "SOLID",
+                                                    "color": {
+                                                      "r": 1,
+                                                      "g": 1,
+                                                      "b": 1
+                                                    },
+                                                    "blendMode": "NORMAL",
+                                                    "visible": true,
+                                                    "opacity": 1
+                                                  }
+                                                ],
+                                                "textDecoration": "NONE",
+                                                "effects": []
+                                              },
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 571,
+                                        "y": 0,
+                                        "width": 107,
+                                        "height": 32,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "A",
+                                          "node": {
+                                            "type": "LINK_UNFURL",
+                                            "x": 595,
+                                            "y": 8,
+                                            "width": 83,
+                                            "height": 15,
+                                            "linkUnfurlData": {
+                                              "url": "https://collect.fifa.com/?intcmp=%28p_fifacom%29_%28d_fifacollect%29_%28c_webuniversal-main%29_%28sc_fifacollect%29_%28ssc_%29_%28sssc_%29_%28l_en%29_%28da_27112023%29",
+                                              "title": null,
+                                              "description": null,
+                                              "provider": null
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "TXT",
+                                              "node": {
+                                                "type": "TEXT",
+                                                "characters": "FIFA COLLECT",
+                                                "x": 595,
+                                                "y": 8,
+                                                "width": 83,
+                                                "height": 15,
+                                                "fontSize": 12,
+                                                "fontName": {
+                                                  "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                  "style": "normal"
+                                                },
+                                                "fills": [
+                                                  {
+                                                    "type": "SOLID",
+                                                    "color": {
+                                                      "r": 1,
+                                                      "g": 1,
+                                                      "b": 1
+                                                    },
+                                                    "blendMode": "NORMAL",
+                                                    "visible": true,
+                                                    "opacity": 1
+                                                  }
+                                                ],
+                                                "textDecoration": "NONE",
+                                                "effects": []
+                                              },
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 678,
+                                        "y": 0,
+                                        "width": 90,
+                                        "height": 32,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "A",
+                                          "node": {
+                                            "type": "LINK_UNFURL",
+                                            "x": 702,
+                                            "y": 8,
+                                            "width": 66,
+                                            "height": 15,
+                                            "linkUnfurlData": {
+                                              "url": "https://inside.fifa.com/en/?intcmp=%28p_fifacom%29_%28d_insidefifa%29_%28c_webuniversal-main%29_%28sc_insidefifa%29_%28ssc_%29_%28sssc_%29_%28l_en%29_%28da_27112023%29",
+                                              "title": null,
+                                              "description": null,
+                                              "provider": null
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "TXT",
+                                              "node": {
+                                                "type": "TEXT",
+                                                "characters": "INSIDE FIFA",
+                                                "x": 702,
+                                                "y": 8,
+                                                "width": 66,
+                                                "height": 15,
+                                                "fontSize": 12,
+                                                "fontName": {
+                                                  "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                  "style": "normal"
+                                                },
+                                                "fills": [
+                                                  {
+                                                    "type": "SOLID",
+                                                    "color": {
+                                                      "r": 1,
+                                                      "g": 1,
+                                                      "b": 1
+                                                    },
+                                                    "blendMode": "NORMAL",
+                                                    "visible": true,
+                                                    "opacity": 1
+                                                  }
+                                                ],
+                                                "textDecoration": "NONE",
+                                                "effects": []
+                                              },
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tag": "DIV",
+                              "node": {
+                                "type": "GROUP",
+                                "x": 0,
+                                "y": 32,
+                                "width": 800,
+                                "height": 64,
+                                "backgrounds": [
+                                  {
+                                    "type": "SOLID",
+                                    "color": {
+                                      "r": 0.01568627450980392,
+                                      "g": 0.33725490196078434,
+                                      "b": 0.5803921568627451
+                                    },
+                                    "blendMode": "NORMAL",
+                                    "visible": true,
+                                    "opacity": 1
+                                  }
+                                ],
+                                "effects": []
+                              },
+                              "children": [
+                                {
+                                  "tag": "DIV",
+                                  "node": {
+                                    "type": "GROUP",
+                                    "x": 0,
+                                    "y": 32,
+                                    "width": 800,
+                                    "height": 64,
+                                    "backgrounds": [],
+                                    "effects": []
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 0,
+                                        "y": 50,
+                                        "width": 72,
+                                        "height": 28,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "DIV",
+                                          "node": {
+                                            "type": "GROUP",
+                                            "x": 0,
+                                            "y": 50,
+                                            "width": 72,
+                                            "height": 28,
+                                            "backgrounds": [],
+                                            "effects": []
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "RECTANGLE",
+                                                "x": 20,
+                                                "y": 50,
+                                                "width": 28,
+                                                "height": 28,
+                                                "fills": [
+                                                  {
+                                                    "type": "SOLID",
+                                                    "color": {
+                                                      "r": 1,
+                                                      "g": 1,
+                                                      "b": 1
+                                                    },
+                                                    "blendMode": "NORMAL",
+                                                    "visible": true,
+                                                    "opacity": 0.15
+                                                  }
+                                                ],
+                                                "topLeftRadius": 50,
+                                                "topRightRadius": 50,
+                                                "bottomLeftRadius": 50,
+                                                "bottomRightRadius": 50,
+                                                "strokes": [],
+                                                "strokeWeight": 0,
+                                                "dashPattern": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "LABEL",
+                                                  "node": {
+                                                    "type": "GROUP",
+                                                    "x": 27,
+                                                    "y": 62,
+                                                    "width": 14,
+                                                    "height": 0,
+                                                    "backgrounds": [],
+                                                    "effects": []
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "DIV",
+                                                      "node": {
+                                                        "type": "RECTANGLE",
+                                                        "x": 27,
+                                                        "y": 57,
+                                                        "width": 14,
+                                                        "height": 2,
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "topLeftRadius": 16,
+                                                        "topRightRadius": 16,
+                                                        "bottomLeftRadius": 16,
+                                                        "bottomRightRadius": 16,
+                                                        "strokes": [],
+                                                        "strokeWeight": 0,
+                                                        "dashPattern": [],
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
+                                                      "tag": "DIV",
+                                                      "node": {
+                                                        "type": "RECTANGLE",
+                                                        "x": 27,
+                                                        "y": 62,
+                                                        "width": 14,
+                                                        "height": 2,
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "topLeftRadius": 16,
+                                                        "topRightRadius": 16,
+                                                        "bottomLeftRadius": 16,
+                                                        "bottomRightRadius": 16,
+                                                        "strokes": [],
+                                                        "strokeWeight": 0,
+                                                        "dashPattern": [],
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    },
+                                                    {
+                                                      "tag": "DIV",
+                                                      "node": {
+                                                        "type": "RECTANGLE",
+                                                        "x": 27,
+                                                        "y": 67,
+                                                        "width": 14,
+                                                        "height": 2,
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "topLeftRadius": 16,
+                                                        "topRightRadius": 16,
+                                                        "bottomLeftRadius": 16,
+                                                        "bottomRightRadius": 16,
+                                                        "strokes": [],
+                                                        "strokeWeight": 0,
+                                                        "dashPattern": [],
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "A",
+                                      "node": {
+                                        "type": "LINK_UNFURL",
+                                        "x": 72,
+                                        "y": 32,
+                                        "width": 104,
+                                        "height": 64,
+                                        "linkUnfurlData": {
+                                          "url": "/en/home",
+                                          "title": null,
+                                          "description": null,
+                                          "provider": null
+                                        }
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "IMG",
+                                          "node": {
+                                            "type": "RECTANGLE",
+                                            "x": 72,
+                                            "y": 32,
+                                            "width": 104,
+                                            "height": 64,
+                                            "fills": [
+                                              {
+                                                "url": "https://digitalhub.fifa.com/transform/befe3a64-328b-453c-8b58-0faeb9103684/FIFA_Logo_White_Generic?&io=transform:fill,height:64&quality=75",
+                                                "type": "IMAGE",
+                                                "scaleMode": "FIT",
+                                                "imageHash": null
+                                              }
+                                            ],
+                                            "topLeftRadius": 0,
+                                            "topRightRadius": 0,
+                                            "bottomLeftRadius": 0,
+                                            "bottomRightRadius": 0,
+                                            "strokes": [],
+                                            "strokeWeight": 0,
+                                            "dashPattern": [],
+                                            "effects": []
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 200,
+                                        "y": 32,
+                                        "width": 453,
+                                        "height": 64,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "NAV",
+                                          "node": {
+                                            "type": "GROUP",
+                                            "x": 200,
+                                            "y": 32,
+                                            "width": 871,
+                                            "height": 64,
+                                            "backgrounds": [],
+                                            "effects": []
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "GROUP",
+                                                "x": 200,
+                                                "y": 32,
+                                                "width": 111,
+                                                "height": 64,
+                                                "backgrounds": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "DIV",
+                                                  "node": {
+                                                    "type": "GROUP",
+                                                    "x": 200,
+                                                    "y": 57,
+                                                    "width": 111,
+                                                    "height": 14,
+                                                    "backgrounds": [],
+                                                    "effects": []
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "TXT",
+                                                      "node": {
+                                                        "type": "TEXT",
+                                                        "characters": "TOURNAMENTS",
+                                                        "x": 200,
+                                                        "y": 55,
+                                                        "width": 111,
+                                                        "height": 18,
+                                                        "fontSize": 14,
+                                                        "fontName": {
+                                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                          "style": "normal"
+                                                        },
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "textDecoration": "NONE",
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "GROUP",
+                                                "x": 343,
+                                                "y": 32,
+                                                "width": 114,
+                                                "height": 64,
+                                                "backgrounds": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "A",
+                                                  "node": {
+                                                    "type": "LINK_UNFURL",
+                                                    "x": 343,
+                                                    "y": 57,
+                                                    "width": 114,
+                                                    "height": 14,
+                                                    "linkUnfurlData": {
+                                                      "url": "/en/match-centre",
+                                                      "title": null,
+                                                      "description": null,
+                                                      "provider": null
+                                                    }
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "TXT",
+                                                      "node": {
+                                                        "type": "TEXT",
+                                                        "characters": "MATCH CENTRE",
+                                                        "x": 343,
+                                                        "y": 55,
+                                                        "width": 114,
+                                                        "height": 18,
+                                                        "fontSize": 14,
+                                                        "fontName": {
+                                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                          "style": "normal"
+                                                        },
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "textDecoration": "NONE",
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "GROUP",
+                                                "x": 489,
+                                                "y": 32,
+                                                "width": 42,
+                                                "height": 64,
+                                                "backgrounds": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "A",
+                                                  "node": {
+                                                    "type": "LINK_UNFURL",
+                                                    "x": 489,
+                                                    "y": 57,
+                                                    "width": 42,
+                                                    "height": 14,
+                                                    "linkUnfurlData": {
+                                                      "url": "/en/news",
+                                                      "title": null,
+                                                      "description": null,
+                                                      "provider": null
+                                                    }
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "TXT",
+                                                      "node": {
+                                                        "type": "TEXT",
+                                                        "characters": "NEWS",
+                                                        "x": 489,
+                                                        "y": 55,
+                                                        "width": 42,
+                                                        "height": 18,
+                                                        "fontSize": 14,
+                                                        "fontName": {
+                                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                          "style": "normal"
+                                                        },
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "textDecoration": "NONE",
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "GROUP",
+                                                "x": 563,
+                                                "y": 32,
+                                                "width": 74,
+                                                "height": 64,
+                                                "backgrounds": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "A",
+                                                  "node": {
+                                                    "type": "LINK_UNFURL",
+                                                    "x": 563,
+                                                    "y": 57,
+                                                    "width": 74,
+                                                    "height": 14,
+                                                    "linkUnfurlData": {
+                                                      "url": "/en/world-rankings",
+                                                      "title": null,
+                                                      "description": null,
+                                                      "provider": null
+                                                    }
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "TXT",
+                                                      "node": {
+                                                        "type": "TEXT",
+                                                        "characters": "RANKINGS",
+                                                        "x": 563,
+                                                        "y": 55,
+                                                        "width": 74,
+                                                        "height": 18,
+                                                        "fontSize": 14,
+                                                        "fontName": {
+                                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                          "style": "normal"
+                                                        },
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "textDecoration": "NONE",
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "GROUP",
+                                                "x": 669,
+                                                "y": 32,
+                                                "width": 118,
+                                                "height": 64,
+                                                "backgrounds": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "DIV",
+                                                  "node": {
+                                                    "type": "GROUP",
+                                                    "x": 669,
+                                                    "y": 57,
+                                                    "width": 118,
+                                                    "height": 14,
+                                                    "backgrounds": [],
+                                                    "effects": []
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "TXT",
+                                                      "node": {
+                                                        "type": "TEXT",
+                                                        "characters": "WATCH ON FIFA+",
+                                                        "x": 669,
+                                                        "y": 55,
+                                                        "width": 118,
+                                                        "height": 18,
+                                                        "fontSize": 14,
+                                                        "fontName": {
+                                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                          "style": "normal"
+                                                        },
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "textDecoration": "NONE",
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "GROUP",
+                                                "x": 819,
+                                                "y": 32,
+                                                "width": 35,
+                                                "height": 64,
+                                                "backgrounds": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "DIV",
+                                                  "node": {
+                                                    "type": "GROUP",
+                                                    "x": 819,
+                                                    "y": 57,
+                                                    "width": 35,
+                                                    "height": 14,
+                                                    "backgrounds": [],
+                                                    "effects": []
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "TXT",
+                                                      "node": {
+                                                        "type": "TEXT",
+                                                        "characters": "PLAY",
+                                                        "x": 819,
+                                                        "y": 55,
+                                                        "width": 35,
+                                                        "height": 18,
+                                                        "fontSize": 14,
+                                                        "fontName": {
+                                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                          "style": "normal"
+                                                        },
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "textDecoration": "NONE",
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "GROUP",
+                                                "x": 886,
+                                                "y": 32,
+                                                "width": 40,
+                                                "height": 64,
+                                                "backgrounds": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "DIV",
+                                                  "node": {
+                                                    "type": "GROUP",
+                                                    "x": 886,
+                                                    "y": 57,
+                                                    "width": 40,
+                                                    "height": 14,
+                                                    "backgrounds": [],
+                                                    "effects": []
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "TXT",
+                                                      "node": {
+                                                        "type": "TEXT",
+                                                        "characters": "SHOP",
+                                                        "x": 886,
+                                                        "y": 55,
+                                                        "width": 40,
+                                                        "height": 18,
+                                                        "fontSize": 14,
+                                                        "fontName": {
+                                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                          "style": "normal"
+                                                        },
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "textDecoration": "NONE",
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "tag": "DIV",
+                                              "node": {
+                                                "type": "GROUP",
+                                                "x": 958,
+                                                "y": 32,
+                                                "width": 81,
+                                                "height": 64,
+                                                "backgrounds": [],
+                                                "effects": []
+                                              },
+                                              "children": [
+                                                {
+                                                  "tag": "DIV",
+                                                  "node": {
+                                                    "type": "GROUP",
+                                                    "x": 958,
+                                                    "y": 57,
+                                                    "width": 81,
+                                                    "height": 14,
+                                                    "backgrounds": [],
+                                                    "effects": []
+                                                  },
+                                                  "children": [
+                                                    {
+                                                      "tag": "TXT",
+                                                      "node": {
+                                                        "type": "TEXT",
+                                                        "characters": "INSIDE FIFA",
+                                                        "x": 958,
+                                                        "y": 55,
+                                                        "width": 81,
+                                                        "height": 18,
+                                                        "fontSize": 14,
+                                                        "fontName": {
+                                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                                          "style": "normal"
+                                                        },
+                                                        "fills": [
+                                                          {
+                                                            "type": "SOLID",
+                                                            "color": {
+                                                              "r": 1,
+                                                              "g": 1,
+                                                              "b": 1
+                                                            },
+                                                            "blendMode": "NORMAL",
+                                                            "visible": true,
+                                                            "opacity": 1
+                                                          }
+                                                        ],
+                                                        "textDecoration": "NONE",
+                                                        "effects": []
+                                                      },
+                                                      "children": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 661,
+                                        "y": 47,
+                                        "width": 40,
+                                        "height": 35,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "A",
+                                          "node": {
+                                            "type": "LINK_UNFURL",
+                                            "x": 669,
+                                            "y": 55,
+                                            "width": 24,
+                                            "height": 19,
+                                            "linkUnfurlData": {
+                                              "url": "/en?searchOverlay=1",
+                                              "title": null,
+                                              "description": null,
+                                              "provider": null
+                                            }
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "svg",
+                                              "node": {
+                                                "type": "SVG",
+                                                "svg": "<svg width=\"19\" height=\"19\" viewBox=\"0 0 19 19\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"global-menu-top-nav_searchIconPadding__iOSPu\"><title>Search</title><circle cx=\"8.5\" cy=\"8.5\" r=\"7.75\" stroke-width=\"2\" stroke-linejoin=\"round\"></circle><line x1=\"14.0607\" y1=\"14\" x2=\"18\" y2=\"17.9393\" stroke-width=\"2\" stroke-linecap=\"round\"></line></svg>",
+                                                "x": 669,
+                                                "y": 55,
+                                                "width": 19,
+                                                "height": 19,
+                                                "strokes": [],
+                                                "strokeWeight": 0,
+                                                "dashPattern": [],
+                                                "effects": []
+                                              },
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "DIV",
+                                      "node": {
+                                        "type": "GROUP",
+                                        "x": 701,
+                                        "y": 49,
+                                        "width": 34,
+                                        "height": 30,
+                                        "backgrounds": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "BUTTON",
+                                          "node": {
+                                            "type": "RECTANGLE",
+                                            "name": "none",
+                                            "x": 703,
+                                            "y": 49,
+                                            "width": 30,
+                                            "height": 30,
+                                            "fills": [],
+                                            "topLeftRadius": 0,
+                                            "topRightRadius": 0,
+                                            "bottomLeftRadius": 0,
+                                            "bottomRightRadius": 0,
+                                            "strokes": [],
+                                            "strokeWeight": 0,
+                                            "dashPattern": [],
+                                            "effects": []
+                                          },
+                                          "children": [
+                                            {
+                                              "tag": "svg",
+                                              "node": {
+                                                "type": "SVG",
+                                                "svg": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" class=\"header-dropdown_languageSelectorIcon__x0YcK\"><title>Language</title><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M3.78363 11.25H6.7648C6.80208 10.3088 6.90906 9.40178 7.07729 8.54987C7.03052 8.53136 6.98427 8.51259 6.93857 8.49355C6.27357 8.21646 5.68645 7.86744 5.25411 7.44154C5.22767 7.4155 5.20166 7.389 5.17612 7.36206C4.40842 8.4894 3.91278 9.81686 3.78363 11.25ZM6.14505 6.18776C6.18694 6.24539 6.24 6.30716 6.30679 6.37296C6.54685 6.60945 6.9249 6.85507 7.44489 7.07902C7.64221 6.43597 7.8779 5.83922 8.1472 5.30063C8.29116 5.01272 8.44831 4.7352 8.61816 4.47276C7.68988 4.89047 6.85281 5.47484 6.14505 6.18776ZM12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25ZM11.25 3.93646C10.6508 4.23145 10.0314 4.88642 9.48884 5.97145C9.25613 6.43687 9.04882 6.96226 8.87347 7.53687C9.58199 7.70245 10.3855 7.81524 11.25 7.85701V3.93646ZM11.25 9.35859C10.2759 9.31572 9.35174 9.19 8.51929 8.99452C8.38739 9.70223 8.30011 10.4588 8.26606 11.25H11.25V9.35859ZM12.75 11.25V9.35859C13.7241 9.31572 14.6483 9.19 15.4807 8.99452C15.6126 9.70223 15.6999 10.4588 15.7339 11.25H12.75ZM11.25 12.75H8.26606C8.29158 13.343 8.347 13.9165 8.4287 14.4646C9.28448 14.2568 10.2405 14.1233 11.25 14.0789V12.75ZM12.75 14.0789V12.75H15.7339C15.7084 13.343 15.653 13.9165 15.5713 14.4646C14.7155 14.2568 13.7595 14.1233 12.75 14.0789ZM11.25 15.5805C10.3247 15.6252 9.46922 15.7513 8.72533 15.9364C8.92746 16.7191 9.18675 17.4244 9.48884 18.0286C10.0314 19.1136 10.6508 19.7685 11.25 20.0635V15.5805ZM8.61816 19.5272C8.44831 19.2648 8.29116 18.9873 8.1472 18.6994C7.8095 18.024 7.52464 17.2571 7.30202 16.4222C6.85505 16.6285 6.52429 16.8503 6.30679 17.0645C6.05863 17.309 6 17.4979 6 17.625H5.9649C6.70915 18.4232 7.60985 19.0735 8.61816 19.5272ZM4.96907 16.3183C5.05592 16.2043 5.15181 16.0967 5.25411 15.996C5.68645 15.5701 6.27357 15.221 6.93857 14.944C6.95321 14.9379 6.9679 14.9318 6.98265 14.9257C6.86857 14.2293 6.79453 13.5005 6.7648 12.75H3.78363C3.90077 14.0499 4.31941 15.2628 4.96907 16.3183ZM15.3818 19.5272C16.3901 19.0735 17.2908 18.4232 18.0351 17.625H18C18 17.4979 17.9414 17.309 17.6932 17.0645C17.4757 16.8503 17.145 16.6285 16.698 16.4222C16.4754 17.2571 16.1905 18.024 15.8528 18.6994C15.7088 18.9873 15.5517 19.2648 15.3818 19.5272ZM15.2747 15.9364C14.5308 15.7513 13.6753 15.6252 12.75 15.5805V20.0635C13.3492 19.7685 13.9686 19.1136 14.5112 18.0286C14.8132 17.4244 15.0725 16.7191 15.2747 15.9364ZM17.0173 14.9257C17.0321 14.9318 17.0468 14.9379 17.0614 14.944C17.7264 15.221 18.3136 15.5701 18.7459 15.996C18.8482 16.0967 18.9441 16.2043 19.0309 16.3183C19.6806 15.2628 20.0992 14.0499 20.2164 12.75H17.2352C17.2055 13.5005 17.1314 14.2293 17.0173 14.9257ZM17.2352 11.25H20.2164C20.0872 9.81686 19.5916 8.4894 18.8239 7.36206C18.7983 7.389 18.7723 7.4155 18.7459 7.44154C18.3136 7.86744 17.7264 8.21646 17.0614 8.49355C17.0157 8.51259 16.9695 8.53136 16.9227 8.54986C17.0909 9.40178 17.1979 10.3088 17.2352 11.25ZM16.5551 7.07902C16.3578 6.43597 16.1221 5.83922 15.8528 5.30063C15.7088 5.01272 15.5517 4.7352 15.3818 4.47276C16.3101 4.89046 17.1472 5.47484 17.8549 6.18776C17.8131 6.24539 17.76 6.30716 17.6932 6.37296C17.4531 6.60945 17.0751 6.85506 16.5551 7.07902ZM15.1265 7.53687C14.418 7.70245 13.6145 7.81524 12.75 7.85701V3.93646C13.3492 4.23145 13.9686 4.88642 14.5112 5.97145C14.7439 6.43687 14.9512 6.96226 15.1265 7.53687Z\" fill=\"white\"></path></svg>",
+                                                "x": 703,
+                                                "y": 49,
+                                                "width": 30,
+                                                "height": 30,
+                                                "strokes": [],
+                                                "strokeWeight": 0,
+                                                "dashPattern": [],
+                                                "effects": []
+                                              },
+                                              "children": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tag": "BUTTON",
+                                      "node": {
+                                        "type": "RECTANGLE",
+                                        "name": "none",
+                                        "x": 735,
+                                        "y": 44,
+                                        "width": 41,
+                                        "height": 40,
+                                        "fills": [],
+                                        "topLeftRadius": 0,
+                                        "topRightRadius": 0,
+                                        "bottomLeftRadius": 0,
+                                        "bottomRightRadius": 0,
+                                        "strokes": [],
+                                        "strokeWeight": 0,
+                                        "dashPattern": [],
+                                        "effects": []
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "svg",
+                                          "node": {
+                                            "type": "SVG",
+                                            "svg": "<svg width=\"25\" height=\"24\" viewBox=\"0 0 25 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12.7368\" cy=\"6.59961\" r=\"5\" stroke-width=\"2\" stroke-linejoin=\"round\"></circle><path d=\"M1.95931 21.6747C2.95328 17.8793 7.2779 14.7998 12.7368 14.7998C18.1957 14.7998 22.5204 17.8793 23.5143 21.6747C23.5598 21.8482 23.5179 21.9983 23.3934 22.1332C23.2562 22.2819 23.0198 22.3998 22.7368 22.3998H2.73682C2.45387 22.3998 2.21743 22.2819 2.08018 22.1332C1.95573 21.9983 1.91386 21.8482 1.95931 21.6747Z\" stroke-width=\"2\" stroke-linejoin=\"round\"></path></svg>",
+                                            "x": 745,
+                                            "y": 54,
+                                            "width": 21,
+                                            "height": 20,
+                                            "strokes": [],
+                                            "strokeWeight": 0,
+                                            "dashPattern": [],
+                                            "effects": []
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "DIV",
+              "node": {
+                "type": "GROUP",
+                "x": 0,
+                "y": 0,
+                "width": 0,
+                "height": 0,
+                "backgrounds": [],
+                "effects": []
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "DIV",
+      "node": {
+        "type": "GROUP",
+        "x": 0,
+        "y": 96,
+        "width": 800,
+        "height": 0,
+        "backgrounds": [],
+        "effects": []
+      },
+      "children": [
+        {
+          "tag": "DIV",
+          "node": {
+            "type": "GROUP",
+            "x": 0,
+            "y": 0,
+            "width": 800,
+            "height": 600,
+            "backgrounds": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 0.5
+              }
+            ],
+            "effects": []
+          },
+          "children": []
+        },
+        {
+          "tag": "DIV",
+          "node": {
+            "type": "RECTANGLE",
+            "x": 0,
+            "y": 415,
+            "width": 800,
+            "height": 186,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": {
+                  "r": 0.03529411764705882,
+                  "g": 0.10588235294117647,
+                  "b": 0.24705882352941178
+                },
+                "blendMode": "NORMAL",
+                "visible": true,
+                "opacity": 1
+              }
+            ],
+            "topLeftRadius": 0,
+            "topRightRadius": 0,
+            "bottomLeftRadius": 0,
+            "bottomRightRadius": 0,
+            "strokes": [],
+            "strokeWeight": 0,
+            "dashPattern": [],
+            "effects": [
+              {
+                "type": "DROP_SHADOW",
+                "color": {
+                  "r": 0,
+                  "g": 0,
+                  "b": 0,
+                  "a": 0.2
+                },
+                "offset": {
+                  "x": 0,
+                  "y": 0
+                },
+                "radius": 18,
+                "visible": true,
+                "blendMode": "NORMAL"
+              }
+            ]
+          },
+          "children": [
+            {
+              "tag": "DIV",
+              "node": {
+                "type": "GROUP",
+                "x": 0,
+                "y": 415,
+                "width": 800,
+                "height": 186,
+                "backgrounds": [],
+                "effects": []
+              },
+              "children": [
+                {
+                  "tag": "DIV",
+                  "node": {
+                    "type": "GROUP",
+                    "x": 0,
+                    "y": 415,
+                    "width": 800,
+                    "height": 186,
+                    "backgrounds": [],
+                    "effects": []
+                  },
+                  "children": [
+                    {
+                      "tag": "DIV",
+                      "node": {
+                        "type": "GROUP",
+                        "x": 0,
+                        "y": 415,
+                        "width": 800,
+                        "height": 186,
+                        "backgrounds": [],
+                        "effects": []
+                      },
+                      "children": [
+                        {
+                          "tag": "DIV",
+                          "node": {
+                            "type": "GROUP",
+                            "x": 0,
+                            "y": 415,
+                            "width": 760,
+                            "height": 123,
+                            "backgrounds": [],
+                            "effects": []
+                          },
+                          "children": [
+                            {
+                              "tag": "DIV",
+                              "node": {
+                                "type": "GROUP",
+                                "x": 16,
+                                "y": 435,
+                                "width": 728,
+                                "height": 93,
+                                "backgrounds": [],
+                                "effects": []
+                              },
+                              "children": [
+                                {
+                                  "tag": "H2",
+                                  "node": {
+                                    "type": "TEXT",
+                                    "characters": "Your Privacy",
+                                    "x": 16,
+                                    "y": 435,
+                                    "width": 110,
+                                    "height": 25,
+                                    "textAlignHorizontal": "LEFT",
+                                    "fontSize": 19.2,
+                                    "fontName": {
+                                      "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                      "style": "normal"
+                                    },
+                                    "fills": [
+                                      {
+                                        "type": "SOLID",
+                                        "color": {
+                                          "r": 1,
+                                          "g": 1,
+                                          "b": 1
+                                        },
+                                        "blendMode": "NORMAL",
+                                        "visible": true,
+                                        "opacity": 1
+                                      }
+                                    ],
+                                    "textDecoration": "NONE",
+                                    "effects": []
+                                  },
+                                  "children": []
+                                },
+                                {
+                                  "tag": "DIV",
+                                  "node": {
+                                    "type": "GROUP",
+                                    "x": 16,
+                                    "y": 469,
+                                    "width": 728,
+                                    "height": 59,
+                                    "backgrounds": [],
+                                    "effects": []
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "TXT",
+                                      "node": {
+                                        "type": "TEXT",
+                                        "characters": "We use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We also share information about your use of our site with our social media, advertising and analytics partners.  You can select your cookie preferences by clicking the buttons on the right.",
+                                        "x": 16,
+                                        "y": 470,
+                                        "width": 722,
+                                        "height": 57,
+                                        "textAlignHorizontal": "LEFT",
+                                        "fontSize": 13.008,
+                                        "fontName": {
+                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                          "style": "normal"
+                                        },
+                                        "fills": [
+                                          {
+                                            "type": "SOLID",
+                                            "color": {
+                                              "r": 1,
+                                              "g": 1,
+                                              "b": 1
+                                            },
+                                            "blendMode": "NORMAL",
+                                            "visible": true,
+                                            "opacity": 1
+                                          }
+                                        ],
+                                        "textDecoration": "NONE",
+                                        "effects": []
+                                      },
+                                      "children": []
+                                    },
+                                    {
+                                      "tag": "A",
+                                      "node": {
+                                        "type": "LINK_UNFURL",
+                                        "x": 353,
+                                        "y": 509,
+                                        "width": 134,
+                                        "height": 18,
+                                        "linkUnfurlData": {
+                                          "url": "https://www.fifa.com/legal/data-protection-portal/",
+                                          "title": null,
+                                          "description": null,
+                                          "provider": null
+                                        }
+                                      },
+                                      "children": [
+                                        {
+                                          "tag": "TXT",
+                                          "node": {
+                                            "type": "TEXT",
+                                            "characters": "Data Protection Portal",
+                                            "x": 353,
+                                            "y": 509,
+                                            "width": 134,
+                                            "height": 18,
+                                            "textAlignHorizontal": "LEFT",
+                                            "fontSize": 13.008,
+                                            "fontName": {
+                                              "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                              "style": "normal"
+                                            },
+                                            "fills": [
+                                              {
+                                                "type": "SOLID",
+                                                "color": {
+                                                  "r": 0.19607843137254902,
+                                                  "g": 0.3843137254901961,
+                                                  "b": 0.5843137254901961
+                                                },
+                                                "blendMode": "NORMAL",
+                                                "visible": true,
+                                                "opacity": 1
+                                              }
+                                            ],
+                                            "textDecoration": "UNDERLINE",
+                                            "effects": []
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "DIV",
+                          "node": {
+                            "type": "GROUP",
+                            "x": 0,
+                            "y": 538,
+                            "width": 800,
+                            "height": 62,
+                            "backgrounds": [],
+                            "effects": []
+                          },
+                          "children": [
+                            {
+                              "tag": "DIV",
+                              "node": {
+                                "type": "GROUP",
+                                "x": 16,
+                                "y": 538,
+                                "width": 768,
+                                "height": 57,
+                                "backgrounds": [],
+                                "effects": []
+                              },
+                              "children": [
+                                {
+                                  "tag": "BUTTON",
+                                  "node": {
+                                    "type": "RECTANGLE",
+                                    "name": "none",
+                                    "x": 16,
+                                    "y": 538,
+                                    "width": 133,
+                                    "height": 41,
+                                    "fills": [
+                                      {
+                                        "type": "SOLID",
+                                        "color": {
+                                          "r": 1,
+                                          "g": 1,
+                                          "b": 1
+                                        },
+                                        "blendMode": "NORMAL",
+                                        "visible": true,
+                                        "opacity": 1
+                                      }
+                                    ],
+                                    "topLeftRadius": 2,
+                                    "topRightRadius": 2,
+                                    "bottomLeftRadius": 2,
+                                    "bottomRightRadius": 2,
+                                    "strokes": [
+                                      {
+                                        "type": "SOLID",
+                                        "color": {
+                                          "r": 0.19607843137254902,
+                                          "g": 0.3843137254901961,
+                                          "b": 0.5843137254901961
+                                        },
+                                        "opacity": 1
+                                      }
+                                    ],
+                                    "strokeWeight": 0.8,
+                                    "dashPattern": [],
+                                    "effects": []
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "TXT",
+                                      "node": {
+                                        "type": "TEXT",
+                                        "characters": "Preference Center",
+                                        "x": 27,
+                                        "y": 549,
+                                        "width": 111,
+                                        "height": 18,
+                                        "textAlignHorizontal": "CENTER",
+                                        "fontSize": 13.008,
+                                        "fontName": {
+                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                          "style": "normal"
+                                        },
+                                        "fills": [
+                                          {
+                                            "type": "SOLID",
+                                            "color": {
+                                              "r": 0.19607843137254902,
+                                              "g": 0.3843137254901961,
+                                              "b": 0.5843137254901961
+                                            },
+                                            "blendMode": "NORMAL",
+                                            "visible": true,
+                                            "opacity": 1
+                                          }
+                                        ],
+                                        "textDecoration": "NONE",
+                                        "effects": []
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "BUTTON",
+                                  "node": {
+                                    "type": "RECTANGLE",
+                                    "name": "none",
+                                    "x": 646,
+                                    "y": 538,
+                                    "width": 125,
+                                    "height": 41,
+                                    "fills": [
+                                      {
+                                        "type": "SOLID",
+                                        "color": {
+                                          "r": 0.19607843137254902,
+                                          "g": 0.3843137254901961,
+                                          "b": 0.5843137254901961
+                                        },
+                                        "blendMode": "NORMAL",
+                                        "visible": true,
+                                        "opacity": 1
+                                      }
+                                    ],
+                                    "topLeftRadius": 2,
+                                    "topRightRadius": 2,
+                                    "bottomLeftRadius": 2,
+                                    "bottomRightRadius": 2,
+                                    "strokes": [
+                                      {
+                                        "type": "SOLID",
+                                        "color": {
+                                          "r": 0.19607843137254902,
+                                          "g": 0.3843137254901961,
+                                          "b": 0.5843137254901961
+                                        },
+                                        "opacity": 1
+                                      }
+                                    ],
+                                    "strokeWeight": 0.8,
+                                    "dashPattern": [],
+                                    "effects": []
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "TXT",
+                                      "node": {
+                                        "type": "TEXT",
+                                        "characters": "Reject All",
+                                        "x": 680,
+                                        "y": 549,
+                                        "width": 57,
+                                        "height": 18,
+                                        "textAlignHorizontal": "CENTER",
+                                        "fontSize": 13.008,
+                                        "fontName": {
+                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                          "style": "normal"
+                                        },
+                                        "fills": [
+                                          {
+                                            "type": "SOLID",
+                                            "color": {
+                                              "r": 1,
+                                              "g": 1,
+                                              "b": 1
+                                            },
+                                            "blendMode": "NORMAL",
+                                            "visible": true,
+                                            "opacity": 1
+                                          }
+                                        ],
+                                        "textDecoration": "NONE",
+                                        "effects": []
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "tag": "BUTTON",
+                                  "node": {
+                                    "type": "RECTANGLE",
+                                    "name": "none",
+                                    "x": 508,
+                                    "y": 538,
+                                    "width": 125,
+                                    "height": 41,
+                                    "fills": [
+                                      {
+                                        "type": "SOLID",
+                                        "color": {
+                                          "r": 0.19607843137254902,
+                                          "g": 0.3843137254901961,
+                                          "b": 0.5843137254901961
+                                        },
+                                        "blendMode": "NORMAL",
+                                        "visible": true,
+                                        "opacity": 1
+                                      }
+                                    ],
+                                    "topLeftRadius": 2,
+                                    "topRightRadius": 2,
+                                    "bottomLeftRadius": 2,
+                                    "bottomRightRadius": 2,
+                                    "strokes": [
+                                      {
+                                        "type": "SOLID",
+                                        "color": {
+                                          "r": 0.19607843137254902,
+                                          "g": 0.3843137254901961,
+                                          "b": 0.5843137254901961
+                                        },
+                                        "opacity": 1
+                                      }
+                                    ],
+                                    "strokeWeight": 0.8,
+                                    "dashPattern": [],
+                                    "effects": []
+                                  },
+                                  "children": [
+                                    {
+                                      "tag": "TXT",
+                                      "node": {
+                                        "type": "TEXT",
+                                        "characters": "I'm OK with that",
+                                        "x": 522,
+                                        "y": 549,
+                                        "width": 96,
+                                        "height": 18,
+                                        "textAlignHorizontal": "CENTER",
+                                        "fontSize": 13.008,
+                                        "fontName": {
+                                          "family": "FIFASans Regular, Poppins 500, Noto Sans Regular, Helvetica Neue, Arial, sans-serif",
+                                          "style": "normal"
+                                        },
+                                        "fills": [
+                                          {
+                                            "type": "SOLID",
+                                            "color": {
+                                              "r": 1,
+                                              "g": 1,
+                                              "b": 1
+                                            },
+                                            "blendMode": "NORMAL",
+                                            "visible": true,
+                                            "opacity": 1
+                                          }
+                                        ],
+                                        "textDecoration": "NONE",
+                                        "effects": []
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "DIV",
+                  "node": {
+                    "type": "GROUP",
+                    "x": 800,
+                    "y": 415,
+                    "width": 0,
+                    "height": 0,
+                    "backgrounds": [],
+                    "effects": []
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
