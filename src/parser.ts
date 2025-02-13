@@ -21,7 +21,7 @@ import {
 export async function parse(url: string): Promise<FigmaNode> {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.goto(url, { waitUntil: 'networkidle2' });
+  await page.goto(url, { waitUntil: 'networkidle2', timeout: 100000 });
 
   // Bundle necessary logic into an object
   const logicBundle = {
