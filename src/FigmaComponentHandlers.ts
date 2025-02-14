@@ -695,3 +695,102 @@ export function handleBodyNode(element: Element): Partial<FrameNode> {
 
   return BodyNode;
 }
+
+export function handleSelectNode(element: Element): FigmaNode {
+  const selectEl = element as HTMLSelectElement;
+  const rect = element.getBoundingClientRect();
+  const computedStyles = getComputedStyle(element);
+
+  const fills: SolidPaint[] = [];
+  const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
+
+  let x = Math.round(rect.left);
+  let y = Math.round(rect.top);
+  let width = Math.round(rect.width);
+  let height = Math.round(rect.height);
+
+  let rgb = getFigmaRGB(computedStyles.color);
+
+  if (rgb) {
+    fills.push({
+      type: 'SOLID',
+      color: { r: rgb.r, g: rgb.g, b: rgb.b },
+      blendMode: 'NORMAL',
+      visible: true,
+      opacity: rgb.a || 1,
+    } as SolidPaint);
+  }
+
+  // Create select box
+  const selectNode: Partial<RectangleNode> = {
+    type: 'RECTANGLE',
+    x: x,
+    y: y,
+    width: width,
+    height: height,
+    fills: fills,
+    effects: shadow ? [shadow] : [],
+  };
+  const figmaSelectNode = createFigmaNode('SELECT', selectNode);
+
+  // Get first option text
+  const firstOptionEl = selectEl.options[0];
+
+  if (firstOptionEl) {
+    const firstOptionText = firstOptionEl.textContent?.trim() || "";
+    const optionStyles = getComputedStyle(firstOptionEl);
+  
+    const optionFills: SolidPaint[] = [];
+  
+    const optionRGB = getFigmaRGB(optionStyles.color);
+    if (optionRGB) {
+      optionFills.push({
+        type: 'SOLID',
+        color: {
+          r: optionRGB.r,
+          g: optionRGB.g,
+          b: optionRGB.b,
+        },
+        blendMode: 'NORMAL',
+        visible: true,
+        opacity: optionRGB.a || 1,
+      } as SolidPaint);
+    }
+  
+    const textNode: Partial<TextNode> = {
+      type: 'TEXT',
+      characters: firstOptionText,
+      x: x + 10, // Left padding
+      y: y + height / 4, // Centered vertically
+      width: width - 30, // Leave space for arrow
+      height: height / 2,
+      fontSize: parseFloat(optionStyles.fontSize),
+      fontName: {
+        family: optionStyles.fontFamily.replace(/['"]/g, ''),
+        style: optionStyles.fontStyle,
+      },
+      fills: optionFills, // Apply option-specific fills
+    };
+  
+    const figmaTextNode = createFigmaNode('TXT', textNode);
+    figmaSelectNode.children.push(figmaTextNode);
+  }
+  
+  // Create dropdown arrow
+  const arrowNode: Partial<VectorNode> = {
+    type: 'VECTOR',
+    x: x + width - 20, // Right side padding
+    y: y + height / 2 - 3, // Centered vertically
+    fills: fills,
+    vectorPaths: [
+      {
+        windingRule: 'NONZERO',
+        data: 'M 0 0 L 6 6 L 12 0', // Simple downward chevron
+      },
+    ],
+  };
+  const figmaArrowNode = createFigmaNode('VECTOR', arrowNode);
+  figmaSelectNode.children.push(figmaArrowNode);
+
+  return figmaSelectNode;
+}

@@ -14,9 +14,12 @@ export function parseHTMLToFigmaNode(element: Element): FigmaNode | null {
   )
     return rootNode;
   element.childNodes.forEach((child) => {
-    const childFigmaNode = parseHTMLToFigmaNode(child as Element);
-    if (childFigmaNode != null) rootNode.children.push(childFigmaNode);
+    if ((child as Element).tagName?.toLowerCase() !== 'option') {
+      const childFigmaNode = parseHTMLToFigmaNode(child as Element);
+      if (childFigmaNode != null) rootNode.children.push(childFigmaNode);
+    }
   });
+    
 
   return rootNode;
 }

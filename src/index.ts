@@ -8,7 +8,7 @@ async function main() {
     // Read links from links.json
 
     const urls = await crawlWebPage(100);
-
+    // const urls = ['http://127.0.0.1:5500/test/index.html']
     // Ensure the data folder exists
     const dataFolder = 'json_data';
     await fs.mkdir(dataFolder, { recursive: true });

@@ -11,6 +11,7 @@ import {
   handleVideoNode,
   handleBodyNode,
   handleInputNode,
+  handleSelectNode
 } from './FigmaComponentHandlers.js';
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
@@ -107,6 +108,8 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
 
   // TODO: INPUT NODE
   if (element instanceof HTMLInputElement) return handleInputNode(element);
+
+  if (element instanceof HTMLSelectElement) return handleSelectNode(element);
 
   // Default: return a Group Figma Node
   return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleDefaultNode(element));
