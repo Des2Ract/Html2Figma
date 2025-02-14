@@ -2,3 +2,5 @@ node_modules
 dist
 *.pkl
 data
+/json_data
+*.csv
