@@ -23,7 +23,7 @@ export interface FigmaNode {
 
 export function createFigmaNode(tag: string, node: LayerNode): FigmaNode {
   return {
-    tag,
+    tag: tag.toUpperCase(),
     node,
     children: [],
   };

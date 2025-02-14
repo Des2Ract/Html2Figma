@@ -81,14 +81,21 @@ export function handleTextNode(element: Element): Partial<TextNode> {
 export function handleSvgNode(element: Element): Partial<LayerNode> {
   const rect = element.getBoundingClientRect();
   const computedStyles = getComputedStyle(element);
+
+  if (element instanceof SVGElement && !element.hasAttribute('xmlns')) {
+    element.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  }
+
   // Extract strokes (borders)
   const borderData = getBorder(computedStyles);
 
   const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
 
+  const svgString = new XMLSerializer().serializeToString(element).replace(/"/g, "'");
+
   const svgNode: Partial<LayerNode> = {
     type: 'SVG',
-    svg: element.outerHTML,
+    svg: svgString,
     x: Math.round(rect.left),
     y: Math.round(rect.top),
     width: Math.round(rect.width),
@@ -99,7 +106,6 @@ export function handleSvgNode(element: Element): Partial<LayerNode> {
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
     effects: shadow ? [shadow] : [],
-
   };
 
   return svgNode;
@@ -144,7 +150,6 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
     effects: shadow ? [shadow] : [],
-
   };
 
   return imageNode;
@@ -193,7 +198,6 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
     effects: shadow ? [shadow] : [],
-
   };
 
   return pictureNode;
@@ -238,7 +242,6 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
     strokeWeight: borderData?.strokeWeight || 0,
     dashPattern: borderData?.dashPattern || [],
     effects: shadow ? [shadow] : [],
-
   };
 
   return videoNode;
@@ -276,7 +279,6 @@ export function handleLineNode(element: Element): Partial<LineNode> {
     height: parseFloat(computedStyles.height),
     fills: fills,
     effects: shadow ? [shadow] : [],
-
   };
 
   return lineNode;
@@ -309,7 +311,6 @@ export function handleInputNode(element: Element): FigmaNode {
       height: Math.round(rect.height),
       fills: fills,
       effects: shadow ? [shadow] : [],
-
     };
     return createFigmaNode('INPUT', checkboxNode);
   }
@@ -323,7 +324,6 @@ export function handleInputNode(element: Element): FigmaNode {
       height: Math.round(rect.height),
       fills: fills,
       effects: shadow ? [shadow] : [],
-
     };
     return createFigmaNode('INPUT', radioNode);
   }
@@ -395,7 +395,6 @@ export function handleInputNode(element: Element): FigmaNode {
       bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
       bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
       effects: shadow ? [shadow] : [],
-
     };
     const inputFigmaNode = createFigmaNode('INPUT', buttonNode);
     const textFigmaNode = createFigmaNode('TXT', textNode);
@@ -518,7 +517,6 @@ export function handleInputNode(element: Element): FigmaNode {
     bottomLeftRadius: parse(computedStyles.borderBottomLeftRadius, rect.height),
     bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
     effects: shadow ? [shadow] : [],
-
   };
 
   return createFigmaNode('INPUT', inputNode);
@@ -625,7 +623,6 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
       strokeWeight: borderData?.strokeWeight || 0,
       dashPattern: borderData?.dashPattern || [],
       effects: shadow ? [shadow] : [],
-
     };
   }
 
@@ -637,7 +634,6 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
     height: Math.round(rect.height),
     backgrounds: fills,
     effects: shadow ? [shadow] : [],
-
   };
 }
 
