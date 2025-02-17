@@ -16,6 +16,7 @@ import {
   handleVideoNode,
   handleBodyNode,
   handleInputNode,
+  handleSelectNode
 } from './FigmaComponentHandlers.js';
 
 export async function parse(url: string): Promise<FigmaNode> {
@@ -40,6 +41,8 @@ export async function parse(url: string): Promise<FigmaNode> {
     handleLinkNode: handleLinkNode.toString(),
     handleBodyNode: handleBodyNode.toString(),
     handleInputNode: handleInputNode.toString(),
+    handleSelectNode: handleSelectNode.toString(),
+
     getBorder: getBorder.toString(),
     parseBoxShadow: parseBoxShadow.toString(),
   };
@@ -61,6 +64,7 @@ export async function parse(url: string): Promise<FigmaNode> {
     const handleLinkNode = new Function(`return ${logic.handleLinkNode}`)();
     const handleBodyNode = new Function(`return ${logic.handleBodyNode}`)();
     const handleInputNode = new Function(`return ${logic.handleInputNode}`)();
+    const handleSelectNode = new Function(`return ${logic.handleSelectNode}`)();
     const getBorder = new Function(`return ${logic.getBorder}`)();
     const parseBoxShadow = new Function(`return ${logic.parseBoxShadow}`)();
 
@@ -79,6 +83,8 @@ export async function parse(url: string): Promise<FigmaNode> {
     window.handleLinkNode = handleLinkNode;
     window.handleBodyNode = handleBodyNode;
     window.handleInputNode = handleInputNode;
+    window.handleSelectNode = handleSelectNode;
+
     window.getBorder = getBorder;
     window.parseBoxShadow = parseBoxShadow;
 
