@@ -206,16 +206,23 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
 export function handleVideoNode(element: Element): Partial<RectangleNode> {
   const rect = element.getBoundingClientRect();
   const computedStyles = getComputedStyle(element);
-  const url = (element as HTMLVideoElement).poster as string;
+  const videoElement = element as HTMLVideoElement;
+
+  // Extract video URL
+  let url = videoElement.src || '';
+  if (!url) {
+    const sourceElement = videoElement.querySelector('source');
+    url = sourceElement?.src || videoElement.poster || '';
+  }
 
   const fills = [
     {
       url: url,
-      type: 'IMAGE',
+      type: 'VIDEO',
       scaleMode: computedStyles.objectFit === 'contain' ? 'FIT' : 'FILL',
-      imageHash: null,
-    } as ImagePaint,
-  ] as ImagePaint[];
+      videoHash: null,
+    } as VideoPaint,
+  ] as VideoPaint[];
 
   const handlePX = (v: string): number => (/px$/.test(v) || v === '0' ? parseFloat(v) : 0);
   const handlePercent = (v: string): number => (/^(\d+)%$/.test(v) ? parseInt(v) / 100 : 0);
@@ -224,7 +231,6 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
 
   // Extract strokes (borders)
   const borderData = getBorder(computedStyles);
-
   const shadow: DropShadowEffect | null = parseBoxShadow(computedStyles.boxShadow);
 
   const videoNode: Partial<RectangleNode> = {
@@ -737,11 +743,11 @@ export function handleSelectNode(element: Element): FigmaNode {
   const firstOptionEl = selectEl.options[0];
 
   if (firstOptionEl) {
-    const firstOptionText = firstOptionEl.textContent?.trim() || "";
+    const firstOptionText = firstOptionEl.textContent?.trim() || '';
     const optionStyles = getComputedStyle(firstOptionEl);
-  
+
     const optionFills: SolidPaint[] = [];
-  
+
     const optionRGB = getFigmaRGB(optionStyles.color);
     if (optionRGB) {
       optionFills.push({
@@ -756,7 +762,7 @@ export function handleSelectNode(element: Element): FigmaNode {
         opacity: optionRGB.a || 1,
       } as SolidPaint);
     }
-  
+
     const textNode: Partial<TextNode> = {
       type: 'TEXT',
       characters: firstOptionText,
@@ -771,11 +777,11 @@ export function handleSelectNode(element: Element): FigmaNode {
       },
       fills: optionFills, // Apply option-specific fills
     };
-  
+
     const figmaTextNode = createFigmaNode('TXT', textNode);
     figmaSelectNode.children.push(figmaTextNode);
   }
-  
+
   // Create dropdown arrow
   const arrowNode: Partial<VectorNode> = {
     type: 'VECTOR',

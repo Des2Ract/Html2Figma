@@ -7,13 +7,14 @@ async function main() {
   try {
     // Read links from links.json
 
-    const urls = await crawlWebPage(10000, true);
+    // const urls = await crawlWebPage(10000, true);
+    const urls = ['http://127.0.0.1:5500/test/index.html'];
 
     // Ensure the data folder exists
     const dataFolder = 'json_data';
     await fs.mkdir(dataFolder, { recursive: true });
 
-    for (let i = 1; i < urls.length; i++) {
+    for (let i = 0; i < urls.length; i++) {
       const url = urls[i];
       console.log(`Processing: ${url}`);
 

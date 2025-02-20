@@ -16,13 +16,49 @@ import {
   handleVideoNode,
   handleBodyNode,
   handleInputNode,
-  handleSelectNode
+  handleSelectNode,
 } from './FigmaComponentHandlers.js';
 
 export async function parse(url: string): Promise<FigmaNode> {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe', // Path to Edge
+    headless: false,
+    defaultViewport: null,
+    args: ['--start-maximized'],
+  });
+
   const page = await browser.newPage();
+
   await page.goto(url, { waitUntil: 'networkidle2', timeout: 100000 });
+
+  // Scroll to the bottom of the page
+  await page.evaluate(async () => {
+    let totalHeight = 0;
+    const distance = 10;
+    const startTime = Date.now(); // Get the start time
+
+    while (Date.now() - startTime < 5000) {
+      // Stop after 10ms
+      window.scrollBy(0, distance);
+      totalHeight += distance;
+      await new Promise((resolve) => setTimeout(resolve, 1)); // Small delay to allow scrolling
+    }
+  });
+
+  await page.evaluate(async () => {
+    const distance = 100; // Number of pixels to scroll up each step
+    const startTime = Date.now(); // Get the start time
+
+    while (Date.now() - startTime < 1000) {
+      // Stop after 1 second
+      window.scrollBy(0, -distance); // Scroll up
+      await new Promise((resolve) => setTimeout(resolve, 1)); // Small delay to allow scrolling
+    }
+  });
+  // Wait for 10 seconds (10,000 milliseconds)
+  await new Promise((resolve) => setTimeout(resolve, 10000));
+
+  // Now you can continue with further actions
 
   // Bundle necessary logic into an object
   const logicBundle = {
