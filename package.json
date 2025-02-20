@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node dist/server.js",
     "format": "prettier --write ."
   },
   "keywords": [],
@@ -14,6 +14,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "jsdom": "^26.0.0",
     "node-fetch": "^3.3.2",
     "puppeteer": "^24.1.1",
@@ -24,6 +26,8 @@
   },
   "devDependencies": {
     "@figma/plugin-typings": "^1.19.3",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^15.6.0",
     "@types/node-fetch": "^2.6.12",

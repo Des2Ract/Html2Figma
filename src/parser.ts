@@ -21,7 +21,7 @@ import {
 
 export async function parse(url: string): Promise<FigmaNode> {
   const browser = await puppeteer.launch({
-    executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe', // Path to Edge
+    // executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe', // Path to Edge
     headless: false,
     defaultViewport: null,
     args: ['--start-maximized'],
@@ -34,7 +34,7 @@ export async function parse(url: string): Promise<FigmaNode> {
   // Scroll to the bottom of the page
   await page.evaluate(async () => {
     let totalHeight = 0;
-    const distance = 10;
+    const distance = 20;
     const startTime = Date.now(); // Get the start time
 
     while (Date.now() - startTime < 5000) {
@@ -44,6 +44,35 @@ export async function parse(url: string): Promise<FigmaNode> {
       await new Promise((resolve) => setTimeout(resolve, 1)); // Small delay to allow scrolling
     }
   });
+
+  // // Function to click buttons for cookies or pop-ups
+  // const clickPopupButtons = async () => {
+  //   const buttonTexts = [
+  //     'Accept',
+  //     'Continue',
+  //     'Agree',
+  //     'Yes, I accept',
+  //     'I agree',
+  //     'Got it',
+  //     'Allow all',
+  //     'Accept all',
+  //   ];
+
+  //   await page.evaluate((buttonTexts) => {
+  //     document.querySelectorAll('button, div, a').forEach((btn) => {
+  //       const element = btn as HTMLElement; // Cast Element to HTMLElement
+  //       if (
+  //         element.innerText &&
+  //         buttonTexts.some((text) => element.innerText.trim().toLowerCase().includes(text.toLowerCase()))
+  //       ) {
+  //         element.click();
+  //       }
+  //     });
+  //   }, buttonTexts);
+  // };
+
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
+  // await clickPopupButtons();
 
   await page.evaluate(async () => {
     const distance = 100; // Number of pixels to scroll up each step
