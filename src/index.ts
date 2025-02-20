@@ -8,7 +8,7 @@ async function main() {
     // Read links from links.json
 
     // const urls = await crawlWebPage(10000, true);
-    const urls = ['http://127.0.0.1:5500/test/index.html'];
+    const urls = ['https://codeforces.com/'];
 
     // Ensure the data folder exists
     const dataFolder = 'json_data';

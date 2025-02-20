@@ -341,7 +341,7 @@ export function handleInputNode(element: Element): FigmaNode {
     let height = Math.round(rect.height);
 
     const fills: SolidPaint[] = [];
-    let rgb = getFigmaRGB(computedStyles.color);
+    let rgb = getFigmaRGB(computedStyles.backgroundColor);
 
     if (rgb) {
       fills.push({
@@ -422,7 +422,7 @@ export function handleInputNode(element: Element): FigmaNode {
     let height = Math.round(rect.height);
 
     const fills: SolidPaint[] = [];
-    let rgb = getFigmaRGB(computedStyles.color);
+    let rgb = getFigmaRGB(computedStyles.backgroundColor);
 
     if (rgb) {
       fills.push({
