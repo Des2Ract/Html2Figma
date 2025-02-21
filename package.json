@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && tsc",
-    "start": "npm run build && node dist/server.js",
+    "start": "npm run build && node dist/index.js",
     "format": "prettier --write ."
   },
   "keywords": [],

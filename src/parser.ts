@@ -21,7 +21,7 @@ import {
 
 export async function parse(url: string): Promise<FigmaNode> {
   const browser = await puppeteer.launch({
-    // executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe', // Path to Edge
+    executablePath: 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe', // Path to Edge
     headless: false,
     defaultViewport: null,
     args: ['--start-maximized'],

@@ -7,7 +7,7 @@ async function main() {
   try {
     // Read links from links.json
 
-    const urls = await crawlWebPage(10000, true);
+    const urls = await crawlWebPage(100, true);
     // const urls = ['http://127.0.0.1:5500/test/index.html'];
 
     // Ensure the data folder exists
