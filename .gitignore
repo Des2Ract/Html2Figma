@@ -6,3 +6,4 @@ data
 *.csv
 *.7z
 *.zip
+.pth
