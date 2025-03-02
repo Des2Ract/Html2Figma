@@ -1,0 +1,5 @@
+Strong Feature Correlations (|r| >= 0.7):
+==================================================
+height ↔ area: 0.9548
+has_text ↔ has_background_color: 0.9157
+width ↔ aspect_ratio: 0.7854
