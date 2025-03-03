@@ -6,5 +6,10 @@ data
 *.csv
 *.7z
 *.zip
+*.txt
+*.png
+*.txt
+*.png
+*.json
 *.pth
 *.h5

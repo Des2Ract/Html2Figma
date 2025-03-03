@@ -12,7 +12,7 @@ from scipy import sparse
 
 # Load the dataset (assuming it's in a CSV file)
 # Replace 'your_dataset.csv' with your actual file path
-def load_data(file_path='figma_dataset.csv'):
+def load_data(file_path='figma_optimized_dataset.csv'):
     try:
         df = pd.read_csv(file_path)
         df = df[~df['tag'].str.contains('-')]
