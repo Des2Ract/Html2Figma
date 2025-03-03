@@ -7,3 +7,10 @@ data
 *.7z
 *.zip
 .pth
+*.txt
+*.png
+*.txt
+*.png
+*.json
+*.pth
+*.h5
