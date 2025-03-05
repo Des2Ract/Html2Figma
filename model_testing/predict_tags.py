@@ -5,6 +5,9 @@ import joblib
 import numpy as np
 import math
 import pandas as pd
+import os
+
+body_width = None
 
 def load_model_and_encoders():
     """Load trained model and preprocessing encoders."""
@@ -49,6 +52,34 @@ def load_model_and_encoders():
     
     return model, label_encoder, ohe, imputer, scaler
 
+def find_nearest_text_node(node, text_nodes):
+    """
+    Calculate the distance to the nearest text node.
+    
+    Args:
+    node (dict): Current node being processed
+    text_nodes (list): List of text nodes with their x, y coordinates
+    
+    Returns:
+    float: Distance to the nearest text node, or a large value if no text nodes exist
+    """
+    if not text_nodes:
+        return 9999999  # Large default value if no text nodes exist
+    
+    # Get current node's center coordinates
+    node_data = node.get("node", {})
+    x = node_data.get("x", 0) + node_data.get("width", 0) / 2
+    y = node_data.get("y", 0) + node_data.get("height", 0) / 2
+    
+    # Calculate Euclidean distances to all text nodes
+    min_distance = float('inf')
+    for text_node in text_nodes:
+        tx, ty = text_node['x'], text_node['y']
+        distance = math.sqrt((x - tx)**2 + (y - ty)**2)
+        min_distance = min(min_distance, distance)
+    
+    return min_distance
+
 def color_difference(color1, color2):
     """
     Calculate a perceptual color difference between two RGB colors using 
@@ -71,7 +102,9 @@ def color_difference(color1, color2):
     
     return normalized_distance
 
-def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=0, parent_bg_color=None):
+def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=0, parent_bg_color=None,text_nodes=None):
+    global body_width
+    
     node_data = node.get("node", {})
     node_type = str(node_data.get("type", ""))
 
@@ -146,28 +179,24 @@ def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=
     chars_count_to_end = count_chars_to_end(node)
     bg_color = None
     
-    # type,width,height,num_direct_children,num_children_to_end,sibling_count,prev_sibling_html_tag,has_background_color,border_radius,has_border,text_length,chars_count_to_end,aspect_ratio,child_1_html_tag,child_2_html_tag,child_3_html_tag,child_1_percentage_of_parent,child_2_percentage_of_parent,child_3_percentage_of_parent,distinct_background
+    # type,width,height,num_direct_children,num_children_to_end,sibling_count,prev_sibling_html_tag,has_background_color,border_radius,has_border,text_length,chars_count_to_end,aspect_ratio,child_1_html_tag,child_2_html_tag,child_3_html_tag,child_1_percentage_of_parent,child_2_percentage_of_parent,child_3_percentage_of_parent,distinct_background,nearest_text_node_dist
     
     feature = {
         "type": node_type,
-        "width": node_width,
+        "width": node_width/(body_width if body_width else 1),
         "height": node_height/(parent_height if parent_height else node_height if node_height else 1),
-        "num_direct_children": num_direct_children,
         "num_children_to_end": num_children_to_end,  # Total descendants count
         "sibling_count": sibling_count,
         "prev_sibling_html_tag": prev_sibling_tag if prev_sibling_tag else "",
         "has_background_color": 0,
         "border_radius": 0,
-        "has_border": 0,
         "text_length": text_length,
         "chars_count_to_end": chars_count_to_end,
         "aspect_ratio": node_width / node_height if node_height > 0 else 0,
         "child_1_html_tag": child_1_tag,
         "child_2_html_tag": child_2_tag,
-        "child_3_html_tag": child_3_tag,
         "child_1_percentage_of_parent": child_1_percent,
         "child_2_percentage_of_parent": child_2_percent,
-        "child_3_percentage_of_parent": child_3_percent,
         "distinct_background": 0,
     }
     
@@ -185,7 +214,7 @@ def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=
             if parent_bg_color:
                 bg_difference = color_difference(bg_color, parent_bg_color)
                 # If difference is significant (threshold of 0.3 - adjust as needed)
-                if bg_difference > 0.4:
+                if bg_difference > 0.25:
                     feature["distinct_background"] = 1   
             break
     # Also check backgrounds for background color
@@ -198,18 +227,18 @@ def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=
                 int(bg["color"].get("b", 0) * 255),
             )
             feature["has_background_color"] = 1  # Flag for explicit background color
-            bg_color = (r, g, b)
+            a = min(float(fill["color"].get("a", 1)),float(fill.get("opacity",1)))
+            
+            bg_color = (r*a, g*a, b*a)
+            
             if parent_bg_color:
                 bg_difference = color_difference(bg_color, parent_bg_color)
+                                
                 # If difference is significant (threshold of 0.3 - adjust as needed)
-                if bg_difference > 0.4:
-                    feature["distinct_background"] = 1   
+                if bg_difference > 0.2:
+                    feature["distinct_background"] = 1  
+                
             break
-    
-    # Extract strokes (borders)
-    strokes = node_data.get("strokes", [])
-    if strokes:
-        feature["has_border"] = 1
     
     # Extract border radius
     br_top_left = node_data.get("topLeftRadius", 0)
@@ -221,17 +250,52 @@ def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=
         feature["border_radius"] = (br_top_left + br_top_right + br_bottom_left + br_bottom_right) / 4
         if feature["border_radius"] >= 50:
             feature["border_radius"] = 0
+            
+    # Calculate nearest text node distance
+    nearest_text_distance = find_nearest_text_node(node, text_nodes)
+    
+    # Add nearest text node distance to the feature dictionary
+    feature["nearest_text_node_dist"] = (nearest_text_distance+0.01) / (math.sqrt((node_width+0.001)* (node_height+0.001)) if math.sqrt((node_width+0.001)*(node_height+0.001)) else 1)
     
     return feature
 
-def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_color, model, label_encoder, ohe, imputer, scaler):
+def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_color,text_nodes, model, label_encoder, ohe, imputer, scaler):
     """
     Predict tag for a node using the trained model.
     """
+    
+    global body_width
+    
+    # First pass: Collect text nodes if not provided
+    if text_nodes is None:
+        def collect_text_nodes(node):
+            text_nodes_list = []
+            # Function to check if a node has meaningful text
+            def has_meaningful_text(node_data):
+                return node_data.get('type','') == "TEXT"
+            
+            node_data = node.get("node", {})
+            # If this node has meaningful text
+            if has_meaningful_text(node_data):
+                text_nodes_list.append({
+                    'x': node_data.get("x", 0) + node_data.get("width", 0) / 2,
+                    'y': node_data.get("y", 0) + node_data.get("height", 0) / 2
+                })
+            
+            # Recursively check children
+            for child in node.get("children", []):
+                text_nodes_list.extend(collect_text_nodes(child))
+            
+            return text_nodes_list
+        
+        text_nodes = collect_text_nodes(node)
+    
     # First, recursively process children to get their tags and information
     node_data = node.get("node", {})
     figma_type = node_data.get("type","")
     node_height = node_data.get("height", 0)
+    if not body_width or (body_width and body_width == 0):
+        body_width = node_data.get("width", 0)
     children = node.get("children", [])
     
     # Extract bgcolor
@@ -264,7 +328,7 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     # Process children first - left to right
     for i, child in enumerate(children):
         # Predict child tag
-        predict_tag(child,len(children)-1,prev_sib_tag,node_height,bg_color if has_background_color else parent_bg_color, model, label_encoder, ohe, imputer, scaler)
+        predict_tag(child,len(children)-1,prev_sib_tag,node_height,bg_color if has_background_color else parent_bg_color,text_nodes, model, label_encoder, ohe, imputer, scaler)
         
         # Update previous sibling tag for next iteration
         prev_sib_tag = child.get("tag","UNK")
@@ -277,13 +341,14 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
         prev_sibling_tag,
         parent_height,
         parent_bg_color,
+        text_nodes
     )
     
     # handle easy cases here
-    #TODO: TEXT,SVG,HR,IMAGE
+    #TODO: TEXT,SVG,HR,IMAGE,VECTOR
     if figma_type == "TEXT":
         node["tag"] = "P"
-    if figma_type == "SVG":
+    if figma_type == "SVG" or figma_type == "VECTOR":
         node["tag"] = "SVG"
     if figma_type == "LINE":
         node["tag"] = "HR"
@@ -295,7 +360,7 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
         return
     
     # Prepare features for model
-    categorical_cols = ['type','prev_sibling_html_tag','child_1_html_tag','child_2_html_tag','child_3_html_tag']
+    categorical_cols = ['type','prev_sibling_html_tag','child_1_html_tag','child_2_html_tag']
     continuous_cols = [col for col in feature.keys() if col not in categorical_cols]
     
     # Prepare categorical data
@@ -309,6 +374,9 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     cont_imputed = imputer.transform(X_df)
     cont_scaled = scaler.transform(cont_imputed)
     
+    print(X_cat_df,X_df)
+    
+    
     # Combine features
     X_processed = np.concatenate([cat_encoded, cont_scaled], axis=1)
     
@@ -318,6 +386,16 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
         outputs = model(X_tensor)
         _, predicted = torch.max(outputs, 1)
         predicted_tag = label_encoder.inverse_transform(predicted)[0]
+    
+    # Save data to CSV
+    X_cat_df["predicted_tag"] = predicted_tag  # Add predicted tag to categorical features
+    X_full_df = pd.concat([X_cat_df, X_df], axis=1)  # Combine categorical and continuous features
+    X_full_df["predicted_tag"] = predicted_tag  # Add predicted tag at the end
+
+    # Save to CSV
+    X_full_df.to_csv("features_with_prediction.csv",mode='a', index=False)
+
+    print("Feature vector and predicted tag saved to predicted_features.csv")
     
     # Update the node's tag
     node["tag"] = predicted_tag
@@ -333,8 +411,11 @@ def process_figma_json(input_file, output_file):
     with open(input_file, 'r', encoding='utf-8') as f:
         data = json.load(f)
     
+    if os.path.exists('features_with_prediction.csv'):
+        os.remove('features_with_prediction.csv')
+        
     # Predict tags recursively
-    predict_tag(data,0,None,None,None, model, label_encoder, ohe, imputer, scaler)
+    predict_tag(data,0,None,None,None,None, model, label_encoder, ohe, imputer, scaler)
     
     # Save processed JSON
     with open(output_file, 'w', encoding='utf-8') as f:

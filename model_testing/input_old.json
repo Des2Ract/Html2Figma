@@ -1,0 +1,402 @@
+{
+  "tag": "UNK",
+  "node": {
+    "type": "FRAME",
+    "x": 0.0,
+    "y": 0.0,
+    "width": 668.0,
+    "height": 579.0,
+    "fills": [
+      {
+        "blendMode": "NORMAL",
+        "type": "SOLID",
+        "color": {
+          "r": 1.0,
+          "g": 1.0,
+          "b": 1.0,
+          "a": 1.0
+        }
+      }
+    ],
+    "topLeftRadius": 0,
+    "topRightRadius": 0,
+    "bottomLeftRadius": 0,
+    "bottomRightRadius": 0
+  },
+  "children": [
+    {
+      "tag": "UNK",
+      "node": {
+        "type": "RECTANGLE",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 668.0,
+        "height": 579.0,
+        "fills": [
+          {
+            "blendMode": "NORMAL",
+            "type": "SOLID",
+            "color": {
+              "r": 0.8582960963249207,
+              "g": 0.8419474363327026,
+              "b": 0.8419474363327026,
+              "a": 1.0
+            }
+          },
+          {
+            "opacity": 0.20000000298023224,
+            "blendMode": "NORMAL",
+            "type": "IMAGE",
+            "scaleMode": "FILL",
+            "imageRef": "fa4f7e9b1a4861daf38662f99a7893fe61682e57"
+          }
+        ],
+        "topLeftRadius": 0,
+        "topRightRadius": 0,
+        "bottomLeftRadius": 0,
+        "bottomRightRadius": 0,
+        "strokes": []
+      },
+      "children": [
+        {
+          "tag": "UNK",
+          "node": {
+            "type": "LINE",
+            "x": 35.0,
+            "y": 62.0,
+            "width": 176.0,
+            "height": 0.0
+          },
+          "children": []
+        },
+        {
+          "tag": "UNK",
+          "node": {
+            "type": "TEXT",
+            "x": 57.0,
+            "y": 36.0,
+            "width": 127.0,
+            "height": 29.0,
+            "characters": "AOZ Website",
+            "fontSize": 20.0,
+            "fontName": {
+              "family": "Permanent Marker",
+              "style": "Regular"
+            },
+            "textAlignHorizontal": "LEFT"
+          },
+          "children": []
+        },
+        {
+          "tag": "UNK",
+          "node": {
+            "type": "RECTANGLE",
+            "x": 129.0,
+            "y": 92.0,
+            "width": 410.0,
+            "height": 396.0,
+            "fills": [
+              {
+                "opacity": 0.23999999463558197,
+                "blendMode": "NORMAL",
+                "type": "SOLID",
+                "color": {
+                  "r": 1.0,
+                  "g": 1.0,
+                  "b": 1.0,
+                  "a": 1.0
+                }
+              }
+            ],
+            "topLeftRadius": 0,
+            "topRightRadius": 0,
+            "bottomLeftRadius": 0,
+            "bottomRightRadius": 0
+          },
+          "children": [
+            {
+              "tag": "UNK",
+              "node": {
+                "type": "TEXT",
+                "x": 266.0,
+                "y": 118.0,
+                "width": 135.0,
+                "height": 41.0,
+                "characters": "Sign in",
+                "fontSize": 32.0,
+                "fontName": {
+                  "family": "Kode Mono",
+                  "style": "SemiBold"
+                },
+                "textAlignHorizontal": "LEFT"
+              },
+              "children": []
+            },
+            {
+              "tag": "UNK",
+              "node": {
+                "type": "TEXT",
+                "x": 199.0,
+                "y": 180.0,
+                "width": 68.0,
+                "height": 18.0,
+                "characters": "UserName",
+                "fontSize": 14.0,
+                "fontName": {
+                  "family": "Kode Mono",
+                  "style": "SemiBold"
+                },
+                "textAlignHorizontal": "LEFT"
+              },
+              "children": []
+            },
+            {
+              "tag": "UNK",
+              "node": {
+                "type": "RECTANGLE",
+                "x": 194.0,
+                "y": 201.0,
+                "width": 279.0,
+                "height": 39.0,
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1.0,
+                      "g": 1.0,
+                      "b": 1.0,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "topLeftRadius": 10.0,
+                "topRightRadius": 10.0,
+                "bottomLeftRadius": 10.0,
+                "bottomRightRadius": 10.0,
+                "strokes": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.0,
+                      "g": 0.0,
+                      "b": 0.0,
+                      "a": 1.0
+                    }
+                  }
+                ]
+              },
+              "children": [
+                {
+                  "tag": "UNK",
+                  "node": {
+                    "type": "TEXT",
+                    "x": 204.0,
+                    "y": 212.0,
+                    "width": 93.0,
+                    "height": 18.0,
+                    "characters": "eg. AOZ2025",
+                    "fontSize": 14.0,
+                    "fontName": {
+                      "family": "Kode Mono",
+                      "style": "SemiBold"
+                    },
+                    "textAlignHorizontal": "LEFT"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "UNK",
+              "node": {
+                "type": "TEXT",
+                "x": 199.0,
+                "y": 281.0,
+                "width": 68.0,
+                "height": 18.0,
+                "characters": "Password",
+                "fontSize": 14.0,
+                "fontName": {
+                  "family": "Kode Mono",
+                  "style": "SemiBold"
+                },
+                "textAlignHorizontal": "LEFT"
+              },
+              "children": []
+            },
+            {
+              "tag": "UNK",
+              "node": {
+                "type": "RECTANGLE",
+                "x": 194.0,
+                "y": 302.0,
+                "width": 279.0,
+                "height": 39.0,
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 1.0,
+                      "g": 1.0,
+                      "b": 1.0,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "topLeftRadius": 10.0,
+                "topRightRadius": 10.0,
+                "bottomLeftRadius": 10.0,
+                "bottomRightRadius": 10.0,
+                "strokes": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.0,
+                      "g": 0.0,
+                      "b": 0.0,
+                      "a": 1.0
+                    }
+                  }
+                ]
+              },
+              "children": []
+            },
+            {
+              "tag": "UNK",
+              "node": {
+                "type": "GROUP",
+                "x": 206.0,
+                "y": 369.0,
+                "width": 262.0,
+                "height": 15.0,
+                "backgrounds": [],
+                "effects": []
+              },
+              "children": [
+                {
+                  "tag": "UNK",
+                  "node": {
+                    "type": "RECTANGLE",
+                    "x": 206.0,
+                    "y": 369.0,
+                    "width": 15.0,
+                    "height": 15.0,
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.8509804010391235,
+                          "g": 0.8509804010391235,
+                          "b": 0.8509804010391235,
+                          "a": 1.0
+                        }
+                      }
+                    ],
+                    "topLeftRadius": 0,
+                    "topRightRadius": 0,
+                    "bottomLeftRadius": 0,
+                    "bottomRightRadius": 0,
+                    "strokes": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.0,
+                          "g": 0.0,
+                          "b": 0.0,
+                          "a": 1.0
+                        }
+                      }
+                    ]
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "UNK",
+                  "node": {
+                    "type": "TEXT",
+                    "x": 230.0,
+                    "y": 369.0,
+                    "width": 238.0,
+                    "height": 15.0,
+                    "characters": "Agree to the Terms and Conditions",
+                    "fontSize": 12.0,
+                    "fontName": {
+                      "family": "Kode Mono",
+                      "style": "SemiBold"
+                    },
+                    "textAlignHorizontal": "LEFT"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "UNK",
+              "node": {
+                "type": "RECTANGLE",
+                "x": 221.0,
+                "y": 403.0,
+                "width": 226.0,
+                "height": 52.0,
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.6745098233222961,
+                      "g": 0.6941176652908325,
+                      "b": 0.8941176533699036,
+                      "a": 1.0
+                    }
+                  }
+                ],
+                "topLeftRadius": 15.0,
+                "topRightRadius": 15.0,
+                "bottomLeftRadius": 15.0,
+                "bottomRightRadius": 15.0,
+                "strokes": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.0,
+                      "g": 0.0,
+                      "b": 0.0,
+                      "a": 1.0
+                    }
+                  }
+                ]
+              },
+              "children": [
+                {
+                  "tag": "UNK",
+                  "node": {
+                    "type": "TEXT",
+                    "x": 283.0,
+                    "y": 413.0,
+                    "width": 101.0,
+                    "height": 31.0,
+                    "characters": "Sign In",
+                    "fontSize": 24.0,
+                    "fontName": {
+                      "family": "Kode Mono",
+                      "style": "SemiBold"
+                    },
+                    "textAlignHorizontal": "LEFT"
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
