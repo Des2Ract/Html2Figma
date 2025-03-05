@@ -12,3 +12,5 @@ data
 *.png
 *.pth
 *.h5
+/temp_json_data
+

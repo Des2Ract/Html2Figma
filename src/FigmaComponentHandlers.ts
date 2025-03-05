@@ -30,6 +30,7 @@ export function handleTextNode(element: Element): Partial<TextNode> {
       blendMode: 'NORMAL',
       visible: true,
       opacity: rgb.a || 1,
+      flexDirection: computedStyles.flexDirection || 'none',
     } as SolidPaint);
   }
 
@@ -124,6 +125,7 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
       type: 'IMAGE',
       scaleMode: computedStyles.objectFit === 'contain' ? 'FIT' : 'FILL',
       imageHash: null,
+      flexDirection: computedStyles.flexDirection || 'none',
     } as ImagePaint,
   ] as ImagePaint[];
 
@@ -170,6 +172,7 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
       type: 'IMAGE',
       scaleMode: computedStyles.objectFit === 'contain' ? 'FIT' : 'FILL',
       imageHash: null,
+      flexDirection: computedStyles.flexDirection || 'none',
     } as ImagePaint,
   ] as ImagePaint[];
 
@@ -272,6 +275,7 @@ export function handleLineNode(element: Element): Partial<LineNode> {
       blendMode: 'NORMAL',
       visible: true,
       opacity: rgb.a || 1,
+      flexDirection: computedStyles.flexDirection || 'none',
     } as SolidPaint);
   }
 
@@ -354,6 +358,7 @@ export function handleInputNode(element: Element): FigmaNode {
         blendMode: 'NORMAL',
         visible: true,
         opacity: rgb.a || 1,
+        flexDirection: computedStyles.flexDirection || 'none',
       } as SolidPaint);
     }
 
@@ -435,6 +440,7 @@ export function handleInputNode(element: Element): FigmaNode {
         blendMode: 'NORMAL',
         visible: true,
         opacity: rgb.a || 1,
+        flexDirection: computedStyles.flexDirection || 'none',
       } as SolidPaint);
     }
 
@@ -547,6 +553,7 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
       blendMode: 'NORMAL',
       visible: true,
       opacity: rgb.a || 1,
+      flexDirection: computedStyles.flexDirection || 'none',
     } as SolidPaint);
   }
 
@@ -596,7 +603,8 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
       blendMode: 'NORMAL',
       visible: true,
       opacity: rgb.a || 1,
-    });
+      flexDirection: computedStyles.flexDirection || 'none',
+    } as SolidPaint);
   }
 
   // Extract strokes (borders)
@@ -678,6 +686,7 @@ export function handleBodyNode(element: Element): Partial<FrameNode> {
       blendMode: 'NORMAL',
       visible: true,
       opacity: rgb.a || 1,
+      flexDirection: computedStyles.flexDirection || 'none',
     } as SolidPaint);
   }
 
@@ -724,6 +733,7 @@ export function handleSelectNode(element: Element): FigmaNode {
       blendMode: 'NORMAL',
       visible: true,
       opacity: rgb.a || 1,
+      flexDirection: computedStyles.flexDirection || 'none',
     } as SolidPaint);
   }
 
