@@ -6,8 +6,9 @@ import numpy as np
 import math
 import pandas as pd
 import os
-
+from sentence_transformers import SentenceTransformer
 body_width = None
+semantic_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def load_model_and_encoders():
     """Load trained model and preprocessing encoders."""
@@ -20,6 +21,7 @@ def load_model_and_encoders():
     # Load imputer and scaler
     imputer = joblib.load("imputer.pkl")
     scaler = joblib.load("scaler.pkl")
+    scaler_emb = joblib.load("scaler_emb.pkl")
     
     # Define model architecture (must match the training script)
     class ImprovedTagClassifier(nn.Module):
@@ -44,41 +46,63 @@ def load_model_and_encoders():
 
     # Load model
     model = ImprovedTagClassifier(
-        input_size=ohe.get_feature_names_out().shape[0] + imputer.statistics_.shape[0],
+        input_size=ohe.get_feature_names_out().shape[0] + imputer.statistics_.shape[0] + 384,
         output_size=len(label_encoder.classes_)
     )
     model.load_state_dict(torch.load("best_tag_classifier.pth", map_location=torch.device('cpu'),weights_only=True))
     model.eval()
     
-    return model, label_encoder, ohe, imputer, scaler
+    return model, label_encoder, ohe, imputer, scaler,scaler_emb
 
-def find_nearest_text_node(node, text_nodes):
+def extract_semantic_features(node, text_nodes_with_content):
     """
-    Calculate the distance to the nearest text node.
+    Calculate the semantic features from the nearest text node.
     
     Args:
     node (dict): Current node being processed
-    text_nodes (list): List of text nodes with their x, y coordinates
+    text_nodes_with_content (list): List of text nodes with their x, y coordinates and text content
     
     Returns:
-    float: Distance to the nearest text node, or a large value if no text nodes exist
+    dict: Semantic feature dictionary
     """
-    if not text_nodes:
-        return 9999999  # Large default value if no text nodes exist
+    if not text_nodes_with_content:
+        return {
+            "nearest_text_semantic_vector": [0] * 384,  # Default zero vector
+            "nearest_text_semantic_distance": 9999999
+        }
     
     # Get current node's center coordinates
     node_data = node.get("node", {})
     x = node_data.get("x", 0) + node_data.get("width", 0) / 2
     y = node_data.get("y", 0) + node_data.get("height", 0) / 2
     
-    # Calculate Euclidean distances to all text nodes
+    # Calculate Euclidean distances to all text nodes and find the nearest
     min_distance = float('inf')
-    for text_node in text_nodes:
+    nearest_text_node = None
+    
+    for text_node in text_nodes_with_content:
         tx, ty = text_node['x'], text_node['y']
         distance = math.sqrt((x - tx)**2 + (y - ty)**2)
-        min_distance = min(min_distance, distance)
+        
+        if distance < min_distance:
+            min_distance = distance
+            nearest_text_node = text_node
     
-    return min_distance
+    # If a nearest text node is found, get its semantic embedding
+    if nearest_text_node and nearest_text_node.get('text'):
+        # Generate semantic embedding for the text
+        semantic_vector = semantic_model.encode(nearest_text_node['text'])
+        
+        return {
+            "nearest_text_semantic_vector": semantic_vector.tolist(),  # Convert to list for JSON serialization
+            "nearest_text_semantic_distance": min_distance
+        }
+    
+    # Fallback if no meaningful text is found
+    return {
+        "nearest_text_semantic_vector": [0] * 384,  # Default zero vector
+        "nearest_text_semantic_distance": 9999999
+    }
 
 def color_difference(color1, color2):
     """
@@ -251,15 +275,20 @@ def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=
         if feature["border_radius"] >= 50:
             feature["border_radius"] = 0
             
+    # Get semantic features for the current node
+    semantic_features = extract_semantic_features(node, text_nodes)
+    
     # Calculate nearest text node distance
-    nearest_text_distance = find_nearest_text_node(node, text_nodes)
+    nearest_text_distance = semantic_features.get('nearest_text_semantic_distance',0)
+    nearest_text_semantic = semantic_features.get('nearest_text_semantic_vector',[0]*384)
     
     # Add nearest text node distance to the feature dictionary
-    feature["nearest_text_node_dist"] = (nearest_text_distance+0.01) / (math.sqrt((node_width+0.001)* (node_height+0.001)) if math.sqrt((node_width+0.001)*(node_height+0.001)) else 1)
+    feature["nearest_text_node_dist"] = (nearest_text_distance) / (math.sqrt((node_width)* (node_height)) if math.sqrt((node_width)*(node_height)) else 1)
+    feature["nearest_text_semantic"] = nearest_text_semantic
     
     return feature
 
-def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_color,text_nodes, model, label_encoder, ohe, imputer, scaler):
+def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_color,text_nodes, model, label_encoder, ohe, imputer, scaler, scaler_emb):
     """
     Predict tag for a node using the trained model.
     """
@@ -328,7 +357,7 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     # Process children first - left to right
     for i, child in enumerate(children):
         # Predict child tag
-        predict_tag(child,len(children)-1,prev_sib_tag,node_height,bg_color if has_background_color else parent_bg_color,text_nodes, model, label_encoder, ohe, imputer, scaler)
+        predict_tag(child,len(children)-1,prev_sib_tag,node_height,bg_color if has_background_color else parent_bg_color,text_nodes, model, label_encoder, ohe, imputer, scaler, scaler_emb)
         
         # Update previous sibling tag for next iteration
         prev_sib_tag = child.get("tag","UNK")
@@ -361,7 +390,11 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     
     # Prepare features for model
     categorical_cols = ['type','prev_sibling_html_tag','child_1_html_tag','child_2_html_tag']
-    continuous_cols = [col for col in feature.keys() if col not in categorical_cols]
+    continuous_cols = [col for col in feature.keys() if col not in categorical_cols and col != 'nearest_text_semantic']
+    
+    # Handle nearest_text_semantic column safely
+    nearest_text_semantic = feature.get('nearest_text_semantic_vector',[0]*384)
+    nearest_text_semantic_expanded = np.array(nearest_text_semantic, dtype=float).reshape(1, -1)
     
     # Prepare categorical data
     cat_data = [[feature[col] for col in categorical_cols]]
@@ -373,12 +406,10 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     X_df = pd.DataFrame(cont_data, columns=continuous_cols)
     cont_imputed = imputer.transform(X_df)
     cont_scaled = scaler.transform(cont_imputed)
-    
-    print(X_cat_df,X_df)
-    
+    nearest_text_semantic_scaled = scaler_emb.transform(nearest_text_semantic_expanded)
     
     # Combine features
-    X_processed = np.concatenate([cat_encoded, cont_scaled], axis=1)
+    X_processed = np.concatenate([cat_encoded, cont_scaled, nearest_text_semantic_scaled], axis=1)
     
     # Convert to tensor and predict
     with torch.no_grad():
@@ -405,7 +436,7 @@ def process_figma_json(input_file, output_file):
     Process a Figma JSON file, predicting tags for UNK nodes.
     """
     # Load model and preprocessing tools
-    model, label_encoder, ohe, imputer, scaler = load_model_and_encoders()
+    model, label_encoder, ohe, imputer, scaler, scaler_emb = load_model_and_encoders()
     
     # Load input JSON
     with open(input_file, 'r', encoding='utf-8') as f:
@@ -415,7 +446,7 @@ def process_figma_json(input_file, output_file):
         os.remove('features_with_prediction.csv')
         
     # Predict tags recursively
-    predict_tag(data,0,None,None,None,None, model, label_encoder, ohe, imputer, scaler)
+    predict_tag(data,0,None,None,None,None, model, label_encoder, ohe, imputer, scaler,scaler_emb)
     
     # Save processed JSON
     with open(output_file, 'w', encoding='utf-8') as f:

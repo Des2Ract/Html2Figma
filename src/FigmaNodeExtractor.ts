@@ -11,7 +11,7 @@ import {
   handleVideoNode,
   handleBodyNode,
   handleInputNode,
-  handleSelectNode
+  handleSelectNode,
 } from './FigmaComponentHandlers.js';
 
 export function extractFigmaNode(element: Element): FigmaNode | null {
@@ -98,8 +98,15 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   if (element instanceof HTMLHRElement) return createFigmaNode(element.tagName, handleLineNode(element));
 
   // TODO: BUTTON/FORM NODE
-  if (element instanceof HTMLButtonElement || element instanceof HTMLFormElement)
-    return createFigmaNode(element.tagName, handleButtonFormNode(element));
+  if (
+    element instanceof HTMLButtonElement ||
+    element instanceof HTMLFormElement ||
+    (element instanceof HTMLInputElement && element.type === 'submit')
+  )
+    return createFigmaNode(
+      element.tagName.toUpperCase() == 'INPUT' ? 'button' : element.tagName,
+      handleButtonFormNode(element),
+    );
 
   // TODO: A/LINK NODE
   if (element instanceof HTMLAnchorElement) return createFigmaNode(element.tagName, handleLinkNode(element));
