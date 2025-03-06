@@ -164,7 +164,7 @@
               "children": []
             },
             {
-              "tag": "DIV",
+              "tag": "INPUT",
               "node": {
                 "type": "RECTANGLE",
                 "x": 194.0,
@@ -254,7 +254,7 @@
               "children": []
             },
             {
-              "tag": "DIV",
+              "tag": "INPUT",
               "node": {
                 "type": "RECTANGLE",
                 "x": 194.0,
@@ -307,7 +307,7 @@
           },
           "children": [
             {
-              "tag": "DIV",
+              "tag": "INPUT",
               "node": {
                 "type": "RECTANGLE",
                 "x": 206.0,
@@ -378,7 +378,7 @@
           },
           "children": [
             {
-              "tag": "BUTTON",
+              "tag": "INPUT",
               "node": {
                 "type": "RECTANGLE",
                 "x": 221.0,
