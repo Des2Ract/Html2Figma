@@ -254,7 +254,7 @@
               "children": []
             },
             {
-              "tag": "INPUT",
+              "tag": "DIV",
               "node": {
                 "type": "RECTANGLE",
                 "x": 194.0,
@@ -307,7 +307,7 @@
           },
           "children": [
             {
-              "tag": "INPUT",
+              "tag": "BUTTON",
               "node": {
                 "type": "RECTANGLE",
                 "x": 206.0,

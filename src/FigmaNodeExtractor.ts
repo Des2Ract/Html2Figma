@@ -101,7 +101,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   if (
     element instanceof HTMLButtonElement ||
     element instanceof HTMLFormElement ||
-    (element instanceof HTMLInputElement && element.type === 'submit')
+    (element instanceof HTMLInputElement && (element.type === 'submit' || element.type === 'button'))
   )
     return createFigmaNode(
       element.tagName.toUpperCase() == 'INPUT' ? 'button' : element.tagName,
