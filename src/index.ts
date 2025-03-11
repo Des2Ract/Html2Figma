@@ -14,7 +14,7 @@ async function main() {
     const dataFolder = 'json_data';
     await fs.mkdir(dataFolder, { recursive: true });
 
-    for (let i = 0; i < urls.length; i++) {
+    for (let i = 260; i < 600; i++) {
       const url = urls[i];
       console.log(`Processing: ${url}`);
 

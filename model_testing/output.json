@@ -89,7 +89,7 @@
       "children": []
     },
     {
-      "tag": "DIV",
+      "tag": "INPUT",
       "node": {
         "type": "FRAME",
         "x": 129.0,
