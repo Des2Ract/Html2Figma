@@ -89,7 +89,7 @@
       "children": []
     },
     {
-      "tag": "INPUT",
+      "tag": "DIV",
       "node": {
         "type": "FRAME",
         "x": 129.0,
@@ -215,6 +215,18 @@
                       "family": "Kode Mono",
                       "style": "SemiBold"
                     },
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.5487722754478455,
+                          "g": 0.5343995690345764,
+                          "b": 0.5343995690345764,
+                          "a": 1.0
+                        }
+                      }
+                    ],
                     "textAlignHorizontal": "LEFT"
                   },
                   "children": []
@@ -254,7 +266,7 @@
               "children": []
             },
             {
-              "tag": "DIV",
+              "tag": "INPUT",
               "node": {
                 "type": "RECTANGLE",
                 "x": 194.0,
@@ -307,7 +319,7 @@
           },
           "children": [
             {
-              "tag": "BUTTON",
+              "tag": "CHECKBOX",
               "node": {
                 "type": "RECTANGLE",
                 "x": 206.0,
@@ -378,7 +390,7 @@
           },
           "children": [
             {
-              "tag": "INPUT",
+              "tag": "BUTTON",
               "node": {
                 "type": "RECTANGLE",
                 "x": 221.0,
@@ -429,6 +441,18 @@
                       "family": "Kode Mono",
                       "style": "SemiBold"
                     },
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.0,
+                          "g": 0.0,
+                          "b": 0.0,
+                          "a": 1.0
+                        }
+                      }
+                    ],
                     "textAlignHorizontal": "LEFT"
                   },
                   "children": []

@@ -215,6 +215,18 @@
                       "family": "Kode Mono",
                       "style": "SemiBold"
                     },
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.54877227544784546,
+                          "g": 0.53439956903457642,
+                          "b": 0.53439956903457642,
+                          "a": 1.0
+                        }
+                      }
+                    ],
                     "textAlignHorizontal": "LEFT"
                   },
                   "children": []
@@ -429,6 +441,18 @@
                       "family": "Kode Mono",
                       "style": "SemiBold"
                     },
+                    "fills": [
+                      {
+                        "blendMode": "NORMAL",
+                        "type": "SOLID",
+                        "color": {
+                          "r": 0.0,
+                          "g": 0.0,
+                          "b": 0.0,
+                          "a": 1.0
+                        }
+                      }
+                    ],
                     "textAlignHorizontal": "LEFT"
                   },
                   "children": []
