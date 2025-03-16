@@ -7,6 +7,10 @@ import math
 import pandas as pd
 import os
 import spacy
+import random
+import shutil
+from lxml import etree
+import webbrowser
 
 body_width = None
 num_nodes = None
@@ -442,11 +446,23 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
         node["tag"] = "HR"
     if (fills := node_data.get("fills", [])) and any(fill.get("type") == "IMAGE" for fill in fills): 
         node["tag"] = "IMG"
-    if node.get("node", {}).get("width", 0) == node.get("node", {}).get("width", 0) and node.get("node", {}).get("width", 0) < 50:
-        if node.get("node", {}).get("type", "RECTANGLE") == "RECTANGLE":
-            node["tag"] = "CHECKBOX"
-        elif node.get("node", {}).get("type", "ELLIPSE") == "ELLIPSE":
-            node["tag"] = "RADIO"
+    if node.get("node", {}).get("width", 0) == node.get("node", {}).get("height", 0) and node.get("node", {}).get("width", 0) < 50:
+        strokes = node_data.get("strokes", [])
+        fills = node_data.get("fills", [])
+
+        has_solid_fill = any(fill.get("type") == "SOLID" for fill in fills)
+
+        # Extract stroke and fill colors
+        stroke_color = strokes[0].get("color") if strokes else None
+        fill_color = fills[0].get("color") if fills else None
+
+        if not strokes or (stroke_color == fill_color):
+            node["tag"] = "LI"
+        elif has_solid_fill:
+            if node.get("node", {}).get("type", "RECTANGLE") == "RECTANGLE":
+                node["tag"] = "CHECKBOX"
+            elif node.get("node", {}).get("type", "ELLIPSE") == "ELLIPSE":
+                node["tag"] = "RADIO"
         
     # If tag is already defined and not 'UNK', return it
     if node.get("tag", "").upper() != "UNK":
@@ -498,9 +514,228 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     # Update the node's tag
     node["tag"] = predicted_tag
 
-def process_figma_json(input_file, output_file):
+def post_process_tags(nodes):
+    global body_width
+    
+    if not isinstance(nodes, dict):
+        raise ValueError("Expected a dict with 'children' key but got a different structure")
+    
+    # Process the children of the root node
+    process_nodes(nodes)
+    
+    return nodes
+
+def process_nodes(node):
+    if not node or "children" not in node:
+        return
+    
+    # Process all children recursively
+    for child in node["children"]:
+        process_nodes(child)
+    
+    # Convert P followed by INPUT into LABEL
+    children = node.get("children", [])
+    for i in range(len(children) - 1):
+        if (children[i].get("tag") == "P" and 
+            children[i+1].get("tag") == "INPUT"):
+            children[i]["tag"] = "LABEL"
+    
+    # Identify and set NAVBAR (a full-width div at the top)
+    for child in children:
+        if (child.get("tag") == "DIV" and 
+            child.get("node", {}).get("x") == 0.0 and 
+            child.get("node", {}).get("y") == 0.0 and 
+            child.get("node", {}).get("width", 0) >= 600): # Assuming body_width is around 668
+            child["tag"] = "NAVBAR"
+    
+    # Convert Group DIV with at least 2 LI elements into UL
+    for child in children:
+        if (child.get("tag") == "DIV" and 
+            count_list_items(child) >= 2):  # Require at least 2 LI elements
+            child["tag"] = "UL"
+    
+    # Convert Group DIV containing inputs/buttons into FORM
+    for child in children:
+        if child.get("tag") == "DIV":
+            form_elements = count_form_elements(child)
+            if form_elements >= 2:
+                child["tag"] = "FORM"
+
+def count_form_elements(node):
+    """Count INPUT and BUTTON elements in direct and nested children."""
+    count = 0
+    if not node or "children" not in node:
+        return count
+    
+    # Check direct children
+    for child in node.get("children", []):
+        if child.get("tag") == "FORM":
+            return 0  # Skip if any direct child is already a FORM
+        if child.get("tag") in ["INPUT", "BUTTON"]:
+            count += 1
+    
+    # Check nested children
+    for child in node.get("children", []):
+        count += count_form_elements(child)
+    
+    return count
+
+def count_list_items(node):
+    """Count LI elements in direct and first-level indirect children, avoiding deeper UL nesting."""
+    if not node or "children" not in node:
+        return 0
+
+    count = 0
+    for child in node.get("children", []):
+        if child.get("tag") == "LI":
+            count += 1
+        elif child.get("tag") != "UL":  # Stop at existing ULs
+            count += sum(1 for grandchild in child.get("children", []) if grandchild.get("tag") == "LI")
+
+    return count
+
+def generate_random_color():
+    """Generate a random color with some transparency"""
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    return f"rgba({r},{g},{b},0.3)"
+
+def draw_tags_on_svg_file(data, svg_input_file, svg_output_file=None):
+    """
+    Draw bounding boxes and tags on a copy of an existing SVG file.
+
+    Args:
+        data (dict): The data containing node information.
+        svg_input_file (str): Path to the original SVG file.
+        svg_output_file (str, optional): Path to save the modified SVG 
+                                          (if None, will use input_file + "_tagged.svg").
+    """
+    
+    # Create output filename if not provided
+    if svg_output_file is None:
+        base, ext = os.path.splitext(svg_input_file)
+        svg_output_file = f"{base}_tagged{ext}"
+    
+    # Make a copy of the original SVG file
+    shutil.copy2(svg_input_file, svg_output_file)
+    
+    # Parse the original SVG to modify it directly
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(svg_output_file, parser)
+    root = tree.getroot()
+    
+    # Get SVG dimensions
+    frame_width = root.get('width', str(data.get("node", {}).get("width", "1000"))).replace('px', '')
+    frame_height = root.get('height', str(data.get("node", {}).get("height", "1000"))).replace('px', '')
+
+    # Add style element
+    style_element = etree.SubElement(root, 'style')
+    style_element.text = """
+        .tag-box { stroke: #000000; stroke-width: 1; fill-opacity: 0.3; }
+        .tag-text { font-family: Arial; font-size: 10px; }
+        .tag-label { fill: white; stroke: #000000; stroke-width: 0.5; rx: 3; ry: 3; }
+    """
+    
+    # Create a group element for our tags
+    tag_group = etree.SubElement(root, 'g', id="tag-annotations")
+    
+    # Track assigned colors by tag type
+    tag_colors = {}
+
+    def draw_element(element, parent_element):
+        """Recursively draw bounding boxes and labels for elements."""
+        if not element or "node" not in element:
+            return
+            
+        tag = element.get("tag", "UNKNOWN")
+        
+        # Assign consistent colors to tag types
+        if tag not in tag_colors:
+            tag_colors[tag] = generate_random_color()
+        color = tag_colors[tag]
+        
+        # Get node position and dimensions
+        node = element["node"]
+        x, y = node.get("x", 0), node.get("y", 0)
+        width, height = node.get("width", 50), node.get("height", 50)
+        
+        # Create a group for this element
+        group = etree.SubElement(parent_element, 'g')
+
+        # Draw rectangle for bounding box
+        rect = etree.SubElement(group, 'rect', {
+            "x": str(x),
+            "y": str(y),
+            "width": str(width),
+            "height": str(height),
+            "class": "tag-box",
+            "fill": color,
+            "stroke": "black",
+            "stroke-width": "1"
+        })
+
+        # Label Background
+        label_width = max(80, len(tag) * 7)
+        label_height = 40
+        
+        label_bg = etree.SubElement(group, 'rect', {
+            "x": str(x),
+            "y": str(y),
+            "width": str(label_width),
+            "height": str(label_height),
+            "rx": "3",
+            "ry": "3",
+            "fill": "white",
+            "fill-opacity": "0.7",
+            "stroke": "black",
+            "stroke-width": "0.5"
+        })
+        
+        # Add text labels
+        etree.SubElement(group, 'text', {
+            "x": str(x + 3),
+            "y": str(y + 12),
+            "class": "tag-text",
+            "fill": "black"
+        }).text = tag
+        
+        etree.SubElement(group, 'text', {
+            "x": str(x + 3),
+            "y": str(y + 24),
+            "class": "tag-text",
+            "fill": "black"
+        }).text = f"x:{x:.1f}, y:{y:.1f}"
+        
+        etree.SubElement(group, 'text', {
+            "x": str(x + 3),
+            "y": str(y + 36),
+            "class": "tag-text",
+            "fill": "black"
+        }).text = f"w:{width:.1f}, h:{height:.1f}"
+        
+        # Process children recursively
+        for child in element.get("children", []):
+            draw_element(child, group)
+
+    # Start drawing from the root
+    draw_element(data, tag_group)
+    
+    # Save the modified SVG file
+    tree.write(svg_output_file, pretty_print=True, encoding='utf-8', xml_declaration=True)
+    print(f"SVG visualization created at {svg_output_file}")
+    
+    # Open the SVG file in the default viewer
+    webbrowser.open(f"file://{os.path.abspath(svg_output_file)}")
+
+def process_figma_json(input_file, output_file, svg_file=None):
     """
     Process a Figma JSON file, predicting tags for UNK nodes.
+    
+    Args:
+        input_file: Path to input JSON file
+        output_file: Path to output JSON file
+        svg_file: Path to the original SVG file (optional)
     """
     # Load model and preprocessing tools
     model, label_encoder, ohe, imputer, scaler = load_model_and_encoders()
@@ -513,14 +748,25 @@ def process_figma_json(input_file, output_file):
         os.remove('features_with_prediction.csv')
         
     # Predict tags recursively
-    predict_tag(data,0,None,None,None,None, model, label_encoder, ohe, imputer, scaler)
+    predict_tag(data, 0, None, None, None, None, model, label_encoder, ohe, imputer, scaler)
+    
+    # Post processing
+    data = post_process_tags(data)
+    
+    # Check if SVG file is provided
+    if svg_file:
+        # Generate the output SVG file path
+        svg_output = os.path.splitext(svg_file)[0] + "_tagged.svg"
+        
+        # Draw tags on a copy of the SVG
+        draw_tags_on_svg_file(data, svg_file, svg_output)
     
     # Save processed JSON
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
     
     print(f"Processed {input_file}. Output saved to {output_file}")
-
+    
 # Example usage
 if __name__ == "__main__":
-    process_figma_json("input.json", "output.json")
+    process_figma_json("input.json", "output.json", "input.svg")

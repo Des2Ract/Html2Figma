@@ -60,11 +60,170 @@
       "children": []
     },
     {
+      "tag": "NAVBAR",
+      "node": {
+        "type": "RECTANGLE",
+        "x": 0.0,
+        "y": 0.0,
+        "width": 668.0,
+        "height": 49.0,
+        "fills": [
+          {
+            "blendMode": "NORMAL",
+            "type": "SOLID",
+            "color": {
+              "r": 0.0,
+              "g": 0.0,
+              "b": 0.0,
+              "a": 1.0
+            }
+          }
+        ],
+        "topLeftRadius": 0,
+        "topRightRadius": 0,
+        "bottomLeftRadius": 0,
+        "bottomRightRadius": 0,
+        "strokes": []
+      },
+      "children": [
+        {
+          "tag": "P",
+          "node": {
+            "type": "TEXT",
+            "x": 28.0,
+            "y": 10.0,
+            "width": 100.0,
+            "height": 29.0,
+            "characters": "DES2RACT",
+            "fontSize": 20.0,
+            "fontName": {
+              "family": "Permanent Marker",
+              "style": "Regular"
+            },
+            "textAlignHorizontal": "LEFT"
+          },
+          "children": []
+        },
+        {
+          "tag": "P",
+          "node": {
+            "type": "TEXT",
+            "x": 221.0,
+            "y": 13.0,
+            "width": 43.0,
+            "height": 23.0,
+            "characters": "Home",
+            "fontSize": 16.0,
+            "fontName": {
+              "family": "Permanent Marker",
+              "style": "Regular"
+            },
+            "textAlignHorizontal": "LEFT"
+          },
+          "children": []
+        },
+        {
+          "tag": "P",
+          "node": {
+            "type": "TEXT",
+            "x": 297.0,
+            "y": 13.0,
+            "width": 63.0,
+            "height": 23.0,
+            "characters": "Services",
+            "fontSize": 16.0,
+            "fontName": {
+              "family": "Permanent Marker",
+              "style": "Regular"
+            },
+            "textAlignHorizontal": "LEFT"
+          },
+          "children": []
+        },
+        {
+          "tag": "P",
+          "node": {
+            "type": "TEXT",
+            "x": 393.0,
+            "y": 13.0,
+            "width": 86.0,
+            "height": 23.0,
+            "characters": "Contact Us",
+            "fontSize": 16.0,
+            "fontName": {
+              "family": "Permanent Marker",
+              "style": "Regular"
+            },
+            "textAlignHorizontal": "LEFT"
+          },
+          "children": []
+        },
+        {
+          "tag": "BUTTON",
+          "node": {
+            "type": "RECTANGLE",
+            "x": 545.0,
+            "y": 10.0,
+            "width": 110.0,
+            "height": 29.0,
+            "fills": [
+              {
+                "blendMode": "NORMAL",
+                "type": "SOLID",
+                "color": {
+                  "r": 1.0,
+                  "g": 1.0,
+                  "b": 1.0,
+                  "a": 1.0
+                }
+              }
+            ],
+            "topLeftRadius": 15.0,
+            "topRightRadius": 15.0,
+            "bottomLeftRadius": 15.0,
+            "bottomRightRadius": 15.0,
+            "strokes": [
+              {
+                "blendMode": "NORMAL",
+                "type": "SOLID",
+                "color": {
+                  "r": 0.0,
+                  "g": 0.0,
+                  "b": 0.0,
+                  "a": 1.0
+                }
+              }
+            ]
+          },
+          "children": [
+            {
+              "tag": "P",
+              "node": {
+                "type": "TEXT",
+                "x": 566.0,
+                "y": 16.0,
+                "width": 68.0191650390625,
+                "height": 35.432308197021484,
+                "characters": "Sign In",
+                "fontSize": 15.0,
+                "fontName": {
+                  "family": "Kode Mono",
+                  "style": "SemiBold"
+                },
+                "textAlignHorizontal": "LEFT"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
       "tag": "HR",
       "node": {
         "type": "LINE",
-        "x": 35.0,
-        "y": 62.0,
+        "x": 28.0,
+        "y": 98.0,
         "width": 176.0,
         "height": 0.0
       },
@@ -74,8 +233,8 @@
       "tag": "P",
       "node": {
         "type": "TEXT",
-        "x": 57.0,
-        "y": 36.0,
+        "x": 50.0,
+        "y": 72.0,
         "width": 127.0,
         "height": 29.0,
         "characters": "AOZ Website",
@@ -89,11 +248,11 @@
       "children": []
     },
     {
-      "tag": "DIV",
+      "tag": "FORM",
       "node": {
         "type": "FRAME",
-        "x": 129.0,
-        "y": 92.0,
+        "x": 128.0,
+        "y": 110.0,
         "width": 410.0,
         "height": 396.0,
         "fills": [
@@ -119,8 +278,8 @@
           "tag": "P",
           "node": {
             "type": "TEXT",
-            "x": 266.0,
-            "y": 118.0,
+            "x": 265.0,
+            "y": 136.0,
             "width": 135.0,
             "height": 41.0,
             "characters": "Sign in",
@@ -137,8 +296,8 @@
           "tag": "DIV",
           "node": {
             "type": "GROUP",
-            "x": 194.0,
-            "y": 180.0,
+            "x": 193.0,
+            "y": 299.0,
             "width": 279.0,
             "height": 60.0,
             "backgrounds": [],
@@ -146,11 +305,11 @@
           },
           "children": [
             {
-              "tag": "P",
+              "tag": "LABEL",
               "node": {
                 "type": "TEXT",
-                "x": 199.0,
-                "y": 180.0,
+                "x": 198.0,
+                "y": 198.0,
                 "width": 68.0,
                 "height": 18.0,
                 "characters": "UserName",
@@ -167,8 +326,8 @@
               "tag": "INPUT",
               "node": {
                 "type": "RECTANGLE",
-                "x": 194.0,
-                "y": 201.0,
+                "x": 193.0,
+                "y": 219.0,
                 "width": 279.0,
                 "height": 39.0,
                 "fills": [
@@ -205,8 +364,8 @@
                   "tag": "P",
                   "node": {
                     "type": "TEXT",
-                    "x": 204.0,
-                    "y": 212.0,
+                    "x": 203.0,
+                    "y": 230.0,
                     "width": 93.0,
                     "height": 18.0,
                     "characters": "eg. AOZ2025",
@@ -239,8 +398,8 @@
           "tag": "DIV",
           "node": {
             "type": "GROUP",
-            "x": 194.0,
-            "y": 281.0,
+            "x": 193.0,
+            "y": 299.0,
             "width": 279.0,
             "height": 60.0,
             "backgrounds": [],
@@ -248,11 +407,11 @@
           },
           "children": [
             {
-              "tag": "P",
+              "tag": "LABEL",
               "node": {
                 "type": "TEXT",
-                "x": 199.0,
-                "y": 281.0,
+                "x": 198.0,
+                "y": 299.0,
                 "width": 68.0,
                 "height": 18.0,
                 "characters": "Password",
@@ -269,8 +428,8 @@
               "tag": "INPUT",
               "node": {
                 "type": "RECTANGLE",
-                "x": 194.0,
-                "y": 302.0,
+                "x": 193.0,
+                "y": 320.0,
                 "width": 279.0,
                 "height": 39.0,
                 "fills": [
@@ -310,8 +469,8 @@
           "tag": "DIV",
           "node": {
             "type": "GROUP",
-            "x": 206.0,
-            "y": 369.0,
+            "x": 205.0,
+            "y": 387.0,
             "width": 262.0,
             "height": 15.0,
             "backgrounds": [],
@@ -322,8 +481,8 @@
               "tag": "CHECKBOX",
               "node": {
                 "type": "RECTANGLE",
-                "x": 206.0,
-                "y": 369.0,
+                "x": 205.0,
+                "y": 387.0,
                 "width": 15.0,
                 "height": 15.0,
                 "fills": [
@@ -361,8 +520,8 @@
               "tag": "P",
               "node": {
                 "type": "TEXT",
-                "x": 230.0,
-                "y": 369.0,
+                "x": 229.0,
+                "y": 387.0,
                 "width": 238.0,
                 "height": 15.0,
                 "characters": "Agree to the Terms and Conditions",
@@ -378,42 +537,110 @@
           ]
         },
         {
-          "tag": "DIV",
+          "tag": "BUTTON",
           "node": {
-            "type": "GROUP",
-            "x": 221.0,
-            "y": 403.0,
+            "type": "RECTANGLE",
+            "x": 220.0,
+            "y": 421.0,
             "width": 226.0,
             "height": 52.0,
-            "backgrounds": [],
-            "effects": []
+            "fills": [
+              {
+                "blendMode": "NORMAL",
+                "type": "SOLID",
+                "color": {
+                  "r": 0.6745098233222961,
+                  "g": 0.6941176652908325,
+                  "b": 0.8941176533699036,
+                  "a": 1.0
+                }
+              }
+            ],
+            "topLeftRadius": 15.0,
+            "topRightRadius": 15.0,
+            "bottomLeftRadius": 15.0,
+            "bottomRightRadius": 15.0,
+            "strokes": [
+              {
+                "blendMode": "NORMAL",
+                "type": "SOLID",
+                "color": {
+                  "r": 0.0,
+                  "g": 0.0,
+                  "b": 0.0,
+                  "a": 1.0
+                }
+              }
+            ]
           },
           "children": [
             {
-              "tag": "BUTTON",
+              "tag": "P",
               "node": {
-                "type": "RECTANGLE",
-                "x": 221.0,
-                "y": 403.0,
-                "width": 226.0,
-                "height": 52.0,
+                "type": "TEXT",
+                "x": 282.0,
+                "y": 431.0,
+                "width": 101.0,
+                "height": 31.0,
+                "characters": "Sign In",
+                "fontSize": 24.0,
+                "fontName": {
+                  "family": "Kode Mono",
+                  "style": "SemiBold"
+                },
                 "fills": [
                   {
                     "blendMode": "NORMAL",
                     "type": "SOLID",
                     "color": {
-                      "r": 0.6745098233222961,
-                      "g": 0.6941176652908325,
-                      "b": 0.8941176533699036,
+                      "r": 0.0,
+                      "g": 0.0,
+                      "b": 0.0,
                       "a": 1.0
                     }
                   }
                 ],
-                "topLeftRadius": 15.0,
-                "topRightRadius": 15.0,
-                "bottomLeftRadius": 15.0,
-                "bottomRightRadius": 15.0,
-                "strokes": [
+                "textAlignHorizontal": "LEFT"
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "UL",
+      "node": {
+        "type": "GROUP",
+        "x": 197.0,
+        "y": 526.0,
+        "width": 50.0,
+        "height": 24.0,
+        "backgrounds": [],
+        "effects": []
+      },
+      "children": [
+        {
+          "tag": "DIV",
+          "node": {
+            "type": "GROUP",
+            "x": 197.0,
+            "y": 526.0,
+            "width": 50.0,
+            "height": 10.0,
+            "backgrounds": [],
+            "effects": []
+          },
+          "children": [
+            {
+              "tag": "LI",
+              "node": {
+                "type": "ELLIPSE",
+                "x": 197.0,
+                "y": 529.0,
+                "width": 5.0,
+                "height": 5.0,
+                "fills": [
                   {
                     "blendMode": "NORMAL",
                     "type": "SOLID",
@@ -426,38 +653,80 @@
                   }
                 ]
               },
-              "children": [
-                {
-                  "tag": "P",
-                  "node": {
-                    "type": "TEXT",
-                    "x": 283.0,
-                    "y": 413.0,
-                    "width": 101.0,
-                    "height": 31.0,
-                    "characters": "Sign In",
-                    "fontSize": 24.0,
-                    "fontName": {
-                      "family": "Kode Mono",
-                      "style": "SemiBold"
-                    },
-                    "fills": [
-                      {
-                        "blendMode": "NORMAL",
-                        "type": "SOLID",
-                        "color": {
-                          "r": 0.0,
-                          "g": 0.0,
-                          "b": 0.0,
-                          "a": 1.0
-                        }
-                      }
-                    ],
-                    "textAlignHorizontal": "LEFT"
-                  },
-                  "children": []
-                }
-              ]
+              "children": []
+            },
+            {
+              "tag": "P",
+              "node": {
+                "type": "TEXT",
+                "x": 208.0,
+                "y": 526.0,
+                "width": 39.0,
+                "height": 10.0,
+                "characters": "Option 1",
+                "fontSize": 8.0,
+                "fontName": {
+                  "family": "Kode Mono",
+                  "style": "SemiBold"
+                },
+                "textAlignHorizontal": "LEFT"
+              },
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "DIV",
+          "node": {
+            "type": "GROUP",
+            "x": 197.0,
+            "y": 540.0,
+            "width": 50.0,
+            "height": 10.0,
+            "backgrounds": [],
+            "effects": []
+          },
+          "children": [
+            {
+              "tag": "LI",
+              "node": {
+                "type": "ELLIPSE",
+                "x": 197.0,
+                "y": 543.0,
+                "width": 5.0,
+                "height": 5.0,
+                "fills": [
+                  {
+                    "blendMode": "NORMAL",
+                    "type": "SOLID",
+                    "color": {
+                      "r": 0.0,
+                      "g": 0.0,
+                      "b": 0.0,
+                      "a": 1.0
+                    }
+                  }
+                ]
+              },
+              "children": []
+            },
+            {
+              "tag": "P",
+              "node": {
+                "type": "TEXT",
+                "x": 208.0,
+                "y": 540.0,
+                "width": 39.0,
+                "height": 10.0,
+                "characters": "Option 2",
+                "fontSize": 8.0,
+                "fontName": {
+                  "family": "Kode Mono",
+                  "style": "SemiBold"
+                },
+                "textAlignHorizontal": "LEFT"
+              },
+              "children": []
             }
           ]
         }
