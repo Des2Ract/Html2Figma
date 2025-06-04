@@ -171,6 +171,8 @@ def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=
                 if is_verb == 0:
                     is_verb = verb_ratio(children[0].get("node", {}).get("characters", ""))
                 placeholder_fills = children[0].get("node", {}).get("fills", [])
+                # remove transparent fills
+                fills = [fill for fill in placeholder_fills if fill and (color := fill.get("color")) and color.get("a", 1) > 0]
                 for fill in placeholder_fills:
                     if fill.get("type") == "SOLID" and "color" in fill:
                         r, g, b = (
@@ -292,6 +294,9 @@ def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=
     
     # Extract fills (background and text color)
     fills = node_data.get("fills", [])
+    # remove transparent fills
+    fills = [fill for fill in fills if fill and (color := fill.get("color")) and color.get("a", 1) > 0]
+    
     for fill in fills:
         if fill.get("type") == "SOLID" and "color" in fill:
             r, g, b = (
@@ -390,6 +395,8 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     
     # Extract bgcolor
     fills = node_data.get("fills", [])
+    # remove transparent fills
+    fills = [fill for fill in fills if fill and (color := fill.get("color")) and color.get("a", 1) > 0]
     has_background_color = False
     bg_color = None
     for fill in fills:
@@ -418,7 +425,7 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     # Process children first - left to right
     for i, child in enumerate(children):
         # Predict child tag
-        predict_tag(child,len(children)-1,prev_sib_tag,node_height,bg_color if has_background_color else parent_bg_color,text_nodes, model, label_encoder, ohe, imputer, scaler)
+        predict_tag(child,len(children)-1,prev_sib_tag,node_height,bg_color if has_background_color and figma_type != "GROUP" else parent_bg_color,text_nodes, model, label_encoder, ohe, imputer, scaler)
         
         # Update previous sibling tag for next iteration
         prev_sib_tag = child.get("tag","UNK")
@@ -448,7 +455,11 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
         node["tag"] = "IMG"
     if node.get("node", {}).get("width", 0) == node.get("node", {}).get("height", 0) and node.get("node", {}).get("width", 0) < 50:
         strokes = node_data.get("strokes", [])
+        # remove transparent strokes
+        strokes = [stroke for stroke in strokes if stroke and (color := stroke.get("color")) and color.get("a", 1) > 0]
         fills = node_data.get("fills", [])
+        # remove transparent fills
+        fills = [fill for fill in fills if fill and (color := fill.get("color")) and color.get("a", 1) > 0]
 
         has_solid_fill = any(fill.get("type") == "SOLID" for fill in fills)
 
@@ -463,6 +474,9 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
                 node["tag"] = "CHECKBOX"
             elif node.get("node", {}).get("type", "ELLIPSE") == "ELLIPSE":
                 node["tag"] = "RADIO"
+    
+    if node.get("name","").startswith("ICON"):
+        node["tag"] = "SVG"
         
     # If tag is already defined and not 'UNK', return it
     if node.get("tag", "").upper() != "UNK":
@@ -545,7 +559,8 @@ def process_nodes(node):
         if (child.get("tag") == "DIV" and 
             child.get("node", {}).get("x") == 0.0 and 
             child.get("node", {}).get("y") == 0.0 and 
-            child.get("node", {}).get("width", 0) >= 600): # Assuming body_width is around 668
+            abs(child.get("node", {}).get("width", 0) - body_width) < 5
+            and child.get("node", {}).get("height", 0) < body_width / 10): 
             child["tag"] = "NAVBAR"
     
     # Convert Group DIV with at least 2 LI elements into UL
@@ -716,7 +731,8 @@ def draw_tags_on_svg_file(data, svg_input_file, svg_output_file=None):
         
         # Process children recursively
         for child in element.get("children", []):
-            draw_element(child, group)
+            if child.get("tag") != "P":
+                draw_element(child, group)
 
     # Start drawing from the root
     draw_element(data, tag_group)

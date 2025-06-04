@@ -13,4 +13,4 @@ data
 *.pth
 *.h5
 /temp_json_data
-
+*.json
