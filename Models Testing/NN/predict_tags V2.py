@@ -12,6 +12,14 @@ import shutil
 from lxml import etree
 import webbrowser
 
+# Adding utils path for importing shared functions
+utils_path = os.path.abspath(os.path.join(os.getcwd(), "../../Utils/"))
+sys.path.append(utils_path)
+
+from utils import verb_ratio, is_near_gray, color_difference, find_nearest_text_node, collect_text_nodes, count_all_descendants, count_chars_to_end, get_center_of_weight
+from model_utils import ImprovedTagClassifier
+
+# Defining global variables for normalization
 body_width = None
 num_nodes = None
 num_chars = None
@@ -19,96 +27,23 @@ num_chars = None
 # Load the pretrained spaCy model
 nlp = spacy.load("en_core_web_sm")
 
-def verb_ratio(text):
-    doc = nlp(text)
-    if len(doc) > 5:
-        return 0
-    
-    verb_count = sum(1 for token in doc if token.pos_ == "VERB" and token.lemma_.lower() not in ["username"])
-    total_words = sum(1 for token in doc if token.is_alpha)  # Count only valid words (ignore punctuation)
-    
-    return verb_count / total_words if total_words > 0 else 0  # Avoid division by zero
-
-def is_near_gray(r, g, b, threshold=30, min_val=50, max_val=200):
-    """Check if (r, g, b) is near a shade of gray within a threshold, excluding very dark or very light grays."""
-    return (
-        min_val <= r <= max_val and
-        min_val <= g <= max_val and
-        min_val <= b <= max_val and
-        abs(r - g) <= threshold and
-        abs(g - b) <= threshold and
-        abs(r - b) <= threshold
-    )
-
 def load_model_and_encoders():
     """Load trained model and preprocessing encoders."""
     # Load label encoder
-    label_encoder = joblib.load("label_encoder.pkl")
+    label_encoder = joblib.load("../Models/label_encoder.pkl")
     
     # Load OneHotEncoder
-    ohe = joblib.load("ohe_encoder.pkl")
+    ohe = joblib.load("../Models/ohe_encoder.pkl")
     
     # Load imputer and scaler
-    imputer = joblib.load("imputer.pkl")
-    scaler = joblib.load("scaler.pkl")
-
-    # Define model architecture (must match the training script)
-    class ImprovedTagClassifier(nn.Module):
-        def __init__(self, input_size, output_size, dropout_rate=0.4):
-            super(ImprovedTagClassifier, self).__init__()
-
-            # First hidden layer
-            self.fc1 = nn.Linear(input_size, 512)
-            self.bn1 = nn.BatchNorm1d(512)
-
-            # Second hidden layer
-            self.fc2 = nn.Linear(512, 256)
-            self.bn2 = nn.BatchNorm1d(256)
-
-            # Third hidden layer
-            self.fc3 = nn.Linear(256, 128)
-            self.bn3 = nn.BatchNorm1d(128)
-
-            # Output layer
-            self.fc4 = nn.Linear(128, output_size)
-
-            # Activations and regularization
-            self.dropout = nn.Dropout(dropout_rate)
-            self.leaky_relu = nn.LeakyReLU(0.1)
-
-            # Skip connections
-            self.skip1_3 = nn.Linear(512, 128)
-
-        def forward(self, x):
-            # First block
-            x1 = self.fc1(x)
-            x1 = self.bn1(x1)
-            x1 = self.leaky_relu(x1)
-            x1 = self.dropout(x1)
-
-            # Second block
-            x2 = self.fc2(x1)
-            x2 = self.bn2(x2)
-            x2 = self.leaky_relu(x2)
-            x2 = self.dropout(x2)
-
-            # Third block with skip connection
-            x3 = self.fc3(x2)
-            skip_x1 = self.skip1_3(x1)
-            x3 = x3 + skip_x1  # Skip connection
-            x3 = self.bn3(x3)
-            x3 = self.leaky_relu(x3)
-            x3 = self.dropout(x3)
-
-            # Output
-            output = self.fc4(x3)
-            return output
+    imputer = joblib.load("../Models/imputer.pkl")
+    scaler = joblib.load("../Models/scaler.pkl")
 
     # Load model
     model = None
     try:
         # Try loading the complete model first
-        checkpoint = torch.load("tag_classifier_complete.pth", map_location=torch.device('cpu'))
+        checkpoint = torch.load("../Models/tag_classifier_complete.pth", map_location=torch.device('cpu'))
         model = ImprovedTagClassifier(
             input_size=checkpoint['input_size'],
             output_size=checkpoint['output_size'])
@@ -119,64 +54,15 @@ def load_model_and_encoders():
         model = ImprovedTagClassifier(
             input_size=ohe.get_feature_names_out().shape[0] + imputer.statistics_.shape[0],
             output_size=len(label_encoder.classes_))
-        model.load_state_dict(torch.load("best_tag_classifier.pth", map_location=torch.device('cpu')))
+        model.load_state_dict(torch.load("../Models/best_tag_classifier.pth", map_location=torch.device('cpu')))
         print("Loaded model state dict only")
 
     model.eval()
     
     return model, label_encoder, ohe, imputer, scaler
 
-def find_nearest_text_node(node, text_nodes):
-    """
-    Calculate the distance to the nearest text node.
-    
-    Args:
-    node (dict): Current node being processed
-    text_nodes (list): List of text nodes with their x, y coordinates
-    
-    Returns:
-    float: Distance to the nearest text node, or a large value if no text nodes exist
-    """
-    if not text_nodes:
-        return 9999999  # Large default value if no text nodes exist
-    
-    # Get current node's center coordinates
-    node_data = node.get("node", {})
-    x = node_data.get("x", 0) + node_data.get("width", 0) / 2
-    y = node_data.get("y", 0) + node_data.get("height", 0) / 2
-    
-    # Calculate Euclidean distances to all text nodes
-    min_distance = float('inf')
-    for text_node in text_nodes:
-        tx, ty = text_node['x'], text_node['y']
-        distance = math.sqrt((x - tx)**2 + (y - ty)**2)
-        min_distance = min(min_distance, distance)
-    
-    return min_distance
-
-def color_difference(color1, color2):
-    """
-    Calculate a perceptual color difference between two RGB colors using 
-    a simplified version of the Delta E formula.
-    Returns a value between 0 and 1, where 0 means identical and 1 means completely different.
-    """
-    if not all([color1, color2]):
-        return 0
-    
-    # Extract RGB values
-    r1, g1, b1 = color1
-    r2, g2, b2 = color2
-    
-    # Calculate Euclidean distance in RGB space (simplified)
-    distance = math.sqrt((r2-r1)**2 + (g2-g1)**2 + (b2-b1)**2)
-    
-    # Normalize to 0-1 range (max possible distance is sqrt(3 * 255^2))
-    max_distance = math.sqrt(3 * 255**2)
-    normalized_distance = distance / max_distance
-    
-    return normalized_distance
-
 def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=0, parent_bg_color=None,text_nodes=None):
+    """Extracting features from a node for tag prediction."""
     global body_width
     global num_nodes
     global num_chars
@@ -253,56 +139,7 @@ def extract_features(node, sibling_count=0, prev_sibling_tag=None,parent_height=
             child_3_height = children[2].get("node", {}).get("height", 0)
             child_3_area = child_3_width * child_3_height
             child_3_percent = (child_3_area / node_area) if node_area > 0 else 0
-    
-    # Count all children in the subtree (recursive count)
-    def count_all_descendants(node):
-        count = 0
-        for child in node.get("children", []):
-            # Count this child
-            count += 1
-            # Add all its descendants
-            count += count_all_descendants(child)
-        return count
-    
-    # Count chars to the end
-    def count_chars_to_end(node):
-        count = 0
-        for child in node.get("children", []):
-            # Count this child
-            node_data = child.get("node", {})
-            count += len(node_data.get("characters", ""))
-            # Add all its descendants
-            count += count_chars_to_end(child)
-        return count
-    
-    # get center of weight
-    def get_center_of_weight(node):
-        parent_node_data = node.get("node", {})
-        parent_x_center = parent_node_data.get("x", 0) + parent_node_data.get("width", 0) / 2
-        
-        total_area = 0
-        total = 0
 
-        for child in node.get("children", []):
-            child_node_data = child.get("node", {})
-            x = child_node_data.get("x", 0)
-            width = child_node_data.get("width", 0)
-            height = child_node_data.get("height", 0)
-
-            child_x_center = x + width / 2
-            area = width * height  # Area as weight
-
-            total += area * child_x_center
-            total_area += area
-
-        # Compute weighted center
-        weighted_x = total / total_area if total_area else parent_x_center
-
-        # Calculate normalized difference
-        diff = abs(parent_x_center - weighted_x) / (parent_node_data.get("width", 0) if parent_node_data.get("width", 0) else 1)
-        
-        return diff
-    
     # Calculate total descendants
     num_children_to_end = count_all_descendants(node)
     if not num_nodes or num_nodes == 0:
@@ -406,26 +243,6 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     
     # First pass: Collect text nodes if not provided
     if text_nodes is None:
-        def collect_text_nodes(node):
-            text_nodes_list = []
-            # Function to check if a node has meaningful text
-            def has_meaningful_text(node_data):
-                return node_data.get('type','') == "TEXT"
-            
-            node_data = node.get("node", {})
-            # If this node has meaningful text
-            if has_meaningful_text(node_data):
-                text_nodes_list.append({
-                    'x': node_data.get("x", 0) + node_data.get("width", 0) / 2,
-                    'y': node_data.get("y", 0) + node_data.get("height", 0) / 2
-                })
-            
-            # Recursively check children
-            for child in node.get("children", []):
-                text_nodes_list.extend(collect_text_nodes(child))
-            
-            return text_nodes_list
-        
         text_nodes = collect_text_nodes(node)
     
     # First, recursively process children to get their tags and information
@@ -542,9 +359,6 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
     cont_imputed = imputer.transform(X_df)
     cont_scaled = scaler.transform(cont_imputed)
     
-    # print(X_cat_df,X_df)
-    
-    
     # Combine features
     X_processed = np.concatenate([cat_encoded, cont_scaled], axis=1)
     
@@ -554,11 +368,6 @@ def predict_tag(node,sibling_count,prev_sibling_tag,parent_height,parent_bg_colo
         outputs = model(X_tensor)
         _, predicted = torch.max(outputs, 1)
         predicted_tag = label_encoder.inverse_transform(predicted)[0]
-        # node_width = node_data.get("width", 0)
-        # node_height = node_data.get("height", 0)
-        # aspect_ratio = node_width / node_height if node_height > 0 else 0
-        # if predicted_tag == "INPUT" and aspect_ratio < 5:
-        #     predicted_tag = "BUTTON"
     # Save data to CSV
     X_cat_df["predicted_tag"] = predicted_tag  # Add predicted tag to categorical features
     X_full_df = pd.concat([X_cat_df, X_df], axis=1)  # Combine categorical and continuous features
@@ -585,6 +394,7 @@ def post_process_tags(nodes):
     return nodes
 
 def process_nodes(node):
+    """Recursively processing nodes for post-processing tag assignment"""
     if not node or "children" not in node:
         return
     
@@ -663,13 +473,12 @@ def generate_random_color():
 
 def draw_tags_on_svg_file(data, svg_input_file, svg_output_file=None):
     """
-    Draw bounding boxes and tags on a copy of an existing SVG file.
+    Draw bounding boxes and tags on a copy of an existing SVG file
 
     Args:
-        data (dict): The data containing node information.
-        svg_input_file (str): Path to the original SVG file.
-        svg_output_file (str, optional): Path to save the modified SVG 
-                                          (if None, will use input_file + "_tagged.svg").
+        data : The data containing node information.
+        svg_input_file : Path to the original SVG file.
+        svg_output_file (optional): Path to save the modified SVG (if None, will use input_file + "_tagged.svg")
     """
     
     # Create output filename if not provided
@@ -828,6 +637,5 @@ def process_figma_json(input_file, output_file, svg_file=None):
     
     print(f"Processed {input_file}. Output saved to {output_file}")
     
-# Example usage
 if __name__ == "__main__":
-    process_figma_json("input.json", "output.json", "input.svg")
+    process_figma_json("../input2.json", "../output.json", "../input2.svg")
