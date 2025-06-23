@@ -38,56 +38,25 @@ export async function parse(url: string): Promise<FigmaNode> {
     const startTime = Date.now(); // Get the start time
 
     while (Date.now() - startTime < 5000) {
-      // Stop after 10ms
       window.scrollBy(0, distance);
       totalHeight += distance;
       await new Promise((resolve) => setTimeout(resolve, 1)); // Small delay to allow scrolling
     }
   });
 
-  // // Function to click buttons for cookies or pop-ups
-  // const clickPopupButtons = async () => {
-  //   const buttonTexts = [
-  //     'Accept',
-  //     'Continue',
-  //     'Agree',
-  //     'Yes, I accept',
-  //     'I agree',
-  //     'Got it',
-  //     'Allow all',
-  //     'Accept all',
-  //   ];
-
-  //   await page.evaluate((buttonTexts) => {
-  //     document.querySelectorAll('button, div, a').forEach((btn) => {
-  //       const element = btn as HTMLElement; // Cast Element to HTMLElement
-  //       if (
-  //         element.innerText &&
-  //         buttonTexts.some((text) => element.innerText.trim().toLowerCase().includes(text.toLowerCase()))
-  //       ) {
-  //         element.click();
-  //       }
-  //     });
-  //   }, buttonTexts);
-  // };
-
-  // await new Promise((resolve) => setTimeout(resolve, 2000));
-  // await clickPopupButtons();
-
   await page.evaluate(async () => {
     const distance = 100; // Number of pixels to scroll up each step
     const startTime = Date.now(); // Get the start time
 
     while (Date.now() - startTime < 1000) {
-      // Stop after 1 second
       window.scrollBy(0, -distance); // Scroll up
       await new Promise((resolve) => setTimeout(resolve, 1)); // Small delay to allow scrolling
     }
   });
+
   // Wait for 10 seconds (10,000 milliseconds)
   await new Promise((resolve) => setTimeout(resolve, 10000));
 
-  // Now you can continue with further actions
 
   // Bundle necessary logic into an object
   const logicBundle = {

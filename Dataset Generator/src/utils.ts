@@ -5,6 +5,12 @@ interface FigmaColor {
   a: number;
 }
 
+
+/**
+ * Converts a CSS color string (rgb/rgba format) to Figma's color format.
+ * Takes RGB values from 0-255 and converts them to 0-1 range for Figma.
+ * Returns null if the color string is invalid or has zero alpha.
+ */
 export function getFigmaRGB(colorString?: string | null): FigmaColor | null {
   if (!colorString) return null;
 
@@ -24,6 +30,12 @@ export function getFigmaRGB(colorString?: string | null): FigmaColor | null {
   };
 }
 
+
+/**
+ * Extracts border properties from computed CSS styles and converts them to Figma format.
+ * Handles different border styles (solid, dashed, dotted) on all four sides.
+ * Returns stroke paint, weight, and dash patterns, with a flag for mixed border styles.
+ */
 export function getBorder(computedStyle: CSSStyleDeclaration) {
   const borderRegex = /^([\d\.]+)px\s*(\w+)\s*(.*)$/;
   const directions = ['Top', 'Left', 'Right', 'Bottom'];
@@ -73,6 +85,12 @@ export function getBorder(computedStyle: CSSStyleDeclaration) {
   return null;
 }
 
+
+/**
+ * Parses CSS box-shadow property and converts it to Figma's DropShadowEffect format.
+ * Handles color values at the beginning or end of the shadow declaration.
+ * Extracts offset, blur radius, spread radius, and color information.
+ */
 export function parseBoxShadow(cssShadow: string | null): DropShadowEffect | null {
   if (!cssShadow || cssShadow === 'none') return null;
 

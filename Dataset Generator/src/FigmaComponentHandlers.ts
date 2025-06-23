@@ -2,6 +2,11 @@ import { LayerNode } from './figma_node.js';
 import { getBorder, getFigmaRGB, parseBoxShadow } from './utils.js';
 import { FigmaNode, createFigmaNode } from './figma_node.js';
 
+
+/**
+ * Converts an HTML text element to a Figma TextNode by extracting computed styles,
+ * positioning, typography properties, text alignment, decorations, and effects
+ */
 export function handleTextNode(element: Element): Partial<TextNode> {
   const parent = element.parentElement as Element;
 
@@ -79,6 +84,11 @@ export function handleTextNode(element: Element): Partial<TextNode> {
   return textnode;
 }
 
+
+/**
+ * Converts an SVG element to a Figma LayerNode by serializing the SVG content,
+ * extracting positioning, borders/strokes, and visual effects like shadows
+ */
 export function handleSvgNode(element: Element): Partial<LayerNode> {
   const rect = element.getBoundingClientRect();
   const computedStyles = getComputedStyle(element);
@@ -112,6 +122,11 @@ export function handleSvgNode(element: Element): Partial<LayerNode> {
   return svgNode;
 }
 
+
+/**
+ * Converts an HTML image element to a Figma RectangleNode by extracting the image URL,
+ * positioning, border radius, scaling mode, borders, and visual effects
+ */
 export function handleImageNode(element: Element): Partial<RectangleNode> {
   const rect = element.getBoundingClientRect();
   const computedStyles = getComputedStyle(element);
@@ -157,6 +172,11 @@ export function handleImageNode(element: Element): Partial<RectangleNode> {
   return imageNode;
 }
 
+
+/**
+ * Converts an HTML picture element to a Figma RectangleNode by extracting the source URL
+ * from srcset, positioning, border radius, scaling mode, borders, and visual effects
+ */
 export function handlePictureNode(element: Element): Partial<RectangleNode> {
   const source = element.querySelector('source')?.srcset.split(/[,\s]+/g)[0];
   const formatUrl = (url: string) =>
@@ -206,6 +226,11 @@ export function handlePictureNode(element: Element): Partial<RectangleNode> {
   return pictureNode;
 }
 
+
+/**
+ * Converts an HTML video element to a Figma RectangleNode by extracting video URL
+ * from src or source elements, positioning, border radius, scaling mode, and effects
+ */
 export function handleVideoNode(element: Element): Partial<RectangleNode> {
   const rect = element.getBoundingClientRect();
   const computedStyles = getComputedStyle(element);
@@ -256,6 +281,11 @@ export function handleVideoNode(element: Element): Partial<RectangleNode> {
   return videoNode;
 }
 
+
+/**
+ * Converts an HTML hr (horizontal rule) element to a Figma LineNode by extracting
+ * positioning, dimensions, background color fills, and visual effects
+ */
 export function handleLineNode(element: Element): Partial<LineNode> {
   const el = element as HTMLHRElement;
   const rect = element.getBoundingClientRect();
@@ -294,6 +324,14 @@ export function handleLineNode(element: Element): Partial<LineNode> {
   return lineNode;
 }
 
+
+/**
+ * Converts various HTML input elements to appropriate Figma nodes based on input type:
+ * - checkbox: RectangleNode
+ * - radio: EllipseNode  
+ * - button/submit/reset: RectangleNode with child TextNode
+ * - text/email/search/number: RectangleNode with optional placeholder TextNode
+ */
 export function handleInputNode(element: Element): FigmaNode {
   const inputEl = element as HTMLInputElement;
   const inputType = inputEl.type.toLowerCase();
@@ -407,7 +445,7 @@ export function handleInputNode(element: Element): FigmaNode {
       bottomRightRadius: parse(computedStyles.borderBottomRightRadius, rect.height),
       effects: shadow ? [shadow] : [],
     };
-    const inputFigmaNode = createFigmaNode('INPUT', buttonNode);
+    const inputFigmaNode = createFigmaNode('BUTTON', buttonNode);
     const textFigmaNode = createFigmaNode('TXT', textNode);
     inputFigmaNode.children.push(textFigmaNode);
 
@@ -534,6 +572,11 @@ export function handleInputNode(element: Element): FigmaNode {
   return createFigmaNode('INPUT', inputNode);
 }
 
+
+/**
+ * Converts HTML button or form elements to a Figma RectangleNode by extracting
+ * positioning, background fills, border radius, borders/strokes, and visual effects
+ */
 export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
   const el = element as HTMLButtonElement | HTMLFormElement;
   const rect = element.getBoundingClientRect();
@@ -588,6 +631,12 @@ export function handleButtonFormNode(element: Element): Partial<RectangleNode> {
   return ButtonFormNode;
 }
 
+
+/**
+ * Converts generic HTML elements (div, span, etc.) to either a Figma GroupNode or RectangleNode
+ * based on whether they have border radius, box shadows, or borders - returns RectangleNode
+ * if styled, GroupNode if not
+ */
 export function handleDefaultNode(element: Element): Partial<GroupNode> | Partial<RectangleNode> {
   const el = element as HTMLDivElement | HTMLSpanElement;
   const rect = element.getBoundingClientRect();
@@ -651,6 +700,11 @@ export function handleDefaultNode(element: Element): Partial<GroupNode> | Partia
   };
 }
 
+
+/**
+ * Converts an HTML anchor (link) element to a Figma LinkUnfurlNode by extracting
+ * the href URL and positioning information for link preview functionality
+ */
 export function handleLinkNode(element: Element): Partial<LinkUnfurlNode> {
   const el = element as HTMLAnchorElement;
   const rect = el.getBoundingClientRect();
@@ -667,6 +721,11 @@ export function handleLinkNode(element: Element): Partial<LinkUnfurlNode> {
   return linkNode;
 }
 
+
+/**
+ * Converts an HTML body element to a Figma FrameNode by extracting positioning,
+ * background fills, and border radius properties to serve as the document container
+ */
 export function handleBodyNode(element: Element): Partial<FrameNode> {
   const el = element as HTMLBodyElement;
   const rect = element.getBoundingClientRect();
@@ -711,6 +770,13 @@ export function handleBodyNode(element: Element): Partial<FrameNode> {
   return BodyNode;
 }
 
+
+/**
+ * Converts an HTML select dropdown element to a Figma node structure containing:
+ * - Main RectangleNode for the select box
+ * - Child TextNode for the first option text
+ * - Child VectorNode for the dropdown arrow icon
+ */
 export function handleSelectNode(element: Element): FigmaNode {
   const selectEl = element as HTMLSelectElement;
   const rect = element.getBoundingClientRect();

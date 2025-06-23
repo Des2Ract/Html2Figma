@@ -46,7 +46,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
     return null;
   }
 
-  // TODO: TEXT NODE
+  // TEXT NODE
   function isTextOnlyNode(element: Element): boolean {
     // Direct text node
     if (element.nodeType === Node.TEXT_NODE) {
@@ -72,7 +72,7 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
   if (isTextOnlyNode(element))
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleTextNode(element));
 
-  // TODO: Hidden NODE
+  // Hidden NODE
   const isHiddenNode = (element: HTMLElement): boolean =>
     getComputedStyle(element).display === 'none' ||
     getComputedStyle(element).visibility === 'hidden' ||
@@ -80,24 +80,24 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
 
   if (isHiddenNode(element as HTMLElement)) return null;
 
-  // TODO: IMAGE NODE
+  // IMAGE NODE
   if (element instanceof HTMLImageElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleImageNode(element));
 
-  // TODO: PICTURE NODE
+  // PICTURE NODE
   if (element instanceof HTMLPictureElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handlePictureNode(element));
-  // TODO: VIDEO NODE
+  // VIDEO NODE
   if (element instanceof HTMLVideoElement)
     return createFigmaNode(element.tagName ? element.tagName : TXTNODETAG, handleVideoNode(element));
 
-  // TODO: SVG NODE
+  // SVG NODE
   if (element instanceof SVGSVGElement) return createFigmaNode(element.tagName, handleSvgNode(element));
 
-  // TODO: HR element
+  // HR element
   if (element instanceof HTMLHRElement) return createFigmaNode(element.tagName, handleLineNode(element));
 
-  // TODO: BUTTON/FORM NODE
+  // BUTTON/FORM NODE
   if (
     element instanceof HTMLButtonElement ||
     element instanceof HTMLFormElement ||
@@ -108,12 +108,12 @@ export function extractFigmaNode(element: Element): FigmaNode | null {
       handleButtonFormNode(element),
     );
 
-  // TODO: A/LINK NODE
+  // A/LINK NODE
   if (element instanceof HTMLAnchorElement) return createFigmaNode(element.tagName, handleLinkNode(element));
-  // TODO: Handle BODY
+  // Handle BODY
   if (element instanceof HTMLBodyElement) return createFigmaNode(element.tagName, handleBodyNode(element));
 
-  // TODO: INPUT NODE
+  // INPUT NODE
   if (element instanceof HTMLInputElement) return handleInputNode(element);
 
   if (element instanceof HTMLSelectElement) return handleSelectNode(element);
