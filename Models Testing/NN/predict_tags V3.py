@@ -24,6 +24,7 @@ body_height = None
 num_nodes = None
 num_chars = None
 
+# spacy.cli.download("en_core_web_sm")
 # Load the pretrained spaCy model
 nlp = spacy.load("en_core_web_sm")
 
@@ -244,18 +245,16 @@ def predict_tag(node, sibling_count, prev_sibling_tag, parent_height, parent_bg_
     if figma_type == "TEXT":
         node["tag"] = "P"
         node["base_tag"] = "P"
-    elif figma_type == "SVG":
+    elif figma_type == "VECTOR" or figma_type == "SVG" or node_data.get("tag") == "SVG" or ((fills := node_data.get("fills", [])) and any(fill.get("type") == "IMAGE" for fill in fills)):
         node["tag"] = "SVG"
         node["base_tag"] = "SVG"
-    elif figma_type == "VECTOR":
-        node["tag"] = "ICON"
-        node["base_tag"] = "ICON"
+        w = node.get("node", {}).get("width", 0)
+        h = node.get("node", {}).get("height", 0)
+        if w * h < 2000:
+            node["tag"] = "ICON"
     elif figma_type == "LINE":
         node["tag"] = "HR"
         node["base_tag"] = "HR"
-    elif (fills := node_data.get("fills", [])) and any(fill.get("type") == "IMAGE" for fill in fills): 
-        node["tag"] = "SVG"
-        node["base_tag"] = "SVG"
     elif "icon" in node.get("name", "").lower():
         node["tag"] = "ICON"
         node["base_tag"] = "ICON"
@@ -322,7 +321,7 @@ def predict_tag(node, sibling_count, prev_sibling_tag, parent_height, parent_bg_
     predicted_tag = base_predicted_tag
     confidence = base_confidence
     
-    for sub_classifier in ['ICON', 'P', 'INPUT', 'DIV']:
+    for sub_classifier in ['ICON', 'P', 'DIV']:
         if base_predicted_tag == sub_classifier:
             predicted_tag, confidence = multi_classifier.predict_hierarchical(feature, base_predicted_tag)
             break
@@ -361,14 +360,19 @@ def process_nodes(node):
             children[i+1].get("tag") == "INPUT"):
             children[i]["tag"] = "LABEL"
             children[i]["base_tag"] = "P"  # Ensure base_tag reflects original
+
+    # Convert DIV with multiple LI to LIST
+    for child in children:
+        if (child.get("base_tag") == "DIV" and 
+            count_list_items(child) >= 2):
+            child["tag"] = "LIST"
     
     # Identify NAVBAR
     for child in children:
-        if ((child.get("base_tag") == "DIV" or child.get("tag") == "DIV") and 
-            child.get("node", {}).get("x") == 0.0 and 
+        if ((child.get("base_tag") == "DIV" or child.get("tag") == "DIV" or child.get("base_tag") == "LIST" or child.get("tag") == "LIST") and 
             child.get("node", {}).get("y") == 0.0 and 
-            abs(child.get("node", {}).get("width", 0) - body_width) < 5
-            and child.get("node", {}).get("height", 0) < body_width / 10):
+            child.get("node", {}).get("width", 0) > 0.8 * body_width
+            and child.get("node", {}).get("height", 0) < (body_width / 10)):
             child["base_tag"] = "DIV"
             child["tag"] = "NAVBAR"
             
@@ -384,11 +388,7 @@ def process_nodes(node):
             child["base_tag"] = "DIV"
             child["tag"] = "FOOTER"
     
-    # Convert DIV with multiple LI to LIST
-    for child in children:
-        if (child.get("base_tag") == "DIV" and 
-            count_list_items(child) >= 2):
-            child["tag"] = "LIST"
+
 
 def count_list_items(node):
     """Count LI elements in direct and first-level indirect children"""
@@ -417,7 +417,6 @@ def parse_length(val):
 def draw_tags_on_svg_file(data, svg_input_file, svg_output_file=None):
     """
     Draw bounding boxes and tags on a copy of an existing SVG file
-
     Args:
         data : The data containing node information.
         svg_input_file : Path to the original SVG file.
@@ -628,4 +627,4 @@ def process_figma_json(input_file, output_file, svg_file=None):
     print(f"Processed {input_file}. Output saved to {output_file}")
 
 if __name__ == "__main__":
-    process_figma_json("../Data/input2.json", "../Data/output.json", "../Data/input2.svg")
+    process_figma_json("../Data/input4.json", "../Data/output.json", "../Data/input4.svg")
